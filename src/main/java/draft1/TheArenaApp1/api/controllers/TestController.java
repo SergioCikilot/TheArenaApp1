@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
     @RestController
-    @RequestMapping("")
+    @RequestMapping("/")
     public class TestController{
 
         private PitchService pitchService;

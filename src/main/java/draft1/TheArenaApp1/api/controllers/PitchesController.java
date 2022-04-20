@@ -13,7 +13,7 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping("/api/pitches")
+@RequestMapping(value ="/api/pitches")
 public class PitchesController {
 
     private PitchService pitchService;
@@ -23,7 +23,7 @@ public class PitchesController {
         this.pitchService = pitchService;
     }
 
-    @GetMapping("")
+    @GetMapping("value = /api/pitches")
     public String hello(){
 
         return "Hello WOrld";
