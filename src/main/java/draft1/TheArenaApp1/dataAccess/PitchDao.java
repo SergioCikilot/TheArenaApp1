@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
     public interface PitchDao extends JpaRepository<Pitch,Integer> {
 
-        Pitch getByPitchName(String PitchName);
+
 }

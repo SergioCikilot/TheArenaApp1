@@ -60,7 +60,7 @@ import java.math.BigDecimal;
 
         public Pitch(int id, String pitchName, String address, String addressLink, BigDecimal price, String imageLink, String openingTime, String closingTime, boolean isIllumination, boolean isCamera) {
             this.id = id;
-            PitchName = pitchName;
+            this.PitchName = pitchName;
             this.address = address;
             this.addressLink = addressLink;
             this.price = price;
