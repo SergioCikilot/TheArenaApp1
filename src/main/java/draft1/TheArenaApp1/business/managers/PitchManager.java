@@ -12,6 +12,9 @@ public class PitchManager implements PitchService {
 
     private PitchDao pitchDao;
 
+    public PitchManager() {
+    }
+
     @Autowired
     public PitchManager(PitchDao pitchDao) {
         this.pitchDao = pitchDao;

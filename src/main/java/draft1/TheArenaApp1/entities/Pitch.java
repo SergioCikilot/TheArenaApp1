@@ -1,72 +1,66 @@
 package draft1.TheArenaApp1.entities;
 
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 
+
+
     @Entity
-    @Document("Pitch")
+    @Table(name="pitches")
 
     public class Pitch {
 
-        @Id
-        private String id;
-        //@Column(name = "pitch_name")
+
+       @Id
+       @GeneratedValue(strategy = GenerationType.IDENTITY)
+       @Column(name = "pitch_id")
+        private int id;
+        @Column(name = "pitch_name")
         private String PitchName;
-        //@Column(name = "pitch_address")
+        @Column(name = "pitch_address")
         private String address;
-        //@Column(name = "pitch_addressLink")
+        @Column(name = "pitch_addressLink")
         private String addressLink;
-        //@Column(name = "pitch_price")
+        @Column(name = "pitch_price")
         private BigDecimal price;
-        //@Column(name = "pitch_imageLink")
+        @Column(name = "pitch_imageLink")
         private String imageLink; //!!!
-        //@Column(name = "pitch_openingTime")
+        @Column(name = "pitch_openingTime")
         private String openingTime;
-        //@Column(name = "pitch_closingTime")
+        @Column(name = "pitch_closingTime")
         private String closingTime;
-        //@Column(name = "pitch_isIllumination")
+        @Column(name = "pitch_isIllumination")
         private boolean isIllumination;
-        //@Column(name = "pitch_isCamera")
+        @Column(name = "pitch_isCamera")
         private boolean isCamera;
+
+
         //location coordinates
         //length of the pitch
         //rezervations
         //players looking for
 
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 
-        public Pitch(String id) {
+        public Pitch(int id) {
             this.id = id;
         }
 
         public Pitch() {
         }
 
-        public Pitch(
-                int id,
-                String pitchName,
-                String address,
-                String addressLink,
-                BigDecimal price,
-                String imageLink,
-                String openingTime,
-                String closingTime,
-                boolean isIllumination,
-                boolean isCamera) {
-
-
-            this.PitchName = pitchName;
+        public Pitch(int id, String pitchName, String address, String addressLink, BigDecimal price, String imageLink, String openingTime, String closingTime, boolean isIllumination, boolean isCamera) {
+            this.id = id;
+            PitchName = pitchName;
             this.address = address;
             this.addressLink = addressLink;
             this.price = price;
@@ -76,8 +70,6 @@ import java.math.BigDecimal;
             this.isIllumination = isIllumination;
             this.isCamera = isCamera;
         }
-
-
 
         public String getPitchName() {
             return PitchName;
