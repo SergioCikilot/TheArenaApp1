@@ -23,7 +23,7 @@ public class PitchesController {
         this.pitchService = pitchService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String hello(){
 
         return "Hello WOrld";
@@ -51,7 +51,7 @@ public class PitchesController {
             validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
 
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Doğrulama hataları");
+        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
 

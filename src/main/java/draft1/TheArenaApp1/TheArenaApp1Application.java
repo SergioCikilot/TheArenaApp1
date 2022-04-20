@@ -21,3 +21,4 @@ public class TheArenaApp1Application {
 
 }
 //http://localhost:8080/swagger-ui.html
+//https://arenahalisaha.azurewebsites.net/swagger-ui.html#/pitches-controller
