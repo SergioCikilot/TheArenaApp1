@@ -1,11 +1,15 @@
 package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.business.services.PitchService;
+import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -37,7 +41,18 @@ public class PitchesController {
 
         this.pitchService.add(pitch);
 
+    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
+        Map<String,String> validationErrors = new HashMap<String,String>();
+        for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
+            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+
+        }
+        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Doğrulama hataları");
+        return  errors;
     }
 
 
