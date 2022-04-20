@@ -29,10 +29,7 @@ public class PitchManager implements PitchService {
 
     }
 
-    @Override
-    public Pitch getByPitchName(String pitchName) {
-        return pitchDao.getByPitchName(pitchName);
-    }
+
 
 
 }

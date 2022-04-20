@@ -25,12 +25,6 @@ public class PitchesController {
         return this.pitchService.getAll();
     }
 
-    @GetMapping("/getByPitchName")
-    public Pitch getByPitchName(@RequestParam String pitchName){
-
-        return pitchService.getByPitchName(pitchName);
-
-    }
 
     @PostMapping("/add")
     public void add(@RequestBody Pitch pitch){

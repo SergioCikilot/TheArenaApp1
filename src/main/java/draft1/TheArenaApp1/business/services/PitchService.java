@@ -8,6 +8,6 @@ public interface PitchService {
 
     List<Pitch> getAll();
     void add(Pitch pitch);
-    Pitch getByPitchName(String pitchName);
+
 
 }
