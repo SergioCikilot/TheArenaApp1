@@ -22,8 +22,6 @@ public class TheArenaApp1Application {
 		SpringApplication.run(TheArenaApp1Application.class, args);
 	}
 
-
-
 	Docket swaggerConfig = new SwaggerConfig().api();
 
 }
