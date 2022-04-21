@@ -24,7 +24,7 @@ public class PitchesController {
         this.pitchService = pitchService;
     }
 
-    @GetMapping("/homePage")
+    @GetMapping("/homepage")
     public String hello() {
 
         return " ARENAYA HOSGELDİN KARDES";
