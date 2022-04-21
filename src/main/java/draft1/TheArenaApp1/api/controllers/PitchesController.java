@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.DriverManager;
 import java.util.*;
 
 
@@ -26,6 +27,7 @@ public class PitchesController {
 
     @GetMapping("/getAll")
     public List<Pitch> getAll(){
+
 
         return this.pitchService.getAll();
     }
