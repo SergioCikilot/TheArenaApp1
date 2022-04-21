@@ -28,7 +28,6 @@ public class PitchesController {
     @GetMapping("/getAll")
     public List<Pitch> getAll(){
 
-
         return this.pitchService.getAll();
     }
 

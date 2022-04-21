@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
     @RestController
-    @RequestMapping("/test")
+    @RequestMapping("")
     public class TestController{
 
         private PitchService pitchService;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
             this.pitchService = pitchService;
         }
 
-        @GetMapping("/hello")
+        @GetMapping("")
         public String hello() {
 
-            return "Hello WOrld";
+            return " ARENAYA HOŞGELDİN KARDEŞ";
         }
 
     }
