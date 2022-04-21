@@ -19,10 +19,5 @@ import org.springframework.web.bind.annotation.RestController;
             this.pitchService = pitchService;
         }
 
-        @GetMapping("homaPage")
-        public String hello() {
-
-            return " ARENAYA HOŞGELDİN KARDEŞ";
-        }
 
     }
