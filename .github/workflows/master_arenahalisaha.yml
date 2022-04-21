@@ -8,14 +8,21 @@ on:
     branches:
       - master
   workflow_dispatch:
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/arenadb
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
 
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL8Dialect
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up Java version
         uses: actions/setup-java@v1
         with:
