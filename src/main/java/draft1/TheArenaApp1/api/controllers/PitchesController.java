@@ -14,7 +14,7 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping("/api/pitches")
+@RequestMapping("/pitches")
 public class PitchesController {
 
     private PitchService pitchService;
