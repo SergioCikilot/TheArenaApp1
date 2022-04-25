@@ -1,48 +1,51 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.business.services.PitchService;
+
+import draft1.TheArenaApp1.business.services.TeamService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.Pitch;
+import draft1.TheArenaApp1.entities.Player;
+import draft1.TheArenaApp1.entities.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.DriverManager;
-import java.util.*;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/pitch")
-public class PitchesController {
+@RequestMapping("/team")
+public class TeamController {
 
-    private PitchService pitchService;
+    private TeamService teamService;
 
     @Autowired
-    public PitchesController(PitchService pitchService) {
-        this.pitchService = pitchService;
+
+    public TeamController(TeamService teamService) {
+        this.teamService = teamService;
     }
 
     @GetMapping("/getAll")
-    public List<Pitch> getAll(){
+    public List<Team> getAll(){
 
-        return this.pitchService.getAll();
+        return this.teamService.getAll();
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Pitch pitch){
+    public void add(@RequestBody Team team){
 
-        this.pitchService.add(pitch);
+        this.teamService.add(team);
 
     }
-
     @DeleteMapping("/delete")
-    public void delete(@RequestBody Pitch pitch){
+    public void delete(@RequestBody Team team){
 
-        this.pitchService.delete(pitch);
+        this.teamService.delete(team);
 
     }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -56,6 +59,5 @@ public class PitchesController {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
 
 }

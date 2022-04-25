@@ -9,5 +9,7 @@ public interface PitchService {
     List<Pitch> getAll();
     void add(Pitch pitch);
 
+    void delete(Pitch pitch);
+
 
 }

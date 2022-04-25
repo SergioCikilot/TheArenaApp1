@@ -1,46 +1,48 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.business.services.PitchService;
+import draft1.TheArenaApp1.business.managers.ReservationManager;
+import draft1.TheArenaApp1.business.services.ReservationService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.Pitch;
+import draft1.TheArenaApp1.entities.Reservation;
+import draft1.TheArenaApp1.entities.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.DriverManager;
-import java.util.*;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/pitch")
-public class PitchesController {
+@RequestMapping("/reservation")
+public class ReservationController {
 
-    private PitchService pitchService;
+    private ReservationService reservationManager;
 
     @Autowired
-    public PitchesController(PitchService pitchService) {
-        this.pitchService = pitchService;
+    public ReservationController(ReservationManager reservationManager) {
+        this.reservationManager = reservationManager;
     }
 
     @GetMapping("/getAll")
-    public List<Pitch> getAll(){
+    public List<Reservation> getAll(){
 
-        return this.pitchService.getAll();
+        return this.reservationManager.getAll();
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Pitch pitch){
+    public void add(@RequestBody Reservation reservation){
 
-        this.pitchService.add(pitch);
+        this.reservationManager.add(reservation);
 
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody Pitch pitch){
+    public void delete(@RequestBody Reservation reservation){
 
-        this.pitchService.delete(pitch);
+        this.reservationManager.delete(reservation);
 
     }
 
@@ -56,6 +58,5 @@ public class PitchesController {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
 
 }

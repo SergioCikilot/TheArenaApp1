@@ -1,48 +1,56 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.business.services.PitchService;
+import draft1.TheArenaApp1.business.services.DateService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.DriverManager;
-import java.util.*;
-
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/pitch")
-public class PitchesController {
+@RequestMapping("/date")
+public class DateController {
 
-    private PitchService pitchService;
+    private DateService dateService;
 
     @Autowired
-    public PitchesController(PitchService pitchService) {
-        this.pitchService = pitchService;
+    public DateController(DateService dateService) {
+        this.dateService = dateService;
     }
 
-    @GetMapping("/getAll")
-    public List<Pitch> getAll(){
+    @GetMapping("/getTime12Hour")
+    public String getFormattedTime12Hour(){
 
-        return this.pitchService.getAll();
-    }
-
-    @PostMapping("/add")
-    public void add(@RequestBody Pitch pitch){
-
-        this.pitchService.add(pitch);
+        return this.dateService.getFormattedCurrentTime12Hour();
 
     }
 
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody Pitch pitch){
+    @GetMapping("/getTime24Hour")
+    public String getFormattedTime24Hour(){
 
-        this.pitchService.delete(pitch);
+        return this.dateService.getFormattedCurrentTime24Hour();
 
     }
+
+    @GetMapping("/getTimeIstanbul24Hour")
+    public String getFormattedTimeIstanbul24Hour(){
+
+        return this.dateService.getFormattedCurrentTimeIstanbul24Hour();
+
+    }
+
+    @GetMapping("/getDateIstanbul")
+    public String getFormattedDateIstanbul(){
+
+        return this.dateService.getFormattedCurrentDateIstanbul();
+
+    }
+
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -1,147 +1,83 @@
 package draft1.TheArenaApp1.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
-
-
+import java.time.LocalTime;
+import java.util.List;
 
 
     @Entity
     @Table(name="pitches")
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations"})
 
     public class Pitch {
 
 
-       @Id
-       @GeneratedValue(strategy = GenerationType.IDENTITY)
-       @Column(name = "pitch_id")
-        private int id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "pitch_id")
+        private int pitchId;
+
         @Column(name = "pitch_name")
-        private String PitchName;
+        private String pitchName;
+
         @Column(name = "pitch_address")
-        private String address;
+        private String pitchAddress;
+
         @Column(name = "pitch_addressLink")
-        private String addressLink;
+        private String pitchAddressLink;
+
         @Column(name = "pitch_price")
-        private BigDecimal price;
+        private BigDecimal pitchPrice;
+
         @Column(name = "pitch_imageLink")
-        private String imageLink; //!!!
+        private String pitchImageLink; //!!!
+
+        @JsonFormat(pattern = "HH:mm:ss")
+        @DateTimeFormat(pattern = "HH:mm:ss")
         @Column(name = "pitch_openingTime")
-        private String openingTime;
+        private LocalTime pitchOpeningTime;
+
+        @JsonFormat(pattern = "HH:mm:ss")
+        @DateTimeFormat(pattern = "HH:mm:ss")
         @Column(name = "pitch_closingTime")
-        private String closingTime;
+        private LocalTime pitchClosingTime;
+
+        @JsonFormat(pattern = "HH:mm:ss")
+        @DateTimeFormat(pattern = "HH:mm:ss")
+        @Column(name = "pitch_matchDuration")
+        private LocalTime pitchMatchDuration;
+
+        @Column(name = "pitch_xCoordinate")
+        private int pitchXCoordinate;
+
+        @Column(name = "pitch_yCoordinate")
+        private int pitchYCoordinate;
+
+        @Column(name = "pitchLength")
+        private int pitchLength;
+
         @Column(name = "pitch_isIllumination")
-        private boolean isIllumination;
+        private boolean pitchIsIllumination;
+
         @Column(name = "pitch_isCamera")
-        private boolean isCamera;
+        private boolean pitchIsCamera;
 
+        @OneToMany(mappedBy = "pitch")
+        private List<Reservation> reservations;
 
-        //location coordinates
-        //length of the pitch
-        //rezervations
         //players looking for
-
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public Pitch(int id) {
-            this.id = id;
-        }
-
-        public Pitch() {
-        }
-
-        public Pitch(int id, String pitchName, String address, String addressLink, BigDecimal price, String imageLink, String openingTime, String closingTime, boolean isIllumination, boolean isCamera) {
-            this.id = id;
-            this.PitchName = pitchName;
-            this.address = address;
-            this.addressLink = addressLink;
-            this.price = price;
-            this.imageLink = imageLink;
-            this.openingTime = openingTime;
-            this.closingTime = closingTime;
-            this.isIllumination = isIllumination;
-            this.isCamera = isCamera;
-        }
-
-        public String getPitchName() {
-            return PitchName;
-        }
-
-        public void setPitchName(String pitchName) {
-            this.PitchName = pitchName;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public String getAddressLink() {
-            return addressLink;
-        }
-
-        public void setAddressLink(String addressLink) {
-            this.addressLink = addressLink;
-        }
-
-        public BigDecimal getPrice() {
-            return price;
-        }
-
-        public void setPrice(BigDecimal price) {
-            this.price = price;
-        }
-
-        public String getImageLink() {
-            return imageLink;
-        }
-
-        public void setImageLink(String imageLink) {
-            this.imageLink = imageLink;
-        }
-
-        public String getOpeningTime() {
-            return openingTime;
-        }
-
-        public void setOpeningTime(String openingTime) {
-            this.openingTime = openingTime;
-        }
-
-        public String getClosingTime() {
-            return closingTime;
-        }
-
-        public void setClosingTime(String closingTime) {
-            this.closingTime = closingTime;
-        }
-
-        public boolean isIllumination() {
-            return isIllumination;
-        }
-
-        public void setIllumination(boolean illumination) {
-            isIllumination = illumination;
-        }
-
-        public boolean isCamera() {
-            return isCamera;
-        }
-
-        public void setCamera(boolean camera) {
-            isCamera = camera;
-        }
 
     }
 
