@@ -9,7 +9,7 @@ public interface DateAdapter  {
     String getFormattedCurrentTime24Hour();
     String getFormattedCurrentTimeIstanbul24Hour();
     String getFormattedCurrentDateIstanbul();
-
-    LocalDate getUnformattedCurrentdateIstanbul();
+    LocalDate getUnformattedCurrentDateIstanbul();
 
 }
+

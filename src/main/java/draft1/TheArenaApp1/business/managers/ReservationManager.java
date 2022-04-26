@@ -37,4 +37,18 @@ public class ReservationManager implements ReservationService {
     public List<Reservation> getAll() {
         return this.reservationDao.findAll();
     }
+
+    @Override
+    public void addReservationTime(String reservationTime, int reservationId) {
+
+        this.reservationDao.addReservationTime(reservationTime,reservationId);
+
+    }
+
+    @Override
+    public void addReservationDate(String reservationDate, int reservationId) {
+
+        this.reservationDao.addReservationDate(reservationDate,reservationId);
+
+    }
 }

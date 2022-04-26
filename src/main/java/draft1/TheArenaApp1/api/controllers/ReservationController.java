@@ -11,6 +11,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,30 +22,48 @@ import java.util.Map;
 @RequestMapping("/reservation")
 public class ReservationController {
 
-    private ReservationService reservationManager;
+    private ReservationService reservationService;
 
     @Autowired
     public ReservationController(ReservationManager reservationManager) {
-        this.reservationManager = reservationManager;
+        this.reservationService = reservationManager;
     }
 
     @GetMapping("/getAll")
     public List<Reservation> getAll(){
 
-        return this.reservationManager.getAll();
+        return this.reservationService.getAll();
     }
 
     @PostMapping("/add")
     public void add(@RequestBody Reservation reservation){
 
-        this.reservationManager.add(reservation);
+        this.reservationService.add(reservation);
+
+    }
+
+    @PutMapping("/updateReservationTime")
+    public void updateReservationTime(@RequestParam LocalTime reservationTime, @RequestParam int reservationId){
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String value = reservationTime.format(dateTimeFormatter);
+        this.reservationService.addReservationTime(value,reservationId);
+
+    }
+
+    @PutMapping("/updateReservationDate")
+    public void updateReservationDate(@RequestParam LocalDate reservationDate, @RequestParam int reservationId){
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String value = reservationDate.format(dateTimeFormatter);
+        this.reservationService.addReservationTime(value,reservationId);
 
     }
 
     @DeleteMapping("/delete")
     public void delete(@RequestBody Reservation reservation){
 
-        this.reservationManager.delete(reservation);
+        this.reservationService.delete(reservation);
 
     }
 

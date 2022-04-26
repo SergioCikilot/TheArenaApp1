@@ -9,7 +9,8 @@ public interface ReservationService {
 
     void add(Reservation reservation);
     void delete(Reservation reservation);
-
     List<Reservation> getAll();
+    void addReservationTime(String reservationTime,int reservationId);
+    void addReservationDate(String reservationDate,int reservationId);
 
 }

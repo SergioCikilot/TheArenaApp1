@@ -39,5 +39,26 @@ public class PitchManager implements PitchService {
 
     }
 
+    @Override
+    public void addPitchOpeningTime(String openingTime,int pitchId) {
+
+        this.pitchDao.addPitchOpeningTime(openingTime,pitchId);
+
+    }
+
+    @Override
+    public void addPitchClosingTime(String closingTime, int pitchId) {
+
+        this.pitchDao.addPitchClosingTime(closingTime,pitchId);
+
+    }
+
+    @Override
+    public void addPitchMatchDuration(String matchDuration, int pitchId) {
+
+        this.pitchDao.addPitchMatchDuration(matchDuration,pitchId);
+
+    }
+
 
 }

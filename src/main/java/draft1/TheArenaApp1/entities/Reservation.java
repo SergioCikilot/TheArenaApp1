@@ -1,6 +1,7 @@
 package draft1.TheArenaApp1.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,15 +24,13 @@ public class Reservation {
     @Column(name = "reservation_id")
     private int reservationId;
 
-    @Column(name = "reservation_date")
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate reservationDate;
-
-    @JsonFormat(pattern = "HH:mm:ss")
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonIgnore
     @Column(name = "reservation_time")
     private String reservationTime;
+
+    @JsonIgnore
+    @Column(name = "reservation_date")
+    private String reservationDate;
 
     @ManyToOne()
     @JoinColumn(name="pitch_id")

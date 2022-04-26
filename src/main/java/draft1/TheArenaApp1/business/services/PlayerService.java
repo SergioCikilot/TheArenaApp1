@@ -19,8 +19,6 @@ public interface PlayerService {
 
      String getPlayerAge(Player player);
 
-
-
      void addTeam(int teamId, int playerId);
 
 }

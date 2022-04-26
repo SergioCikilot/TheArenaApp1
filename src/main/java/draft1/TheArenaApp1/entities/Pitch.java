@@ -2,14 +2,20 @@ package draft1.TheArenaApp1.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -44,20 +50,17 @@ import java.util.List;
         @Column(name = "pitch_imageLink")
         private String pitchImageLink; //!!!
 
-        @JsonFormat(pattern = "HH:mm:ss")
-        @DateTimeFormat(pattern = "HH:mm:ss")
+        @JsonIgnore
         @Column(name = "pitch_openingTime")
-        private LocalTime pitchOpeningTime;
+        private String pitchOpeningTime;
 
-        @JsonFormat(pattern = "HH:mm:ss")
-        @DateTimeFormat(pattern = "HH:mm:ss")
+        @JsonIgnore
         @Column(name = "pitch_closingTime")
-        private LocalTime pitchClosingTime;
+        private String pitchClosingTime;
 
-        @JsonFormat(pattern = "HH:mm:ss")
-        @DateTimeFormat(pattern = "HH:mm:ss")
+        @JsonIgnore
         @Column(name = "pitch_matchDuration")
-        private LocalTime pitchMatchDuration;
+        private String pitchMatchDuration;
 
         @Column(name = "pitch_xCoordinate")
         private int pitchXCoordinate;
