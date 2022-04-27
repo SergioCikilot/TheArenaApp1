@@ -8,8 +8,12 @@ public interface PitchService {
 
     List<Pitch> getAll();
     void add(Pitch pitch);
-
     void delete(Pitch pitch);
+    void addPitchOpeningTime(String openingTime,int pitchId);
+    void addPitchClosingTime(String closingTime,int pitchId);
+
+    void addPitchMatchDuration(String matchDuration,int pitchId);
+
 
 
 }

@@ -61,15 +61,12 @@ public class PlayerController {
 
     }
 
-
-    @PutMapping("/addTeamToPlayer")
-    public void add(@RequestParam int teamId,@RequestParam int playerId){
+    @PutMapping("/updateTeamOfPlayer")
+    public void updateTeamOfPlayer(@RequestParam int teamId,@RequestParam int playerId){
 
         this.playerService.addTeam(teamId, playerId);
 
     }
-
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

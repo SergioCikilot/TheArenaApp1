@@ -10,6 +10,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.DriverManager;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -34,6 +37,33 @@ public class PitchesController {
     public void add(@RequestBody Pitch pitch){
 
         this.pitchService.add(pitch);
+
+    }
+
+    @PutMapping("/updateOpeningTimeToPitch")
+    public void addTOpeningTimeToPitch(@RequestParam LocalTime openingTime, @RequestParam int pitchId){
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String value = openingTime.format(dateTimeFormatter);
+        this.pitchService.addPitchOpeningTime(value,pitchId);
+
+    }
+
+    @PutMapping("/updateClosingTimeToPitch")
+    public void addClosingTimeToPitch(@RequestParam LocalTime closingTime, @RequestParam int pitchId){
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String value = closingTime.format(dateTimeFormatter);
+        this.pitchService.addPitchOpeningTime(value,pitchId);
+
+    }
+
+    @PutMapping("/updatePitchMatchDuration")
+    public void addPitchMatchDuration(@RequestParam LocalTime duration, @RequestParam int pitchId){
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String value = duration.format(dateTimeFormatter);
+        this.pitchService.addPitchOpeningTime(value,pitchId);
 
     }
 

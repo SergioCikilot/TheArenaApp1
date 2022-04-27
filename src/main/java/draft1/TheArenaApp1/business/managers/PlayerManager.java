@@ -17,21 +17,18 @@ public class PlayerManager implements PlayerService {
     private PlayerDao playerDao;
     private DateAdapter dateAdapter;
 
-
-
     @Autowired
     public PlayerManager(PlayerDao playerDao,DateAdapter dateAdapter) {
 
         this.playerDao = playerDao;
         this.dateAdapter = dateAdapter;
-    }
 
+    }
 
     @Override
     public void add(Player player) {
 
         this.playerDao.save(player);
-
 
     }
 
@@ -59,17 +56,13 @@ public class PlayerManager implements PlayerService {
         return this.playerDao.getByPlayerId(playerId);
     }
 
-
     @Override
     public String getPlayerAge(Player player) {
 
-
-
         LocalDate startDate = player.getAgeBirthDate();//repoya çek
-        LocalDate endDate = dateAdapter.getUnformattedCurrentdateIstanbul();
+        LocalDate endDate = dateAdapter.getUnformattedCurrentDateIstanbul();
         Period period = Period.between(startDate, endDate);
         String age =String.format("%d", period.getYears());
-
         return age;
 
     }
