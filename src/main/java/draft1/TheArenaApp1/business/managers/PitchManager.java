@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.business.managers;
 
 import draft1.TheArenaApp1.business.services.PitchService;
-import draft1.TheArenaApp1.core.dataAccess.PitchDao;
+import draft1.TheArenaApp1.dataAccess.PitchDao;
 import draft1.TheArenaApp1.entities.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

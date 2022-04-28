@@ -2,7 +2,7 @@ package draft1.TheArenaApp1.business.managers;
 
 import draft1.TheArenaApp1.business.services.PlayerService;
 import draft1.TheArenaApp1.core.utilities.DateAndTime.DateAdapter;
-import draft1.TheArenaApp1.core.dataAccess.PlayerDao;
+import draft1.TheArenaApp1.dataAccess.PlayerDao;
 import draft1.TheArenaApp1.entities.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
