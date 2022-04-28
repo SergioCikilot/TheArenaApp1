@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.core.dataAccess;
+package draft1.TheArenaApp1.dataAccess;
 
 import draft1.TheArenaApp1.entities.Player;
 import org.springframework.data.jpa.repository.JpaRepository;

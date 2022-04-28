@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.business.managers;
 
 import draft1.TheArenaApp1.business.services.ReservationService;
-import draft1.TheArenaApp1.core.dataAccess.ReservationDao;
+import draft1.TheArenaApp1.dataAccess.ReservationDao;
 import draft1.TheArenaApp1.entities.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
