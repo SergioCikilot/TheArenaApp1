@@ -7,8 +7,8 @@ import java.util.List;
 
 public class DefencePosition extends Position{
 
-    public DefencePosition(List list) {
-        super(2, "Defence", list);
+    public DefencePosition() {
+        super(2, "Defence");
     }
 
 }

@@ -4,6 +4,8 @@ package draft1.TheArenaApp1.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import draft1.TheArenaApp1.core.entities.positions.Position;
+import draft1.TheArenaApp1.core.entities.positions.PositionEnum;
+import draft1.TheArenaApp1.security.auth.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,15 +40,21 @@ public class Player {
     @JsonFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate ageBirthDate;
-    @ManyToOne()
+    /*@ManyToMany()
     @JoinColumn(name="position_id")
-    private Position playerPosition;
+    private List<Position> playerPositions;*/
+    @Enumerated
+    @Column(name = "player_position")
+    private PositionEnum positionEnum;
     @ManyToOne()
     @JoinColumn(name="team_id")
     private Team team;
 
     @OneToMany(mappedBy = "player")
     private List<Reservation> reservations;
+
+    @OneToOne(mappedBy = "player")
+    private User user;
 
 
 }

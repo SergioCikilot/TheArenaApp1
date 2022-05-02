@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ForwardPosition extends Position {
 
-    public ForwardPosition(List list) {
-        super(4, "Forward", list);
+    public ForwardPosition() {
+        super(4, "Forward");
     }
 }
