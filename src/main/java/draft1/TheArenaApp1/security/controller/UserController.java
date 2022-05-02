@@ -1,10 +1,12 @@
-package draft1.TheArenaApp1.api.controllers;
+package draft1.TheArenaApp1.security.controller;
 
-import draft1.TheArenaApp1.business.services.UserService;
-import draft1.TheArenaApp1.core.entities.User;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
+import draft1.TheArenaApp1.security.auth.User;
+import draft1.TheArenaApp1.security.auth.UserService;
+import draft1.TheArenaApp1.security.jwt.UsernameAndPasswordAuthenticationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -13,17 +15,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
+
     private UserService userService;
+
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+
     }
+
+
 
     @PostMapping("/signup")
     public void add(@RequestBody User user){
@@ -60,3 +66,4 @@ public class UserController {
 
 
 }
+

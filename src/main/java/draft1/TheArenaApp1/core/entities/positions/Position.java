@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-@Entity
-@Table(name = "position")
+//@Entity
+//@Table(name = "position")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","players"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","players"})
 public class Position <T>
 {
 
@@ -23,9 +23,6 @@ public class Position <T>
 
     @Column(name = "position")
     private String position;
-
-    @OneToMany(mappedBy = "playerPosition")
-    private List<Player> players;
 
 
 }

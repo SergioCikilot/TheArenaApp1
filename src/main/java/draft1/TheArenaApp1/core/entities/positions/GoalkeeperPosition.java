@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GoalkeeperPosition extends Position{
 
-    public GoalkeeperPosition(List list) {
-        super(1, "Goalkeeper", list);
+    public GoalkeeperPosition() {
+        super(1, "Goalkeeper");
     }
 }

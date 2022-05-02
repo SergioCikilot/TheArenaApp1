@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MidfieldPosition extends Position{
 
-    public MidfieldPosition(int positionId, String position, List list) {
-        super(3, "Midfield", list);
+    public MidfieldPosition(int positionId, String position) {
+        super(3, "Midfield");
     }
 }
