@@ -6,13 +6,14 @@ import java.util.List;
 
 public interface PitchService {
 
-    List<Pitch> getAll();
-    void add(Pitch pitch);
-    void delete(Pitch pitch);
-    void addPitchOpeningTime(String openingTime,int pitchId);
-    void addPitchClosingTime(String closingTime,int pitchId);
+    List<Pitch> getAllPitches();
+    List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize);
+    void addPitch(Pitch pitch);
+    void deletePitch(Pitch pitch);
+    void updatePitchOpeningTime(String openingTime, int pitchId);
+    void updatePitchClosingTime(String closingTime, int pitchId);
+    void updatePitchMatchDuration(String matchDuration, int pitchId);
 
-    void addPitchMatchDuration(String matchDuration,int pitchId);
 
 
 

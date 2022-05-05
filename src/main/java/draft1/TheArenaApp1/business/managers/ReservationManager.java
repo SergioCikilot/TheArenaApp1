@@ -20,35 +20,35 @@ public class ReservationManager implements ReservationService {
 
 
     @Override
-    public void add(Reservation reservation) {
+    public void addReservation(Reservation reservation) {
 
         this.reservationDao.save(reservation);
 
     }
 
     @Override
-    public void delete(Reservation reservation) {
+    public void deleteReservation(Reservation reservation) {
 
         this.reservationDao.delete(reservation);
 
     }
 
     @Override
-    public List<Reservation> getAll() {
+    public List<Reservation> getAllReservations() {
         return this.reservationDao.findAll();
     }
 
     @Override
-    public void addReservationTime(String reservationTime, int reservationId) {
+    public void updateReservationTime(String reservationTime, int reservationId) {
 
-        this.reservationDao.addReservationTime(reservationTime,reservationId);
+        this.reservationDao.updateReservationTime(reservationTime,reservationId);
 
     }
 
     @Override
-    public void addReservationDate(String reservationDate, int reservationId) {
+    public void updateReservationDate(String reservationDate, int reservationId) {
 
-        this.reservationDao.addReservationDate(reservationDate,reservationId);
+        this.reservationDao.updateReservationDate(reservationDate,reservationId);
 
     }
 }

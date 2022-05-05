@@ -22,15 +22,11 @@ public class UserController {
 
     private UserService userService;
 
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
 
     }
-
-
-
     @PostMapping("/signup")
     public void add(@RequestBody User user){
 

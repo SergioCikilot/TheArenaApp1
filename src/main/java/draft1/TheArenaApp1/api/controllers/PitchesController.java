@@ -9,8 +9,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.DriverManager;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -30,47 +28,53 @@ public class PitchesController {
     @GetMapping("/getAll")
     public List<Pitch> getAll(){
 
-        return this.pitchService.getAll();
+        return this.pitchService.getAllPitches();
+    }
+
+    @GetMapping("/getAllByPage")
+    public List<Pitch> getAllByPage(@RequestParam int pageNo,@RequestParam int pageSize){
+
+        return this.pitchService.getAllPitchesWithPage(pageNo,pageSize);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Pitch pitch){
+    public void addPitch(@RequestBody Pitch pitch){
 
-        this.pitchService.add(pitch);
+        this.pitchService.addPitch(pitch);
 
     }
 
     @PutMapping("/updateOpeningTimeToPitch")
-    public void addTOpeningTimeToPitch(@RequestParam LocalTime openingTime, @RequestParam int pitchId){
+    public void updateTOpeningTimeToPitch(@RequestParam LocalTime openingTime, @RequestParam int pitchId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String value = openingTime.format(dateTimeFormatter);
-        this.pitchService.addPitchOpeningTime(value,pitchId);
+        this.pitchService.updatePitchOpeningTime(value,pitchId);
 
     }
 
     @PutMapping("/updateClosingTimeToPitch")
-    public void addClosingTimeToPitch(@RequestParam LocalTime closingTime, @RequestParam int pitchId){
+    public void updateClosingTimeToPitch(@RequestParam LocalTime closingTime, @RequestParam int pitchId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String value = closingTime.format(dateTimeFormatter);
-        this.pitchService.addPitchOpeningTime(value,pitchId);
+        this.pitchService.updatePitchClosingTime(value,pitchId);
 
     }
 
     @PutMapping("/updatePitchMatchDuration")
-    public void addPitchMatchDuration(@RequestParam LocalTime duration, @RequestParam int pitchId){
+    public void updatePitchMatchDuration(@RequestParam LocalTime duration, @RequestParam int pitchId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String value = duration.format(dateTimeFormatter);
-        this.pitchService.addPitchOpeningTime(value,pitchId);
+        this.pitchService.updatePitchMatchDuration(value,pitchId);
 
     }
 
     @DeleteMapping("/delete")
     public void delete(@RequestBody Pitch pitch){
 
-        this.pitchService.delete(pitch);
+        this.pitchService.deletePitch(pitch);
 
     }
 

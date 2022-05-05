@@ -19,7 +19,6 @@ import java.util.List;
 
 public class Team {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_id")
@@ -30,7 +29,5 @@ public class Team {
 
     @OneToMany(mappedBy = "team")//player
     private List<Player> players;
-
-
 
 }
