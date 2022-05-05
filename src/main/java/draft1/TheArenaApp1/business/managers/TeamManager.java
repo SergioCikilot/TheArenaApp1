@@ -2,7 +2,7 @@ package draft1.TheArenaApp1.business.managers;
 
 import draft1.TheArenaApp1.business.services.TeamService;
 import draft1.TheArenaApp1.dataAccess.TeamDao;
-import draft1.TheArenaApp1.entities.Team;
+import draft1.TheArenaApp1.entities.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,8 @@ public class TeamManager implements TeamService {
     }
 
     @Override
-    public void deleteTeam(Team team) {
+    public void deleteTeam(int id) {
+        Team team = teamDao.getById(id);
         this.teamDao.delete(team);
     }
 
@@ -38,6 +39,8 @@ public class TeamManager implements TeamService {
 
     @Override
     public void updateTeam(Team team) {
+
+        this.teamDao.save(team);
 
     }
 

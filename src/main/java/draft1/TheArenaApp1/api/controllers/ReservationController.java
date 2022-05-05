@@ -3,7 +3,9 @@ package draft1.TheArenaApp1.api.controllers;
 import draft1.TheArenaApp1.business.managers.ReservationManager;
 import draft1.TheArenaApp1.business.services.ReservationService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.Reservation;
+import draft1.TheArenaApp1.entities.model.Reservation;
+import draft1.TheArenaApp1.entities.dtos.ReservationWithPlayerAndPitchIdDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -28,18 +30,28 @@ public class ReservationController {
         this.reservationService = reservationManager;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllReservations")
     public List<Reservation> getAllReservations(){
 
         return this.reservationService.getAllReservations();
     }
 
-    @PostMapping("/add")
-    public void addReservation(@RequestBody Reservation reservation){
+    @PostMapping("/addReservation")
+    public void addReservation(@RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto){
 
+        ModelMapper modelMapper = new ModelMapper();
+        Reservation reservation = modelMapper.map(reservationWithPlayerAndPitchIdDto,Reservation.class);
         this.reservationService.addReservation(reservation);
 
     }
+
+    @PutMapping("/updateReservation")
+    public void updateReservation(@RequestBody Reservation reservation){
+
+        this.reservationService.updateReservation(reservation);
+
+    }
+
 
     @PutMapping("/updateReservationTime")
     public void updateReservationTime(@RequestParam LocalTime reservationTime, @RequestParam int reservationId){
@@ -59,10 +71,10 @@ public class ReservationController {
 
     }
 
-    @DeleteMapping("/delete")
-    public void deleteReservation(@RequestBody Reservation reservation){
+    @DeleteMapping("/deleteReservation")
+    public void deleteReservation(@RequestParam int id){
 
-        this.reservationService.deleteReservation(reservation);
+        this.reservationService.deleteReservation(id);
 
     }
 

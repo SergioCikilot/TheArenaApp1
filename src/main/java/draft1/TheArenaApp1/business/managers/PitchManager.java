@@ -2,11 +2,10 @@ package draft1.TheArenaApp1.business.managers;
 
 import draft1.TheArenaApp1.business.services.PitchService;
 import draft1.TheArenaApp1.dataAccess.PitchDao;
-import draft1.TheArenaApp1.entities.Pitch;
+import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -46,9 +45,17 @@ public class PitchManager implements PitchService {
     }
 
     @Override
-    public void deletePitch(Pitch pitch) {
+    public void deletePitch(int id) {
 
+        Pitch pitch = this.pitchDao.getByPitchId(id);
         this.pitchDao.delete(pitch);
+
+    }
+
+    @Override
+    public void updatePitch(Pitch pitch) {
+
+        this.pitchDao.save(pitch);
 
     }
 

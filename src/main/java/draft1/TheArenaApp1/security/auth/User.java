@@ -1,11 +1,14 @@
 package draft1.TheArenaApp1.security.auth;
 
 
-import draft1.TheArenaApp1.entities.Player;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import draft1.TheArenaApp1.entities.model.Player;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -13,12 +16,14 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "user")
+@Data
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "user_id")
-    private int id;
+    @NotNull
+    private int userId;
     @Column(name = "user_username")
     private String username;
     @Column(name = "user_password")
@@ -31,23 +36,27 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired;
     @Column(name = "isEnabled")
     private boolean isEnabled;
+    @JsonIgnore
 
-    @OneToOne
-    @JoinColumn(name = "player_id")
-    private Player player;
+    @OneToOne(
+            fetch = FetchType.LAZY,
+            cascade =  CascadeType.MERGE,
+            mappedBy = "user")
+    //@MapsId
+    private Player playerLink;
 
     public User() {
     }
 
-    public User(int id, String username, String password, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, Player player) {
-        this.id = id;
+    public User(int id, String username, String password, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, Player playerLink) {
+        this.userId = id;
         this.username = username;
         this.password = password;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
-        this.player = player;
+        this.playerLink = playerLink;
     }
 
     @Override
@@ -55,12 +64,12 @@ public class User implements UserDetails {
         return null;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int id) {
+        this.userId = id;
     }
 
     @Override

@@ -2,7 +2,7 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.business.services.PitchService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.Pitch;
+import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -25,14 +25,14 @@ public class PitchesController {
         this.pitchService = pitchService;
     }
 
-    @GetMapping("/getAll")
-    public List<Pitch> getAll(){
+    @GetMapping("/getAllPitches")
+    public List<Pitch> getAllPitches(){
 
         return this.pitchService.getAllPitches();
     }
 
-    @GetMapping("/getAllByPage")
-    public List<Pitch> getAllByPage(@RequestParam int pageNo,@RequestParam int pageSize){
+    @GetMapping("/getAllPitchesByPage")
+    public List<Pitch> getAllPitchesByPage(@RequestParam int pageNo,@RequestParam int pageSize){
 
         return this.pitchService.getAllPitchesWithPage(pageNo,pageSize);
     }
@@ -44,7 +44,21 @@ public class PitchesController {
 
     }
 
-    @PutMapping("/updateOpeningTimeToPitch")
+    @DeleteMapping("/deletePitch")
+    public void deletePitch(@RequestParam int id){
+
+        this.pitchService.deletePitch(id);
+
+    }
+
+    @PutMapping("/updatePitch")
+    public void updatePitch(@RequestBody Pitch pitch){
+
+        this.pitchService.updatePitch(pitch);
+
+    }
+
+    @PutMapping("/updatePitchOpeningTime")
     public void updateTOpeningTimeToPitch(@RequestParam LocalTime openingTime, @RequestParam int pitchId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -53,7 +67,7 @@ public class PitchesController {
 
     }
 
-    @PutMapping("/updateClosingTimeToPitch")
+    @PutMapping("/updatePitchClosingTime")
     public void updateClosingTimeToPitch(@RequestParam LocalTime closingTime, @RequestParam int pitchId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -71,12 +85,7 @@ public class PitchesController {
 
     }
 
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody Pitch pitch){
 
-        this.pitchService.deletePitch(pitch);
-
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

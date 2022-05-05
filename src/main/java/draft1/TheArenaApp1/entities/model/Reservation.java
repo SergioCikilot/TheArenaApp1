@@ -1,16 +1,13 @@
-package draft1.TheArenaApp1.entities;
+package draft1.TheArenaApp1.entities.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import draft1.TheArenaApp1.entities.model.Pitch;
+import draft1.TheArenaApp1.entities.model.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
 @Table(name="reservations")
