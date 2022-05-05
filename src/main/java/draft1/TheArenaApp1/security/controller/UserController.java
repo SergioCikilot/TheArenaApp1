@@ -28,20 +28,20 @@ public class UserController {
 
     }
     @PostMapping("/signup")
-    public void add(@RequestBody User user){
+    public void addUser(@RequestBody User user){
 
         this.userService.add(user);
 
     }
 
-    @GetMapping("/getAll")
-    public List<User> getAll(){
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers(){
 
         return this.userService.getAll();
 
     }
-    @DeleteMapping("/delete")
-    public void delete(@RequestBody User user){
+    @DeleteMapping("/deleteUser")
+    public void deleteUser(@RequestBody User user){
 
         this.userService.delete(user);
 

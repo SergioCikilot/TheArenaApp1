@@ -1,13 +1,11 @@
 package draft1.TheArenaApp1.core.entities.positions;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import draft1.TheArenaApp1.entities.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+
 //@Entity
 //@Table(name = "position")
 @Data

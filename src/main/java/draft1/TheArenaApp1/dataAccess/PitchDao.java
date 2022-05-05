@@ -1,6 +1,6 @@
 package draft1.TheArenaApp1.dataAccess;
 
-import draft1.TheArenaApp1.entities.Pitch;
+import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +26,5 @@ public interface PitchDao extends JpaRepository<Pitch,Integer> {
     @Query("update Pitch p set p.pitchMatchDuration=:pitchMatchDuration where p.pitchId =:pitchId")
     void updatePitchMatchDuration(@Param("pitchMatchDuration")String pitchMatchDuration, @Param("pitchId") int pitchId);
 
+    Pitch getByPitchId(int id);
 }

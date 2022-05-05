@@ -3,7 +3,7 @@ package draft1.TheArenaApp1.business.managers;
 import draft1.TheArenaApp1.business.services.PlayerService;
 import draft1.TheArenaApp1.core.utilities.DateAndTime.AgeManager;
 import draft1.TheArenaApp1.dataAccess.PlayerDao;
-import draft1.TheArenaApp1.entities.Player;
+import draft1.TheArenaApp1.entities.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +30,17 @@ public class PlayerManager implements PlayerService {
     }
 
     @Override
-    public void delete(Player player) {
+    public void delete(int id) {
 
+        Player player = this.playerDao.getByPlayerId(id);
         this.playerDao.delete(player);
+
+    }
+
+    @Override
+    public void updatePlayer(Player player) {
+
+        this.playerDao.save(player);
 
     }
 
@@ -54,11 +62,11 @@ public class PlayerManager implements PlayerService {
     }
 
     @Override
-    public String getPlayerAge(Player player) {
+    public String getPlayerAge(Player player) {//Not finished returns null
 
-        String age = this.ageManager.AgeCalculator(player);
+        //String age = this.ageManager.AgeCalculator(player);
 
-        return age ;
+        return null ;
 
     }
 

@@ -3,7 +3,7 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.business.services.TeamService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.Team;
+import draft1.TheArenaApp1.entities.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -26,22 +26,30 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllTeams")
     public List<Team> getAllTeams(){
 
         return this.teamService.getAllTeams();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addTeam")
     public void addTeam(@RequestBody Team team){
 
         this.teamService.addTeam(team);
 
     }
-    @DeleteMapping("/delete")
-    public void deleteTeam(@RequestBody Team team){
 
-        this.teamService.deleteTeam(team);
+    @PutMapping("updateTeam")
+    public void updateTeam(@RequestBody Team team){
+
+        this.teamService.updateTeam(team);
+
+    }
+
+    @DeleteMapping("/deleteTeam")
+    public void deleteTeam(@RequestParam int id){
+
+        this.teamService.deleteTeam(id);
 
     }
 

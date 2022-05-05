@@ -1,8 +1,7 @@
 package draft1.TheArenaApp1.business.services;
 
 
-import draft1.TheArenaApp1.entities.Player;
-import org.springframework.data.repository.query.Param;
+import draft1.TheArenaApp1.entities.model.Player;
 
 import java.util.List;
 
@@ -10,7 +9,9 @@ public interface PlayerService {
 
      void add(Player player);
 
-     void delete(Player player);
+     void delete(int id);
+
+     void updatePlayer(Player player);
      List<Player> getAll();
 
      List<Player> getPlayersByTeam(int teamId);

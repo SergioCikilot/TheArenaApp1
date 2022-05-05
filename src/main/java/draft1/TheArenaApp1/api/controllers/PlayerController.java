@@ -2,10 +2,8 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.business.services.PlayerService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.Pitch;
-import draft1.TheArenaApp1.entities.Player;
-import draft1.TheArenaApp1.entities.dtos.PlayerWithAgeDto;
-import draft1.TheArenaApp1.entities.dtos.PlayerWithoutUserDto;
+import draft1.TheArenaApp1.entities.model.Player;
+import draft1.TheArenaApp1.entities.dtos.PlayerWithUserIdDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +28,7 @@ public class PlayerController {
 
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllPlayers")
     public List<Player> getAllPlayers(){
 
         return this.playerService.getAll();
@@ -51,20 +49,28 @@ public class PlayerController {
     }
 
     @PostMapping("/add")
-    public void addPlayer(@RequestBody PlayerWithoutUserDto playerWithoutUserDto){
+    public void addPlayer(@RequestBody PlayerWithUserIdDto playerWithUserIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
-        Player player = modelMapper.map(playerWithoutUserDto,Player.class);
+        Player player = modelMapper.map(playerWithUserIdDto,Player.class);
         this.playerService.add(player);
 
     }
 
     @DeleteMapping("delete")
-    public void deletePlayer(@RequestBody Player player){
+    public void deletePlayer(@RequestParam int id){
 
-        this.playerService.delete(player);
+        this.playerService.delete(id);
 
     }
+
+    @PutMapping("/updatePlayer")
+    public void updatePlayer(@RequestBody Player player){
+
+        this.playerService.updatePlayer(player);
+
+    }
+
 
     @PutMapping("/updateTeamOfPlayer")
     public void updateTeamOfPlayer(@RequestParam int teamId,@RequestParam int playerId){

@@ -2,7 +2,7 @@ package draft1.TheArenaApp1.business.managers;
 
 import draft1.TheArenaApp1.business.services.ReservationService;
 import draft1.TheArenaApp1.dataAccess.ReservationDao;
-import draft1.TheArenaApp1.entities.Reservation;
+import draft1.TheArenaApp1.entities.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +27,17 @@ public class ReservationManager implements ReservationService {
     }
 
     @Override
-    public void deleteReservation(Reservation reservation) {
+    public void deleteReservation(int id) {
 
+        Reservation reservation = this.reservationDao.getByReservationId(id);
         this.reservationDao.delete(reservation);
+
+    }
+
+    @Override
+    public void updateReservation(Reservation reservation) {
+
+        this.reservationDao.save(reservation);
 
     }
 

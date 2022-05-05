@@ -1,6 +1,6 @@
 package draft1.TheArenaApp1.dataAccess;
 
-import draft1.TheArenaApp1.entities.Player;
+import draft1.TheArenaApp1.entities.model.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

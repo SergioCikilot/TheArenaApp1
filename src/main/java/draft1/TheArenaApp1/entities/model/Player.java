@@ -1,20 +1,15 @@
-package draft1.TheArenaApp1.entities;
+package draft1.TheArenaApp1.entities.model;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import draft1.TheArenaApp1.core.entities.positions.Position;
 import draft1.TheArenaApp1.core.entities.positions.PositionEnum;
 import draft1.TheArenaApp1.security.auth.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -39,12 +34,12 @@ public class Player {
     private String playerSirName;
 
     @Column(name = "age_birthDate")
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate ageBirthDate;
+    private String playerBirthDate;
+
     /*@ManyToMany()
     @JoinColumn(name="position_id")
     private List<Position> playerPositions;*/
+
     @Enumerated
     @Column(name = "player_position")
     private PositionEnum positionEnum;
@@ -56,7 +51,9 @@ public class Player {
     @OneToMany(mappedBy = "player")
     private List<Reservation> reservations;
 
-    @OneToOne(mappedBy = "player")
+    @OneToOne(
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 }
