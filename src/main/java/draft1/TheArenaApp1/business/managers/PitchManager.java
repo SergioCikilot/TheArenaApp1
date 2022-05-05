@@ -4,13 +4,18 @@ import draft1.TheArenaApp1.business.services.PitchService;
 import draft1.TheArenaApp1.dataAccess.PitchDao;
 import draft1.TheArenaApp1.entities.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 @Service
 public class PitchManager implements PitchService {
 
     private PitchDao pitchDao;
+
 
     public PitchManager() {
     }
@@ -21,42 +26,50 @@ public class PitchManager implements PitchService {
     }
 
     @Override
-    public List<Pitch> getAll() {
+    public List<Pitch> getAllPitches() {
         return pitchDao.findAll();
     }
 
     @Override
-    public void add(Pitch pitch) {
+    public List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize)
+    {
+        Pageable pageable = PageRequest.of(pageNo,pageSize);
+
+        return this.pitchDao.findAll(pageable).getContent();
+    }
+
+    @Override
+    public void addPitch(Pitch pitch) {
 
         this.pitchDao.save(pitch);
 
     }
 
     @Override
-    public void delete(Pitch pitch) {
+    public void deletePitch(Pitch pitch) {
 
         this.pitchDao.delete(pitch);
 
     }
 
     @Override
-    public void addPitchOpeningTime(String openingTime,int pitchId) {
+    public void updatePitchOpeningTime(String openingTime, int pitchId) {
 
-        this.pitchDao.addPitchOpeningTime(openingTime,pitchId);
-
-    }
-
-    @Override
-    public void addPitchClosingTime(String closingTime, int pitchId) {
-
-        this.pitchDao.addPitchClosingTime(closingTime,pitchId);
+        this.pitchDao.updatePitchOpeningTime(openingTime,pitchId);
 
     }
 
     @Override
-    public void addPitchMatchDuration(String matchDuration, int pitchId) {
+    public void updatePitchClosingTime(String closingTime, int pitchId) {
 
-        this.pitchDao.addPitchMatchDuration(matchDuration,pitchId);
+        this.pitchDao.updatePitchClosingTime(closingTime,pitchId);
+
+    }
+
+    @Override
+    public void updatePitchMatchDuration(String matchDuration, int pitchId) {
+
+        this.pitchDao.updatePitchMatchDuration(matchDuration,pitchId);
 
     }
 

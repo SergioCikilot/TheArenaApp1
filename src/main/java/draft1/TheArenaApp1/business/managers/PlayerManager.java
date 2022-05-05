@@ -1,28 +1,25 @@
 package draft1.TheArenaApp1.business.managers;
 
 import draft1.TheArenaApp1.business.services.PlayerService;
-import draft1.TheArenaApp1.core.utilities.DateAndTime.DateAdapter;
+import draft1.TheArenaApp1.core.utilities.DateAndTime.AgeManager;
 import draft1.TheArenaApp1.dataAccess.PlayerDao;
 import draft1.TheArenaApp1.entities.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 @Service
 public class PlayerManager implements PlayerService {
 
     private PlayerDao playerDao;
-    private DateAdapter dateAdapter;
+    private AgeManager ageManager;
 
     @Autowired
-    public PlayerManager(PlayerDao playerDao,DateAdapter dateAdapter) {
+    public PlayerManager(PlayerDao playerDao, AgeManager ageManager) {
 
         this.playerDao = playerDao;
-        this.dateAdapter = dateAdapter;
-
+        this.ageManager = ageManager;
     }
 
     @Override
@@ -59,11 +56,9 @@ public class PlayerManager implements PlayerService {
     @Override
     public String getPlayerAge(Player player) {
 
-        LocalDate startDate = player.getAgeBirthDate();//repoya çek
-        LocalDate endDate = dateAdapter.getUnformattedCurrentDateIstanbul();
-        Period period = Period.between(startDate, endDate);
-        String age =String.format("%d", period.getYears());
-        return age;
+        String age = this.ageManager.AgeCalculator(player);
+
+        return age ;
 
     }
 

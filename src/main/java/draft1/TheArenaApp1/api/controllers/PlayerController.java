@@ -4,6 +4,9 @@ import draft1.TheArenaApp1.business.services.PlayerService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.Pitch;
 import draft1.TheArenaApp1.entities.Player;
+import draft1.TheArenaApp1.entities.dtos.PlayerWithAgeDto;
+import draft1.TheArenaApp1.entities.dtos.PlayerWithoutUserDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -28,7 +31,7 @@ public class PlayerController {
     }
 
     @GetMapping("/getAll")
-    public List<Player> getAll(){
+    public List<Player> getAllPlayers(){
 
         return this.playerService.getAll();
     }
@@ -48,14 +51,16 @@ public class PlayerController {
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Player player){
+    public void addPlayer(@RequestBody PlayerWithoutUserDto playerWithoutUserDto){
 
+        ModelMapper modelMapper = new ModelMapper();
+        Player player = modelMapper.map(playerWithoutUserDto,Player.class);
         this.playerService.add(player);
 
     }
 
     @DeleteMapping("delete")
-    public void delete(@RequestBody Player player){
+    public void deletePlayer(@RequestBody Player player){
 
         this.playerService.delete(player);
 

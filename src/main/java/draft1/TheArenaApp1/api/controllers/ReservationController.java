@@ -4,7 +4,6 @@ import draft1.TheArenaApp1.business.managers.ReservationManager;
 import draft1.TheArenaApp1.business.services.ReservationService;
 import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.Reservation;
-import draft1.TheArenaApp1.entities.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -30,15 +29,15 @@ public class ReservationController {
     }
 
     @GetMapping("/getAll")
-    public List<Reservation> getAll(){
+    public List<Reservation> getAllReservations(){
 
-        return this.reservationService.getAll();
+        return this.reservationService.getAllReservations();
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Reservation reservation){
+    public void addReservation(@RequestBody Reservation reservation){
 
-        this.reservationService.add(reservation);
+        this.reservationService.addReservation(reservation);
 
     }
 
@@ -47,7 +46,7 @@ public class ReservationController {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String value = reservationTime.format(dateTimeFormatter);
-        this.reservationService.addReservationTime(value,reservationId);
+        this.reservationService.updateReservationTime(value,reservationId);
 
     }
 
@@ -56,14 +55,14 @@ public class ReservationController {
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String value = reservationDate.format(dateTimeFormatter);
-        this.reservationService.addReservationTime(value,reservationId);
+        this.reservationService.updateReservationDate(value,reservationId);
 
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody Reservation reservation){
+    public void deleteReservation(@RequestBody Reservation reservation){
 
-        this.reservationService.delete(reservation);
+        this.reservationService.deleteReservation(reservation);
 
     }
 

@@ -44,6 +44,9 @@ import java.util.List;
         @Column(name = "pitch_addressLink")
         private String pitchAddressLink;
 
+        @Column(name = "pitch_rating")
+        private int pitchRating;
+
         @Column(name = "pitch_price")
         private BigDecimal pitchPrice;
 

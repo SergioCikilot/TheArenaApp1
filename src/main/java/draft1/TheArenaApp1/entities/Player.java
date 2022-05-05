@@ -2,7 +2,9 @@ package draft1.TheArenaApp1.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import draft1.TheArenaApp1.core.entities.positions.Position;
 import draft1.TheArenaApp1.core.entities.positions.PositionEnum;
 import draft1.TheArenaApp1.security.auth.User;
@@ -48,6 +50,7 @@ public class Player {
     private PositionEnum positionEnum;
     @ManyToOne()
     @JoinColumn(name="team_id")
+    @JsonIgnore
     private Team team;
 
     @OneToMany(mappedBy = "player")
@@ -55,6 +58,5 @@ public class Player {
 
     @OneToOne(mappedBy = "player")
     private User user;
-
 
 }

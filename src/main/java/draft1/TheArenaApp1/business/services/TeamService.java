@@ -1,17 +1,18 @@
 package draft1.TheArenaApp1.business.services;
 
-import draft1.TheArenaApp1.entities.Player;
 import draft1.TheArenaApp1.entities.Team;
 
 import java.util.List;
 
 public interface TeamService {
 
-    void add(Team team);
+    void addTeam(Team team);
 
-    void delete(Team team);
+    void deleteTeam(Team team);
 
-    List<Team> getAll();
+    List<Team> getAllTeams();
+
+    void updateTeam(Team team);
 
 
 }
