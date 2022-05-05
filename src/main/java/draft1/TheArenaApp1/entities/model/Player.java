@@ -33,7 +33,7 @@ public class Player {
     @Column(name = "player_sirName")
     private String playerSirName;
 
-    @Column(name = "age_birthDate")
+    @Column(name = "player_birthDate")
     private String playerBirthDate;
 
     /*@ManyToMany()
