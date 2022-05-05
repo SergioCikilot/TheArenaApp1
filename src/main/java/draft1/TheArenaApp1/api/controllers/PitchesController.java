@@ -37,7 +37,7 @@ public class PitchesController {
         return this.pitchService.getAllPitchesWithPage(pageNo,pageSize);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addPitch")
     public void addPitch(@RequestBody Pitch pitch){
 
         this.pitchService.addPitch(pitch);

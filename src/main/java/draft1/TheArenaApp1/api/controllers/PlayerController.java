@@ -48,7 +48,7 @@ public class PlayerController {
 
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addPlayer")
     public void addPlayer(@RequestBody PlayerWithUserIdDto playerWithUserIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
