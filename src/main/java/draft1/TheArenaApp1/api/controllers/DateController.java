@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.business.services.DateService;
-import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
+import draft1.TheArenaApp1.service.services.DateService;
+import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;

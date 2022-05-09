@@ -1,9 +1,8 @@
-package draft1.TheArenaApp1.api.controllers;
+package draft1.TheArenaApp1.core.user;
 
-
-import draft1.TheArenaApp1.service.services.TeamService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.model.Team;
+import draft1.TheArenaApp1.core.user.User;
+import draft1.TheArenaApp1.core.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -15,44 +14,36 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/team")
-public class TeamController {
+@RequestMapping("/user")
+public class UserController {
 
-    private TeamService teamService;
+
+    private UserService userService;
 
     @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
 
-    public TeamController(TeamService teamService) {
-        this.teamService = teamService;
     }
+    @PostMapping("/signup")
+    public void addUser(@RequestBody User user){
 
-    @GetMapping("/getAllTeams")
-    public List<Team> getAllTeams(){
-
-        return this.teamService.getAllTeams();
-    }
-
-    @PostMapping("/addTeam")
-    public void addTeam(@RequestBody Team team){
-
-        this.teamService.addTeam(team);
+        this.userService.add(user);
 
     }
 
-    @PutMapping("updateTeam")
-    public void updateTeam(@RequestBody Team team){
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers(){
 
-        this.teamService.updateTeam(team);
-
-    }
-
-    @DeleteMapping("/deleteTeam")
-    public void deleteTeam(@RequestParam int id){
-
-        this.teamService.deleteTeam(id);
+        return this.userService.getAll();
 
     }
+    @DeleteMapping("/deleteUser")
+    public void deleteUser(@RequestBody User user){
 
+        this.userService.delete(user);
+
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -67,4 +58,6 @@ public class TeamController {
         return  errors;
     }
 
+
 }
+

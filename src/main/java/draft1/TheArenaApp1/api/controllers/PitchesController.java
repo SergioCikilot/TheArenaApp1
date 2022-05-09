@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.business.services.PitchService;
-import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
+import draft1.TheArenaApp1.service.services.PitchService;
+import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

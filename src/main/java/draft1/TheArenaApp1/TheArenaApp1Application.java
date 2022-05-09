@@ -3,8 +3,6 @@ package draft1.TheArenaApp1;
 import draft1.TheArenaApp1.config.SwaggerConfig;
 
 
-import draft1.TheArenaApp1.security.auth.UserService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;

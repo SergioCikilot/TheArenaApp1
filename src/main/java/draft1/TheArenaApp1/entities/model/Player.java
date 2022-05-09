@@ -4,7 +4,7 @@ package draft1.TheArenaApp1.entities.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import draft1.TheArenaApp1.core.entities.positions.PositionEnum;
-import draft1.TheArenaApp1.security.auth.User;
+import draft1.TheArenaApp1.core.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
