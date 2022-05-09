@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'ArenaHalisaha'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE18DFC8AE554030996B2BAE41BE1ED0 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3ED039DBB2FB4E3EAA1CC1D312D80BF4 }}
           package: '*.jar'
