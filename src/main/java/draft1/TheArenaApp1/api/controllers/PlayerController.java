@@ -1,9 +1,9 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.business.services.PlayerService;
-import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
+import draft1.TheArenaApp1.service.services.PlayerService;
+import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Player;
-import draft1.TheArenaApp1.entities.dtos.PlayerWithUserIdDto;
+import draft1.TheArenaApp1.entities.dto.PlayerWithUserIdDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

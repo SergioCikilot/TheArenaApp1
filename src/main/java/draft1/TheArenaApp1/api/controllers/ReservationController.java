@@ -1,10 +1,10 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.business.managers.ReservationManager;
-import draft1.TheArenaApp1.business.services.ReservationService;
-import draft1.TheArenaApp1.core.utilities.results.ErrorDataResult;
+import draft1.TheArenaApp1.service.managers.ReservationManager;
+import draft1.TheArenaApp1.service.services.ReservationService;
+import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Reservation;
-import draft1.TheArenaApp1.entities.dtos.ReservationWithPlayerAndPitchIdDto;
+import draft1.TheArenaApp1.entities.dto.ReservationWithPlayerAndPitchIdDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

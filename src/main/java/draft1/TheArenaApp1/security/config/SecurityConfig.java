@@ -1,10 +1,8 @@
 package draft1.TheArenaApp1.security.config;
 
-import draft1.TheArenaApp1.security.auth.UserService;
 import draft1.TheArenaApp1.security.jwt.JwtConfig;
 import draft1.TheArenaApp1.security.jwt.JwtTokenVerifier;
 import draft1.TheArenaApp1.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -25,12 +23,12 @@ import javax.crypto.SecretKey;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final draft1.TheArenaApp1.security.auth.UserService UserService;
+    private final draft1.TheArenaApp1.core.user.UserService UserService;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
 
 
-    public SecurityConfig(PasswordEncoder passwordEncoder, draft1.TheArenaApp1.security.auth.UserService userService, SecretKey secretKey, JwtConfig jwtConfig) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, draft1.TheArenaApp1.core.user.UserService userService, SecretKey secretKey, JwtConfig jwtConfig) {
         this.passwordEncoder = passwordEncoder;
         UserService = userService;
         this.secretKey = secretKey;
