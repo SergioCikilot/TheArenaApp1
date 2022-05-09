@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import draft1.TheArenaApp1.entities.model.Player;
 import lombok.Data;
 import org.checkerframework.common.aliasing.qual.Unique;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -35,9 +36,8 @@ public class User implements UserDetails {
     private String password;
 
     @Email(message = "Email should be valid")
-    @NotBlank(message = "Can not be empty")
+    @NotBlank(message = "Email can not be empty")
     @Column(name = "user_email",unique = true)
-
     private String email;
 
     @Column(name = "isAccountNonExpired")
