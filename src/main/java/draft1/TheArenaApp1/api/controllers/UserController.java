@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.core.user;
+package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.core.user.User;
