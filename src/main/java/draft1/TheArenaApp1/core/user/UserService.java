@@ -10,8 +10,7 @@ public interface UserService extends UserDetailsService {
 
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-
-    void add(User user);
+    void add(User user) throws Exception;
     void delete(User user);
     List<User> getAll();
 

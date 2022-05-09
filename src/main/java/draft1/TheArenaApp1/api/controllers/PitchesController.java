@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-
 @RestController
 @RequestMapping("/pitch")
 public class PitchesController {
