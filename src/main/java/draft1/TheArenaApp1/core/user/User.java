@@ -18,7 +18,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity
-@Table(name = "user")
+@Table(name = "user",uniqueConstraints={
+        @UniqueConstraint(columnNames = "user_email")})
 @Data
 public class User implements UserDetails {
 

@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class UserController {
 
     }
     @PostMapping("/signup")
-    public void addUser(@RequestBody User user){
+    public void addUser( @RequestBody User user){
 
         this.userService.add(user);
 
