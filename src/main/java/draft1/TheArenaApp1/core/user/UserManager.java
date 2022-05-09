@@ -14,7 +14,6 @@ public class UserManager implements UserService {
     private UserDao userDao;
     private PasswordConfig passwordConfig;
 
-
     @Autowired
     public UserManager(UserDao userDao,PasswordConfig passwordConfig) {
 
@@ -32,13 +31,29 @@ public class UserManager implements UserService {
                 );
     }
 
-    public void add(User user) {
+    public void add(User user) throws Exception {
 
         user.setPassword(passwordConfig.passwordEncoder().encode(user.getPassword()));
-        this.userDao.save(user);
+
+        List<User> listForEmail = this.userDao.findUsersByEmail(user.getEmail());
+        boolean emailExists = !listForEmail.isEmpty();
+        List<User> listForUsername =this.userDao.findUsersByUsername(user.getUsername());
+        boolean usernameExists = !listForUsername.isEmpty();
+        if (usernameExists && emailExists ){
+
+            throw new Exception("Email and username are already exist");
+
+        } else if (usernameExists) {
+
+            throw new Exception("Username is already exists");
+
+        } else if (emailExists) {
+
+            throw new Exception("Email is already exists");
+
+        } else this.userDao.save(user);
 
     }
-
 
     public void delete(User user) {
 
@@ -46,12 +61,7 @@ public class UserManager implements UserService {
 
     }
 
-
     public List<User> getAll() {
         return this.userDao.findAll();
     }
-
-
-
-
 }

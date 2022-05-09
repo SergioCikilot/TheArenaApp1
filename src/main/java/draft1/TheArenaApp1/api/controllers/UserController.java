@@ -27,7 +27,7 @@ public class UserController {
 
     }
     @PostMapping("/signup")
-    public void addUser( @RequestBody User user){
+    public void addUser(@RequestBody User user) throws Exception {
 
         this.userService.add(user);
 
