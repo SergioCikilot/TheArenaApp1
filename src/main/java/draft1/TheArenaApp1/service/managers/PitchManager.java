@@ -15,7 +15,6 @@ public class PitchManager implements PitchService {
 
     private PitchDao pitchDao;
 
-
     public PitchManager() {
     }
 
