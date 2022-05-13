@@ -37,6 +37,12 @@ public class UserController {
 
     }
 
+    @PostMapping("/signup")
+    public void addUser(@Valid @RequestBody User user) throws Exception {
+
+        this.userService.add(user);
+
+    }
     @PostMapping("/getUserByUsername")
     public UserDetails getUserByUsername(@RequestParam String username) throws Exception {
 
@@ -58,12 +64,7 @@ public class UserController {
         return id;
     }
 
-    @PostMapping("/signup")
-    public void addUser(@Valid @RequestBody User user) throws Exception {
 
-        this.userService.add(user);
-
-    }
 
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
