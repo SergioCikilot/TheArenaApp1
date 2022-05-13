@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PostMapping("/getUserIdByUsername")
-    public int getUserByIdUsername(@RequestParam String username) throws Exception {
+    public int getUserIdByUsername(@RequestParam String username) throws Exception {
 
         UserDetails userDetails = this.userService.loadUserByUsername(username);
 
@@ -58,12 +58,12 @@ public class UserController {
         return id;
     }
 
-    /*@PostMapping("/signup")
+    @PostMapping("/signup")
     public void addUser(@Valid @RequestBody User user) throws Exception {
 
         this.userService.add(user);
 
-    }*/
+    }
 
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
