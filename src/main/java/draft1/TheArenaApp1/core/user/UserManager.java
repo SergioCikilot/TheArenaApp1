@@ -1,10 +1,14 @@
 package draft1.TheArenaApp1.core.user;
 
+import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.security.config.PasswordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -15,7 +19,7 @@ public class UserManager implements UserService {
     private PasswordConfig passwordConfig;
 
     @Autowired
-    public UserManager(UserDao userDao,PasswordConfig passwordConfig) {
+    public UserManager(UserDao userDao, PasswordConfig passwordConfig) {
 
         this.userDao = userDao;
         this.passwordConfig = passwordConfig;
@@ -31,15 +35,17 @@ public class UserManager implements UserService {
                 );
     }
 
+
+
     public void add(User user) throws Exception {
 
         user.setPassword(passwordConfig.passwordEncoder().encode(user.getPassword()));
 
         List<User> listForEmail = this.userDao.findUsersByEmail(user.getEmail());
         boolean emailExists = !listForEmail.isEmpty();
-        List<User> listForUsername =this.userDao.findUsersByUsername(user.getUsername());
+        List<User> listForUsername = this.userDao.findUsersByUsername(user.getUsername());
         boolean usernameExists = !listForUsername.isEmpty();
-        if (usernameExists && emailExists ){
+        if (usernameExists && emailExists) {
 
             throw new Exception("Email and username are already exist");
 
@@ -64,4 +70,7 @@ public class UserManager implements UserService {
     public List<User> getAll() {
         return this.userDao.findAll();
     }
+
+
 }
+

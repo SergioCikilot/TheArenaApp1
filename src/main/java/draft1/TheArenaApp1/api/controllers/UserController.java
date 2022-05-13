@@ -1,21 +1,18 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.core.user.UserDao;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.core.user.User;
 import draft1.TheArenaApp1.core.user.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintValidatorContext;
 import javax.validation.Valid;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +30,40 @@ public class UserController {
         this.userService = userService;
 
     }
-    @PostMapping("/signup")
-    public void addUser(@Valid @RequestBody User user) throws Exception {
+    @PostMapping("/login")
+    public String login() throws Exception {
 
-            this.userService.add(user);
-
+            return "login screen";
 
     }
+
+    @PostMapping("/getUserByUsername")
+    public UserDetails getUserByUsername(@RequestParam String username) throws Exception {
+
+        return this.userService.loadUserByUsername(username);
+
+    }
+
+    @PostMapping("/getUserIdByUsername")
+    public int getUserByIdUsername(@RequestParam String username) throws Exception {
+
+        UserDetails userDetails = this.userService.loadUserByUsername(username);
+
+        ModelMapper modelMapper = new ModelMapper();
+
+        User user = modelMapper.map(userDetails,User.class);
+
+        int id = user.getUserId();
+
+        return id;
+    }
+
+    /*@PostMapping("/signup")
+    public void addUser(@Valid @RequestBody User user) throws Exception {
+
+        this.userService.add(user);
+
+    }*/
 
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
