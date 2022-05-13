@@ -64,8 +64,6 @@ public class UserController {
         return id;
     }
 
-
-
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
 
