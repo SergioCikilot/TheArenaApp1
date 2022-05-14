@@ -1,5 +1,6 @@
 package draft1.TheArenaApp1.api.controllers;
 
+import draft1.TheArenaApp1.entities.dto.PlayerWithIdUser;
 import draft1.TheArenaApp1.service.services.PlayerService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Player;
@@ -65,8 +66,10 @@ public class PlayerController {
     }
 
     @PutMapping("/updatePlayer")
-    public void updatePlayer(@RequestBody Player player){
+    public void updatePlayer(@RequestBody PlayerWithIdUser playerWithIdUser) {
 
+        ModelMapper modelMapper = new ModelMapper();
+        Player player = modelMapper.map(playerWithIdUser,Player.class);
         this.playerService.updatePlayer(player);
 
     }

@@ -1,10 +1,12 @@
 package draft1.TheArenaApp1.api.controllers;
 
+import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.core.user.User;
 import draft1.TheArenaApp1.core.user.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -84,7 +86,9 @@ public class UserController {
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
-            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+            String field = fieldError.getField();
+            String message = fieldError.getDefaultMessage();
+            validationErrors.put(field,message);
 
         }
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
@@ -98,13 +102,29 @@ public class UserController {
         return  errors;
     }*/
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(ExistingEntryException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationExistException(ExistingEntryException exceptions){
+
+        Map<String,String> validationErrors = new HashMap<String,String>();
+
+        for (int i = 0; i < exceptions.getFieldList().size() ; i++) {
+
+            validationErrors.put(exceptions.getFieldList().get(i),exceptions.getMessage());
+
+        }
+
+        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
+        return  errors;
+    }
+
+    /*@ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationAllException(Exception exceptions){
 
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(exceptions.getMessage(),"Validation Error3");
         return  errors;
-    }
+    }*/
 
 
 }

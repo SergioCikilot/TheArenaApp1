@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerWithAgeDto {
 
-    private int id;
-    private String playerName;
-    private String playerAge;
+public class TeamWithoutIdDto {
+
+    private String teamName;
 
 }

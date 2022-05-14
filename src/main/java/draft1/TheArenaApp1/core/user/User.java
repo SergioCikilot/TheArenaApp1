@@ -25,8 +25,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
+    @JsonIgnore
     private int userId;
     @NotBlank(message = "Username can not be empty")
     @Column(name = "user_username",unique = true)
@@ -52,12 +53,14 @@ public class User implements UserDetails {
     @Column(name = "isEnabled")
     private boolean isEnabled;
 
-    @JsonIgnore
+
     @OneToOne(
+            mappedBy = "user",
             fetch = FetchType.LAZY,
             cascade =  CascadeType.MERGE,
-            mappedBy = "user")
-    //@MapsId
+            orphanRemoval = true
+            )
+    @JsonIgnore
     private Player playerLink;
 
     public User() {
@@ -131,7 +134,6 @@ public class User implements UserDetails {
     public void setCredentialsNonExpired(boolean credentialsNonExpired) {
         isCredentialsNonExpired = credentialsNonExpired;
     }
-
     @Override
     public boolean isEnabled() {
         return isEnabled;
@@ -139,6 +141,22 @@ public class User implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         isEnabled = enabled;
+    }
+
+    public String getField(String fieldName){
+
+        if (fieldName.equals("username")){
+
+            return "username";
+
+        }
+        else if(fieldName.equals("email")) {
+
+            return "email";
+
+        }
+        else return "error on";
+
     }
 }
 

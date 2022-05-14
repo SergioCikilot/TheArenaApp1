@@ -1,5 +1,7 @@
 package draft1.TheArenaApp1.api.controllers;
 
+import draft1.TheArenaApp1.entities.dto.ReservationWithIdPlayerPitch;
+import draft1.TheArenaApp1.entities.dto.ReservationWithoutLocalDateTime;
 import draft1.TheArenaApp1.service.managers.ReservationManager;
 import draft1.TheArenaApp1.service.services.ReservationService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
@@ -18,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/reservation")
@@ -31,9 +34,12 @@ public class ReservationController {
     }
 
     @GetMapping("/getAllReservations")
-    public List<Reservation> getAllReservations(){
+    public List<ReservationWithoutLocalDateTime> getAllReservations(){
 
-        return this.reservationService.getAllReservations();
+        ModelMapper modelMapper = new ModelMapper();
+
+        return this.reservationService.getAllReservations().stream().map(reservation -> modelMapper.map(reservation,ReservationWithoutLocalDateTime.class))
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/addReservation")
@@ -46,8 +52,10 @@ public class ReservationController {
     }
 
     @PutMapping("/updateReservation")
-    public void updateReservation(@RequestBody Reservation reservation){
+    public void updateReservation(@RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch){
 
+        ModelMapper modelMapper = new ModelMapper();
+        Reservation reservation = modelMapper.map(reservationWithIdPlayerPitch,Reservation.class);
         this.reservationService.updateReservation(reservation);
 
     }

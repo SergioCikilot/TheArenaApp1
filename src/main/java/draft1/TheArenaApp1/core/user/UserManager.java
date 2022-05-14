@@ -1,15 +1,15 @@
 package draft1.TheArenaApp1.core.user;
 
-import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
+import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
 import draft1.TheArenaApp1.security.config.PasswordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -37,27 +37,37 @@ public class UserManager implements UserService {
 
 
 
-    public void add(User user) throws Exception {
 
+    public void add(User user) throws Exception {
+        //Re-write
         user.setPassword(passwordConfig.passwordEncoder().encode(user.getPassword()));
 
         List<User> listForEmail = this.userDao.findUsersByEmail(user.getEmail());
         boolean emailExists = !listForEmail.isEmpty();
         List<User> listForUsername = this.userDao.findUsersByUsername(user.getUsername());
         boolean usernameExists = !listForUsername.isEmpty();
+        ArrayList<String> list = new ArrayList<>();
+
         if (usernameExists && emailExists) {
 
-            throw new Exception("Email and username are already exist");
+            list.add(user.getField("username"));
+            list.add(user.getField("email"));
+            throw new ExistingEntryException("Username and email are already exists",list);
+
 
         } else if (usernameExists) {
+            list.add(user.getField("username"));
+            throw new ExistingEntryException("Username is already exists", list);
 
-            throw new Exception("Username is already exists");
 
         } else if (emailExists) {
 
-            throw new Exception("Email is already exists");
+            list.add(user.getField("email"));
+            throw new ExistingEntryException("Email is already exists", list);
 
-        } else this.userDao.save(user);
+        } else
+
+            this.userDao.save(user);
 
     }
 

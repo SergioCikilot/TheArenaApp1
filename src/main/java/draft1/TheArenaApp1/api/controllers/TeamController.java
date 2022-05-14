@@ -1,9 +1,12 @@
 package draft1.TheArenaApp1.api.controllers;
 
 
+import draft1.TheArenaApp1.entities.dto.TeamWithoutIdDto;
+import draft1.TheArenaApp1.entities.model.Player;
 import draft1.TheArenaApp1.service.services.TeamService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Team;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -33,8 +36,10 @@ public class TeamController {
     }
 
     @PostMapping("/addTeam")
-    public void addTeam(@RequestBody Team team){
+    public void addTeam(@RequestBody TeamWithoutIdDto teamWithoutIdDto){
 
+        ModelMapper modelMapper = new ModelMapper();
+        Team team = modelMapper.map(teamWithoutIdDto,Team.class);
         this.teamService.addTeam(team);
 
     }
