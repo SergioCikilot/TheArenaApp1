@@ -21,11 +21,9 @@ public class Reservation {
     @Column(name = "reservation_id")
     private int reservationId;
 
-    @JsonIgnore
     @Column(name = "reservation_time")
     private String reservationTime;
 
-    @JsonIgnore
     @Column(name = "reservation_date")
     private String reservationDate;
 

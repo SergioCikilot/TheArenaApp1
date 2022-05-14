@@ -1,8 +1,10 @@
 package draft1.TheArenaApp1.service.managers;
 
+import draft1.TheArenaApp1.entities.dto.ReservationWithPlayerAndPitchIdDto;
 import draft1.TheArenaApp1.service.services.ReservationService;
 import draft1.TheArenaApp1.repository.ReservationDao;
 import draft1.TheArenaApp1.entities.model.Reservation;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +47,8 @@ public class ReservationManager implements ReservationService {
     public List<Reservation> getAllReservations() {
         return this.reservationDao.findAll();
     }
+
+
 
     @Override
     public void updateReservationTime(String reservationTime, int reservationId) {

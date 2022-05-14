@@ -3,7 +3,7 @@ package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import draft1.TheArenaApp1.core.entities.positions.PositionEnum;
+import draft1.TheArenaApp1.core.entities.foots.FootEnum;
 import draft1.TheArenaApp1.core.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +25,7 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "player_id")
+
     private int playerId;
 
     @Column(name = "player_name")
@@ -36,13 +37,22 @@ public class Player {
     @Column(name = "player_birthDate")
     private String playerBirthDate;
 
-    /*@ManyToMany()
-    @JoinColumn(name="position_id")
-    private List<Position> playerPositions;*/
+    @Column(name = "player_height")
+    private int playerHeight;
 
     @Enumerated
-    @Column(name = "player_position")
-    private PositionEnum positionEnum;
+    @Column(name = "player_foot")
+    private FootEnum playerFoot;
+
+    @Column(name = "player_isForward")
+
+    private boolean playerIsForward;
+    @Column(name = "player_isMidfielder")
+    private boolean playerIsMidfielder;
+    @Column(name = "player_isDefender")
+    private boolean playerIsDefender;
+    @Column(name = "player_isGoalkeeper")
+    private boolean playerIsGoalkeeper ;
     @ManyToOne()
     @JoinColumn(name="team_id")
     @JsonIgnore
@@ -50,10 +60,17 @@ public class Player {
 
     @OneToMany(mappedBy = "player")
     private List<Reservation> reservations;
-
-    @OneToOne(
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = true)
+    @JsonIgnore
     private User user;
+
+    /*@ManyToMany()
+    @JoinColumn(name="position_id")
+    private List<Position> playerPositions;*/
+
+    /*@Enumerated
+    @Column(name = "player_position")
+    private PositionEnum playerPosition;*/
 
 }

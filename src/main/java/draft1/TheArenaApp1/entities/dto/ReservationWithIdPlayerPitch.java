@@ -16,11 +16,9 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationWithPlayerAndPitchIdDto {
 
+public class ReservationWithIdPlayerPitch {
 
-
-    @JsonIgnore
     private int reservationId;
 
     @Future
@@ -38,5 +36,6 @@ public class ReservationWithPlayerAndPitchIdDto {
     private int pitchId;
 
     private int playerId;
+
 
 }

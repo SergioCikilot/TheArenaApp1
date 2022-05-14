@@ -1,8 +1,11 @@
 package draft1.TheArenaApp1.api.controllers;
 
+import draft1.TheArenaApp1.entities.dto.PitchDto;
+import draft1.TheArenaApp1.entities.dto.PitchWithoutIdDto;
 import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Pitch;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -37,7 +40,10 @@ public class PitchesController {
     }
 
     @PostMapping("/addPitch")
-    public void addPitch(@RequestBody Pitch pitch){
+    public void addPitch(@RequestBody PitchWithoutIdDto pitchWithoutIdDto){
+
+        ModelMapper modelMapper = new ModelMapper();
+        Pitch pitch = modelMapper.map(pitchWithoutIdDto,Pitch.class);
 
         this.pitchService.addPitch(pitch);
 
@@ -51,7 +57,10 @@ public class PitchesController {
     }
 
     @PutMapping("/updatePitch")
-    public void updatePitch(@RequestBody Pitch pitch){
+    public void updatePitch(@RequestBody PitchDto pitchDto){
+
+        ModelMapper modelMapper = new ModelMapper();
+        Pitch pitch = modelMapper.map(pitchDto,Pitch.class);
 
         this.pitchService.updatePitch(pitch);
 
