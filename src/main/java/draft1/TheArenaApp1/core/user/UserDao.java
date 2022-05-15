@@ -1,6 +1,5 @@
 package draft1.TheArenaApp1.core.user;
 
-import draft1.TheArenaApp1.entities.dto.UserWithEmailDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

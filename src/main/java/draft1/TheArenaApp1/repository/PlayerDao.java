@@ -17,6 +17,8 @@ public interface PlayerDao extends JpaRepository<Player,Integer> {
     void addTeam(@Param("teamId")int teamId,@Param("playerId") int playerId);
     List<Player> getByTeamTeamId(int teamId);
 
+    Player getPlayerByUserUserId(int id);
+
     Player getByPlayerId(int playerId);
 
 

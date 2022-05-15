@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.entities.dto;
+package draft1.TheArenaApp1.entities.dto.TeamDtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserWithIdDto {
 
-    private int Id;
+public class TeamWithoutIdDto {
+
+    private String teamName;
 
 }

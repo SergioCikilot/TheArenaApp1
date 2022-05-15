@@ -1,6 +1,5 @@
 package draft1.TheArenaApp1.service.services;
 
-import draft1.TheArenaApp1.entities.dto.ReservationWithPlayerAndPitchIdDto;
 import draft1.TheArenaApp1.entities.model.Reservation;
 
 import java.util.List;

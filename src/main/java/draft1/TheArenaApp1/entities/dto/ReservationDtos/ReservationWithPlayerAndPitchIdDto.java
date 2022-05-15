@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.entities.dto;
+package draft1.TheArenaApp1.entities.dto.ReservationDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,9 +16,11 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+public class ReservationWithPlayerAndPitchIdDto {
 
-public class ReservationWithIdPlayerPitch {
 
+
+    @JsonIgnore
     private int reservationId;
 
     @Future
@@ -36,6 +38,5 @@ public class ReservationWithIdPlayerPitch {
     private int pitchId;
 
     private int playerId;
-
 
 }

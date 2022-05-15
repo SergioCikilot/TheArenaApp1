@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.entities.dto.PitchDto;
-import draft1.TheArenaApp1.entities.dto.PitchWithoutIdDto;
+import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchDto;
+import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchWithoutIdDto;
 import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Pitch;
@@ -31,12 +31,14 @@ public class PitchesController {
     public List<Pitch> getAllPitches(){
 
         return this.pitchService.getAllPitches();
+
     }
 
     @GetMapping("/getAllPitchesByPage")
     public List<Pitch> getAllPitchesByPage(@RequestParam int pageNo,@RequestParam int pageSize){
 
         return this.pitchService.getAllPitchesWithPage(pageNo,pageSize);
+
     }
 
     @PostMapping("/addPitch")
@@ -44,7 +46,6 @@ public class PitchesController {
 
         ModelMapper modelMapper = new ModelMapper();
         Pitch pitch = modelMapper.map(pitchWithoutIdDto,Pitch.class);
-
         this.pitchService.addPitch(pitch);
 
     }
@@ -61,7 +62,6 @@ public class PitchesController {
 
         ModelMapper modelMapper = new ModelMapper();
         Pitch pitch = modelMapper.map(pitchDto,Pitch.class);
-
         this.pitchService.updatePitch(pitch);
 
     }
@@ -92,8 +92,6 @@ public class PitchesController {
         this.pitchService.updatePitchMatchDuration(value,pitchId);
 
     }
-
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

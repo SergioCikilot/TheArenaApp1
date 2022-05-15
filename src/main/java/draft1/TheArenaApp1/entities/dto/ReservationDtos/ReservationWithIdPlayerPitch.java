@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.entities.dto;
+package draft1.TheArenaApp1.entities.dto.ReservationDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,17 +16,26 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationWithoutLocalDateTime {
 
+public class ReservationWithIdPlayerPitch {
 
     private int reservationId;
 
-    private String reservationTime;
+    @Future
+    @Temporal(TemporalType.TIME)
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime reservationTime;
 
-    private String reservationDate;
+    @Future
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate reservationDate;
 
     private int pitchId;
 
     private int playerId;
+
 
 }

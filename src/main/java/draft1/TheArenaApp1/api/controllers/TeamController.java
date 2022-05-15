@@ -1,8 +1,7 @@
 package draft1.TheArenaApp1.api.controllers;
 
 
-import draft1.TheArenaApp1.entities.dto.TeamWithoutIdDto;
-import draft1.TheArenaApp1.entities.model.Player;
+import draft1.TheArenaApp1.entities.dto.TeamDtos.TeamWithoutIdDto;
 import draft1.TheArenaApp1.service.services.TeamService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Team;
@@ -33,6 +32,7 @@ public class TeamController {
     public List<Team> getAllTeams(){
 
         return this.teamService.getAllTeams();
+
     }
 
     @PostMapping("/addTeam")
@@ -57,7 +57,6 @@ public class TeamController {
         this.teamService.deleteTeam(id);
 
     }
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

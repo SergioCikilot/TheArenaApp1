@@ -31,11 +31,14 @@ public class UserManager implements UserService {
         return userDao
                 .findUserByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException(String.format("Username %s not found", username))
-                );
+                        new UsernameNotFoundException(String.format("Username %s not found", username)));
     }
 
-
+    @Override
+    public User findUserByUsername(String username) {
+        return this.userDao.findUserByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException(String.format("Username %s not found", username)));
+    }
 
 
     public void add(User user) throws Exception {
