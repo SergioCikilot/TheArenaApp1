@@ -77,4 +77,12 @@ public class PlayerManager implements PlayerService {
 
     }
 
+    @Override
+    public Player getPlayerByUserId(int id) {
+
+        return this.playerDao.getPlayerByUserUserId(id);
+
+    }
+
+
 }

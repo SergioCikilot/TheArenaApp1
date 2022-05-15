@@ -23,15 +23,15 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-
     private UserService userService;
-
 
     @Autowired
     public UserController(UserService userService) {
+
         this.userService = userService;
 
     }
+
     @PostMapping("/login")
     public String login() throws Exception {
 
@@ -45,25 +45,23 @@ public class UserController {
         this.userService.add(user);
 
     }
-    @PostMapping("/getUserByUsername")
-    public UserDetails getUserByUsername(@RequestParam String username) throws Exception {
+
+    @GetMapping("/getUserDetailsByUsername")
+    public UserDetails getUserDetailsByUsername(@RequestParam String username) throws Exception {
 
         return this.userService.loadUserByUsername(username);
 
     }
 
-    @PostMapping("/getUserIdByUsername")
+    @GetMapping("/getUserIdByUsername")
     public int getUserIdByUsername(@RequestParam String username) throws Exception {
 
         UserDetails userDetails = this.userService.loadUserByUsername(username);
-
         ModelMapper modelMapper = new ModelMapper();
-
         User user = modelMapper.map(userDetails,User.class);
-
         int id = user.getUserId();
-
         return id;
+
     }
 
     @GetMapping("/getAllUsers")
@@ -72,13 +70,19 @@ public class UserController {
         return this.userService.getAll();
 
     }
+    @GetMapping("/getUserByUsername")
+    public User getUserByUsername(@RequestParam String username){
+
+        return this.userService.findUserByUsername(username);
+
+    }
+
     @DeleteMapping("/deleteUser")
     public void deleteUser(@RequestBody User user){
 
         this.userService.delete(user);
 
     }
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -94,13 +98,6 @@ public class UserController {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-    /*@ExceptionHandler(DataIntegrityViolationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDataResult<Object> handleValidationTheException(DataIntegrityViolationException exceptions){
-
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(exceptions.getMessage(),"Validation Error2");
-        return  errors;
-    }*/
 
     @ExceptionHandler(ExistingEntryException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -125,7 +122,12 @@ public class UserController {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(exceptions.getMessage(),"Validation Error3");
         return  errors;
     }*/
+    /*@ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationTheException(DataIntegrityViolationException exceptions){
 
-
+        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(exceptions.getMessage(),"Validation Error2");
+        return  errors;
+    }*/
 }
 

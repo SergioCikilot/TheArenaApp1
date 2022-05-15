@@ -1,10 +1,10 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.entities.dto.PlayerWithIdUser;
+import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithIdUser;
 import draft1.TheArenaApp1.service.services.PlayerService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Player;
-import draft1.TheArenaApp1.entities.dto.PlayerWithUserIdDto;
+import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -49,6 +49,13 @@ public class PlayerController {
 
     }
 
+    @GetMapping("/getPlayerByUserId")
+    public Player getPlayerByUserId(@RequestParam int userId){
+
+        return this.playerService.getPlayerByUserId(userId);
+
+    }
+
     @PostMapping("/addPlayer")
     public void addPlayer(@RequestBody PlayerWithUserIdDto playerWithUserIdDto){
 
@@ -73,7 +80,6 @@ public class PlayerController {
         this.playerService.updatePlayer(player);
 
     }
-
 
     @PutMapping("/updateTeamOfPlayer")
     public void updateTeamOfPlayer(@RequestParam int teamId,@RequestParam int playerId){

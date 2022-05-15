@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.entities.dto;
+package draft1.TheArenaApp1.entities.dto.PlayerDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

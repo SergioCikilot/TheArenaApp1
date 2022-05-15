@@ -1,12 +1,12 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.entities.dto.ReservationWithIdPlayerPitch;
-import draft1.TheArenaApp1.entities.dto.ReservationWithoutLocalDateTime;
+import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithIdPlayerPitch;
+import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutLocalDateTime;
 import draft1.TheArenaApp1.service.managers.ReservationManager;
 import draft1.TheArenaApp1.service.services.ReservationService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Reservation;
-import draft1.TheArenaApp1.entities.dto.ReservationWithPlayerAndPitchIdDto;
+import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithPlayerAndPitchIdDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,9 +37,9 @@ public class ReservationController {
     public List<ReservationWithoutLocalDateTime> getAllReservations(){
 
         ModelMapper modelMapper = new ModelMapper();
-
         return this.reservationService.getAllReservations().stream().map(reservation -> modelMapper.map(reservation,ReservationWithoutLocalDateTime.class))
                 .collect(Collectors.toList());
+
     }
 
     @PostMapping("/addReservation")
@@ -59,7 +59,6 @@ public class ReservationController {
         this.reservationService.updateReservation(reservation);
 
     }
-
 
     @PutMapping("/updateReservationTime")
     public void updateReservationTime(@RequestParam LocalTime reservationTime, @RequestParam int reservationId){
