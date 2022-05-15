@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithIdPlayerPitch;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutLocalDateTime;
+import draft1.TheArenaApp1.entities.model.Player;
 import draft1.TheArenaApp1.service.managers.ReservationManager;
 import draft1.TheArenaApp1.service.services.ReservationService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
@@ -39,6 +40,15 @@ public class ReservationController {
         ModelMapper modelMapper = new ModelMapper();
         return this.reservationService.getAllReservations().stream().map(reservation -> modelMapper.map(reservation,ReservationWithoutLocalDateTime.class))
                 .collect(Collectors.toList());
+
+    }
+    @GetMapping("/getReservationByPlayerId")
+    public ReservationWithoutLocalDateTime getReservationByPlayerId(@RequestParam int id){
+
+        ModelMapper modelMapper = new ModelMapper();
+        Reservation reservation =this.reservationService.getReservationByPlayerId(id);
+        ReservationWithoutLocalDateTime ReservationWithoutLocalDateTime = modelMapper.map(reservation,ReservationWithoutLocalDateTime.class);
+        return ReservationWithoutLocalDateTime;
 
     }
 
