@@ -46,6 +46,12 @@ public class ReservationManager implements ReservationService {
         return this.reservationDao.findAll();
     }
 
+    @Override
+    public Reservation getReservationByPlayerId(int id) {
+
+        return this.reservationDao.getReservationByPlayerPlayerId(id);
+
+    }
 
 
     @Override

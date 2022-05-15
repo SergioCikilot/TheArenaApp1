@@ -27,4 +27,7 @@ public interface PitchDao extends JpaRepository<Pitch,Integer> {
     void updatePitchMatchDuration(@Param("pitchMatchDuration")String pitchMatchDuration, @Param("pitchId") int pitchId);
 
     Pitch getByPitchId(int id);
+
+
+
 }
