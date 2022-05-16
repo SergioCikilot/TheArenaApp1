@@ -9,12 +9,15 @@ import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Reservation;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithPlayerAndPitchIdDto;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -42,18 +45,19 @@ public class ReservationController {
                 .collect(Collectors.toList());
 
     }
-    @GetMapping("/getReservationByPlayerId")
-    public ReservationWithoutLocalDateTime getReservationByPlayerId(@RequestParam int id){
+    @GetMapping("/getReservationsByPlayerId")
+    public List<ReservationWithoutLocalDateTime> getReservationsByPlayerId(@RequestParam int id){
 
         ModelMapper modelMapper = new ModelMapper();
-        Reservation reservation =this.reservationService.getReservationByPlayerId(id);
-        ReservationWithoutLocalDateTime ReservationWithoutLocalDateTime = modelMapper.map(reservation,ReservationWithoutLocalDateTime.class);
+        List <Reservation> list =this.reservationService.getReservationsByPlayerId(id);
+        Type listType = new TypeToken<List<ReservationWithoutLocalDateTime>>(){}.getType();
+        List<ReservationWithoutLocalDateTime> ReservationWithoutLocalDateTime = modelMapper.map(list,listType);
         return ReservationWithoutLocalDateTime;
 
     }
 
     @PostMapping("/addReservation")
-    public void addReservation(@RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto){
+    public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
         Reservation reservation = modelMapper.map(reservationWithPlayerAndPitchIdDto,Reservation.class);
@@ -62,7 +66,7 @@ public class ReservationController {
     }
 
     @PutMapping("/updateReservation")
-    public void updateReservation(@RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch){
+    public void updateReservation(@Valid @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch){
 
         ModelMapper modelMapper = new ModelMapper();
         Reservation reservation = modelMapper.map(reservationWithIdPlayerPitch,Reservation.class);
@@ -71,7 +75,7 @@ public class ReservationController {
     }
 
     @PutMapping("/updateReservationTime")
-    public void updateReservationTime(@RequestParam LocalTime reservationTime, @RequestParam int reservationId){
+    public void updateReservationTime(@Valid @RequestParam LocalTime reservationTime, @RequestParam int reservationId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String value = reservationTime.format(dateTimeFormatter);
@@ -80,7 +84,7 @@ public class ReservationController {
     }
 
     @PutMapping("/updateReservationDate")
-    public void updateReservationDate(@RequestParam LocalDate reservationDate, @RequestParam int reservationId){
+    public void updateReservationDate(@Valid @RequestParam LocalDate reservationDate, @RequestParam int reservationId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String value = reservationDate.format(dateTimeFormatter);
@@ -107,5 +111,7 @@ public class ReservationController {
         ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
+
+
 
 }

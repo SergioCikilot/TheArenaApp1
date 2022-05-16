@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface ReservationDao extends JpaRepository<Reservation,Integer> {
 
@@ -20,7 +21,7 @@ public interface ReservationDao extends JpaRepository<Reservation,Integer> {
     @Query("update Reservation p set p.reservationTime=:reservationTime where p.reservationId =:reservationId")
     void updateReservationTime(@Param("reservationTime")String reservationTime, @Param("reservationId") int reservationId);
 
-    Reservation getReservationByPlayerPlayerId(int id);
+    List<Reservation> getReservationsByPlayerPlayerId(int id);
     Reservation getByReservationId(int id);
 
 }
