@@ -42,24 +42,29 @@ public class UserController {
     @PostMapping("/signup")
     public void addUser(@Valid @RequestBody User user) throws Exception {
 
-        this.userService.add(user);
+        this.userService
+                .add(user);
 
     }
 
     @GetMapping("/getUserDetailsByUsername")
     public UserDetails getUserDetailsByUsername(@RequestParam String username) throws Exception {
 
-        return this.userService.loadUserByUsername(username);
+        return this.userService
+                .loadUserByUsername(username);
 
     }
 
     @GetMapping("/getUserIdByUsername")
     public int getUserIdByUsername(@RequestParam String username) throws Exception {
 
-        UserDetails userDetails = this.userService.loadUserByUsername(username);
+        UserDetails userDetails = this.userService
+                .loadUserByUsername(username);
         ModelMapper modelMapper = new ModelMapper();
-        User user = modelMapper.map(userDetails,User.class);
-        int id = user.getUserId();
+        User user = modelMapper
+                .map(userDetails,User.class);
+        int id = user
+                .getUserId();
         return id;
 
     }
@@ -67,35 +72,45 @@ public class UserController {
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
 
-        return this.userService.getAll();
+        return this.userService
+                .getAll();
 
     }
     @GetMapping("/getUserByUsername")
     public User getUserByUsername(@RequestParam String username){
 
-        return this.userService.findUserByUsername(username);
+        return this.userService
+                .findUserByUsername(username);
 
     }
 
     @DeleteMapping("/deleteUser")
     public void deleteUser(@RequestBody User user){
 
-        this.userService.delete(user);
+        this.userService
+                .delete(user);
 
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
+    public ErrorDataResult<Object> handleValidationException(
+            MethodArgumentNotValidException exceptions){
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
-            String field = fieldError.getField();
-            String message = fieldError.getDefaultMessage();
-            validationErrors.put(field,message);
+            String field = fieldError
+                    .getField();
+            String message = fieldError
+                    .getDefaultMessage();
+            validationErrors
+                    .put(
+                            field,
+                            message);
 
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
 
@@ -107,11 +122,17 @@ public class UserController {
 
         for (int i = 0; i < exceptions.getFieldList().size() ; i++) {
 
-            validationErrors.put(exceptions.getFieldList().get(i),exceptions.getMessage());
+            validationErrors
+                    .put(
+                    exceptions.getFieldList()
+                            .get(i),
+                    exceptions
+                            .getMessage());
 
         }
 
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
         return  errors;
     }
 

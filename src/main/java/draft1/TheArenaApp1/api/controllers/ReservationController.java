@@ -41,17 +41,26 @@ public class ReservationController {
     public List<ReservationWithoutLocalDateTime> getAllReservations(){
 
         ModelMapper modelMapper = new ModelMapper();
-        return this.reservationService.getAllReservations().stream().map(reservation -> modelMapper.map(reservation,ReservationWithoutLocalDateTime.class))
-                .collect(Collectors.toList());
+        return this.reservationService
+                .getAllReservations()
+                .stream()
+                .map(reservation -> modelMapper
+                        .map(reservation, ReservationWithoutLocalDateTime.class))
+                .collect(Collectors
+                        .toList());
 
     }
     @GetMapping("/getReservationsByPlayerId")
     public List<ReservationWithoutLocalDateTime> getReservationsByPlayerId(@RequestParam int id){
 
         ModelMapper modelMapper = new ModelMapper();
-        List <Reservation> list =this.reservationService.getReservationsByPlayerId(id);
-        Type listType = new TypeToken<List<ReservationWithoutLocalDateTime>>(){}.getType();
-        List<ReservationWithoutLocalDateTime> ReservationWithoutLocalDateTime = modelMapper.map(list,listType);
+        List <Reservation> list =this.reservationService
+                .getReservationsByPlayerId(id);
+        Type listType =
+                new TypeToken<List<ReservationWithoutLocalDateTime>>(){}
+                        .getType();
+        List<ReservationWithoutLocalDateTime> ReservationWithoutLocalDateTime = modelMapper
+                .map(list,listType);
         return ReservationWithoutLocalDateTime;
 
     }
@@ -60,8 +69,10 @@ public class ReservationController {
     public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
-        Reservation reservation = modelMapper.map(reservationWithPlayerAndPitchIdDto,Reservation.class);
-        this.reservationService.addReservation(reservation);
+        Reservation reservation = modelMapper
+                .map(reservationWithPlayerAndPitchIdDto,Reservation.class);
+        this.reservationService
+                .addReservation(reservation);
 
     }
 
@@ -69,17 +80,23 @@ public class ReservationController {
     public void updateReservation(@Valid @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch){
 
         ModelMapper modelMapper = new ModelMapper();
-        Reservation reservation = modelMapper.map(reservationWithIdPlayerPitch,Reservation.class);
-        this.reservationService.updateReservation(reservation);
+        Reservation reservation = modelMapper
+                .map(reservationWithIdPlayerPitch,Reservation.class);
+        this.reservationService
+                .updateReservation(reservation);
 
     }
 
     @PutMapping("/updateReservationTime")
     public void updateReservationTime(@Valid @RequestParam LocalTime reservationTime, @RequestParam int reservationId){
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String value = reservationTime.format(dateTimeFormatter);
-        this.reservationService.updateReservationTime(value,reservationId);
+        DateTimeFormatter dateTimeFormatter =
+                DateTimeFormatter
+                        .ofPattern("HH:mm:ss");
+        String value = reservationTime
+                .format(dateTimeFormatter);
+        this.reservationService
+                .updateReservationTime(value,reservationId);
 
     }
 
@@ -88,7 +105,7 @@ public class ReservationController {
 
         DateTimeFormatter dateTimeFormatter =
                 DateTimeFormatter
-                .ofPattern("dd-MM-yyyy");
+                        .ofPattern("dd-MM-yyyy");
         String value = reservationDate
                 .format(dateTimeFormatter);
         this.reservationService
@@ -99,7 +116,8 @@ public class ReservationController {
     @DeleteMapping("/deleteReservation")
     public void deleteReservation(@RequestParam int id){
 
-        this.reservationService.deleteReservation(id);
+        this.reservationService
+                .deleteReservation(id);
 
     }
 
@@ -109,10 +127,14 @@ public class ReservationController {
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
-            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+            validationErrors
+                    .put(
+                    fieldError.getField(),
+                    fieldError.getDefaultMessage());
 
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
 

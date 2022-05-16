@@ -25,28 +25,32 @@ public class DateController {
     @GetMapping("/getTime12Hour")
     public String getFormattedTime12Hour(){
 
-        return this.dateService.getFormattedCurrentTime12Hour();
+        return this.dateService
+                .getFormattedCurrentTime12Hour();
 
     }
 
     @GetMapping("/getTime24Hour")
     public String getFormattedTime24Hour(){
 
-        return this.dateService.getFormattedCurrentTime24Hour();
+        return this.dateService
+                .getFormattedCurrentTime24Hour();
 
     }
 
     @GetMapping("/getTimeIstanbul24Hour")
     public String getFormattedTimeIstanbul24Hour(){
 
-        return this.dateService.getFormattedCurrentTimeIstanbul24Hour();
+        return this.dateService
+                .getFormattedCurrentTimeIstanbul24Hour();
 
     }
 
     @GetMapping("/getDateIstanbul")
     public String getFormattedDateIstanbul(){
 
-        return this.dateService.getFormattedCurrentDateIstanbul();
+        return this.dateService
+                .getFormattedCurrentDateIstanbul();
 
     }
 
@@ -56,10 +60,14 @@ public class DateController {
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
-            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+            validationErrors
+                    .put(
+                    fieldError.getField(),
+                    fieldError.getDefaultMessage());
 
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors, "Validation Errors");
         return  errors;
     }
 

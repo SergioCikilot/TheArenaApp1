@@ -31,51 +31,60 @@ public class PitchManager implements PitchService {
     @Override
     public List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize)
     {
-        Pageable pageable = PageRequest.of(pageNo,pageSize);
+        Pageable pageable = PageRequest
+                .of(pageNo,pageSize);
 
-        return this.pitchDao.findAll(pageable).getContent();
+        return this.pitchDao
+                .findAll(pageable).getContent();
     }
 
     @Override
     public void addPitch(Pitch pitch) {
 
-        this.pitchDao.save(pitch);
+        this.pitchDao
+                .save(pitch);
 
     }
 
     @Override
     public void deletePitch(int id) {
 
-        Pitch pitch = this.pitchDao.getByPitchId(id);
-        this.pitchDao.delete(pitch);
+        Pitch pitch = this.pitchDao
+                .getByPitchId(id);
+        this.pitchDao
+                .delete(pitch);
 
     }
 
     @Override
     public void updatePitch(Pitch pitch) {
 
-        this.pitchDao.save(pitch);
+        this.pitchDao
+                .save(pitch);
 
     }
 
     @Override
     public void updatePitchOpeningTime(String openingTime, int pitchId) {
 
-        this.pitchDao.updatePitchOpeningTime(openingTime,pitchId);
+        this.pitchDao
+                .updatePitchOpeningTime(openingTime,pitchId);
 
     }
 
     @Override
     public void updatePitchClosingTime(String closingTime, int pitchId) {
 
-        this.pitchDao.updatePitchClosingTime(closingTime,pitchId);
+        this.pitchDao
+                .updatePitchClosingTime(closingTime,pitchId);
 
     }
 
     @Override
     public void updatePitchMatchDuration(String matchDuration, int pitchId) {
 
-        this.pitchDao.updatePitchMatchDuration(matchDuration,pitchId);
+        this.pitchDao
+                .updatePitchMatchDuration(matchDuration,pitchId);
 
     }
 

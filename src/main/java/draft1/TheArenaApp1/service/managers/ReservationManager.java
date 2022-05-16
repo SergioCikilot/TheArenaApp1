@@ -22,34 +22,41 @@ public class ReservationManager implements ReservationService {
     @Override
     public void addReservation(Reservation reservation) {
 
-        this.reservationDao.save(reservation);
+        this.reservationDao
+                .save(reservation);
 
     }
 
     @Override
     public void deleteReservation(int id) {
 
-        Reservation reservation = this.reservationDao.getByReservationId(id);
-        this.reservationDao.delete(reservation);
+        Reservation reservation = this.reservationDao
+                .getByReservationId(id);
+        this.reservationDao
+                .delete(reservation);
 
     }
 
     @Override
     public void updateReservation(Reservation reservation) {
 
-        this.reservationDao.save(reservation);
+        this.reservationDao
+                .save(reservation);
 
     }
 
     @Override
     public List<Reservation> getAllReservations() {
-        return this.reservationDao.findAll();
+
+        return this.reservationDao
+                .findAll();
     }
 
     @Override
     public List<Reservation> getReservationsByPlayerId(int id) {
 
-        return this.reservationDao.getReservationsByPlayerPlayerId(id);
+        return this.reservationDao
+                .getReservationsByPlayerPlayerId(id);
 
     }
 
@@ -57,14 +64,16 @@ public class ReservationManager implements ReservationService {
     @Override
     public void updateReservationTime(String reservationTime, int reservationId) {
 
-        this.reservationDao.updateReservationTime(reservationTime,reservationId);
+        this.reservationDao
+                .updateReservationTime(reservationTime,reservationId);
 
     }
 
     @Override
     public void updateReservationDate(String reservationDate, int reservationId) {
 
-        this.reservationDao.updateReservationDate(reservationDate,reservationId);
+        this.reservationDao
+                .updateReservationDate(reservationDate,reservationId);
 
     }
 }

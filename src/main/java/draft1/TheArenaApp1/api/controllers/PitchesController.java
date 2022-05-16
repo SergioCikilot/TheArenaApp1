@@ -30,14 +30,16 @@ public class PitchesController {
     @GetMapping("/getAllPitches")
     public List<Pitch> getAllPitches(){
 
-        return this.pitchService.getAllPitches();
+        return this.pitchService
+                .getAllPitches();
 
     }
 
     @GetMapping("/getAllPitchesByPage")
     public List<Pitch> getAllPitchesByPage(@RequestParam int pageNo,@RequestParam int pageSize){
 
-        return this.pitchService.getAllPitchesWithPage(pageNo,pageSize);
+        return this.pitchService
+                .getAllPitchesWithPage(pageNo,pageSize);
 
     }
 
@@ -45,15 +47,18 @@ public class PitchesController {
     public void addPitch(@RequestBody PitchWithoutIdDto pitchWithoutIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
-        Pitch pitch = modelMapper.map(pitchWithoutIdDto,Pitch.class);
-        this.pitchService.addPitch(pitch);
+        Pitch pitch = modelMapper
+                .map(pitchWithoutIdDto,Pitch.class);
+        this.pitchService
+                .addPitch(pitch);
 
     }
 
     @DeleteMapping("/deletePitch")
     public void deletePitch(@RequestParam int id){
 
-        this.pitchService.deletePitch(id);
+        this.pitchService
+                .deletePitch(id);
 
     }
 
@@ -61,8 +66,10 @@ public class PitchesController {
     public void updatePitch(@RequestBody PitchDto pitchDto){
 
         ModelMapper modelMapper = new ModelMapper();
-        Pitch pitch = modelMapper.map(pitchDto,Pitch.class);
-        this.pitchService.updatePitch(pitch);
+        Pitch pitch = modelMapper
+                .map(pitchDto,Pitch.class);
+        this.pitchService
+                .updatePitch(pitch);
 
     }
 
@@ -70,26 +77,34 @@ public class PitchesController {
     public void updateTOpeningTimeToPitch(@RequestParam LocalTime openingTime, @RequestParam int pitchId){
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String value = openingTime.format(dateTimeFormatter);
-        this.pitchService.updatePitchOpeningTime(value,pitchId);
+        String value = openingTime
+                .format(dateTimeFormatter);
+        this.pitchService
+                .updatePitchOpeningTime(value,pitchId);
 
     }
 
     @PutMapping("/updatePitchClosingTime")
     public void updateClosingTimeToPitch(@RequestParam LocalTime closingTime, @RequestParam int pitchId){
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String value = closingTime.format(dateTimeFormatter);
-        this.pitchService.updatePitchClosingTime(value,pitchId);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+                .ofPattern("HH:mm:ss");
+        String value = closingTime
+                .format(dateTimeFormatter);
+        this.pitchService
+                .updatePitchClosingTime(value,pitchId);
 
     }
 
     @PutMapping("/updatePitchMatchDuration")
     public void updatePitchMatchDuration(@RequestParam LocalTime duration, @RequestParam int pitchId){
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String value = duration.format(dateTimeFormatter);
-        this.pitchService.updatePitchMatchDuration(value,pitchId);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+                .ofPattern("HH:mm:ss");
+        String value = duration
+                .format(dateTimeFormatter);
+        this.pitchService
+                .updatePitchMatchDuration(value,pitchId);
 
     }
 
@@ -99,10 +114,14 @@ public class PitchesController {
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
-            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+            validationErrors
+                    .put(
+                    fieldError.getField(),
+                    fieldError.getDefaultMessage());
 
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
 
