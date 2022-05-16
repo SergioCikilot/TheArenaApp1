@@ -22,25 +22,32 @@ public class TeamManager implements TeamService {
     @Override
     public void addTeam(Team team) {
 
-        this.teamDao.save(team);
+        this.teamDao
+                .save(team);
 
     }
 
     @Override
     public void deleteTeam(int id) {
-        Team team = teamDao.getById(id);
-        this.teamDao.delete(team);
+
+        Team team = teamDao
+                .getById(id);
+        this.teamDao
+                .delete(team);
     }
 
     @Override
     public List<Team> getAllTeams() {
-        return this.teamDao.findAll();
+
+        return this.teamDao
+                .findAll();
     }
 
     @Override
     public void updateTeam(Team team) {
 
-        this.teamDao.save(team);
+        this.teamDao
+                .save(team);
 
     }
 

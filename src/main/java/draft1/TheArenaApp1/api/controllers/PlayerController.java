@@ -33,27 +33,32 @@ public class PlayerController {
     @GetMapping("/getAllPlayers")
     public List<Player> getAllPlayers(){
 
-        return this.playerService.getAll();
+        return this.playerService
+                .getAll();
     }
 
     @GetMapping("/getPlayersByTeam")
     public List<Player> getPlayersByTeam(@RequestParam int teamId){
 
-        return this.playerService.getPlayersByTeam(teamId);
+        return this.playerService
+                .getPlayersByTeam(teamId);
     }
 
     @GetMapping("/getPlayerAge")
     public String getPlayerAge(@RequestParam int playerId){
 
-        Player player = this.playerService.getByPlayerPlayerId(playerId);
-        return this.playerService.getPlayerAge(player);
+        Player player = this.playerService
+                .getByPlayerPlayerId(playerId);
+        return this.playerService
+                .getPlayerAge(player);
 
     }
 
     @GetMapping("/getPlayerByUserId")
     public Player getPlayerByUserId(@RequestParam int userId){
 
-        return this.playerService.getPlayerByUserId(userId);
+        return this.playerService
+                .getPlayerByUserId(userId);
 
     }
 
@@ -61,15 +66,18 @@ public class PlayerController {
     public void addPlayer(@Valid @RequestBody PlayerWithUserIdDto playerWithUserIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
-        Player player = modelMapper.map(playerWithUserIdDto,Player.class);
-        this.playerService.add(player);
+        Player player = modelMapper
+                .map(playerWithUserIdDto,Player.class);
+        this.playerService
+                .add(player);
 
     }
 
     @DeleteMapping("delete")
     public void deletePlayer(@RequestParam int id){
 
-        this.playerService.delete(id);
+        this.playerService
+                .delete(id);
 
     }
 
@@ -77,15 +85,18 @@ public class PlayerController {
     public void updatePlayer(@RequestBody PlayerWithIdUser playerWithIdUser) {
 
         ModelMapper modelMapper = new ModelMapper();
-        Player player = modelMapper.map(playerWithIdUser,Player.class);
-        this.playerService.updatePlayer(player);
+        Player player = modelMapper
+                .map(playerWithIdUser,Player.class);
+        this.playerService
+                .updatePlayer(player);
 
     }
 
     @PutMapping("/updateTeamOfPlayer")
     public void updateTeamOfPlayer(@RequestParam int teamId,@RequestParam int playerId){
 
-        this.playerService.addTeam(teamId, playerId);
+        this.playerService
+                .addTeam(teamId, playerId);
 
     }
 
@@ -95,10 +106,14 @@ public class PlayerController {
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
-            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+            validationErrors
+                    .put(
+                    fieldError.getField(),
+                    fieldError.getDefaultMessage());
 
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
 

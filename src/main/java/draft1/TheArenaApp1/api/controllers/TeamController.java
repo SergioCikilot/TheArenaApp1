@@ -39,22 +39,26 @@ public class TeamController {
     public void addTeam(@RequestBody TeamWithoutIdDto teamWithoutIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
-        Team team = modelMapper.map(teamWithoutIdDto,Team.class);
-        this.teamService.addTeam(team);
+        Team team = modelMapper
+                .map(teamWithoutIdDto,Team.class);
+        this.teamService
+                .addTeam(team);
 
     }
 
     @PutMapping("updateTeam")
     public void updateTeam(@RequestBody Team team){
 
-        this.teamService.updateTeam(team);
+        this.teamService
+                .updateTeam(team);
 
     }
 
     @DeleteMapping("/deleteTeam")
     public void deleteTeam(@RequestParam int id){
 
-        this.teamService.deleteTeam(id);
+        this.teamService
+                .deleteTeam(id);
 
     }
 
@@ -64,10 +68,14 @@ public class TeamController {
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
 
-            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+            validationErrors
+                    .put(
+                    fieldError.getField(),
+                    fieldError.getDefaultMessage());
 
         }
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
 

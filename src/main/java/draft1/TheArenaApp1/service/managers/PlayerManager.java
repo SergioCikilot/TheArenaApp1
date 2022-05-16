@@ -25,40 +25,47 @@ public class PlayerManager implements PlayerService {
     @Override
     public void add(Player player) {
 
-        this.playerDao.save(player);
+        this.playerDao
+                .save(player);
 
     }
 
     @Override
     public void delete(int id) {
 
-        Player player = this.playerDao.getByPlayerId(id);
-        this.playerDao.delete(player);
+        Player player = this.playerDao
+                .getByPlayerId(id);
+        this.playerDao
+                .delete(player);
 
     }
 
     @Override
     public void updatePlayer(Player player) {
 
-        this.playerDao.save(player);
+        this.playerDao
+                .save(player);
 
     }
 
     @Override
     public List<Player> getAll() {
 
-        return this.playerDao.findAll();
+        return this.playerDao
+                .findAll();
 
     }
 
     @Override
     public List<Player> getPlayersByTeam(int teamId) {
-        return this.playerDao.getByTeamTeamId(teamId);
+        return this.playerDao
+                .getByTeamTeamId(teamId);
     }
 
     @Override
     public Player getByPlayerPlayerId(int playerId) {
-        return this.playerDao.getByPlayerId(playerId);
+        return this.playerDao
+                .getByPlayerId(playerId);
     }
 
     @Override
@@ -73,14 +80,16 @@ public class PlayerManager implements PlayerService {
     @Override
     public void addTeam(int teamId, int playerId) {
 
-        this.playerDao.addTeam(teamId,playerId);
+        this.playerDao
+                .addTeam(teamId,playerId);
 
     }
 
     @Override
     public Player getPlayerByUserId(int id) {
 
-        return this.playerDao.getPlayerByUserUserId(id);
+        return this.playerDao
+                .getPlayerByUserUserId(id);
 
     }
 
