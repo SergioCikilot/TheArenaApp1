@@ -47,9 +47,9 @@ public class ReservationManager implements ReservationService {
     }
 
     @Override
-    public Reservation getReservationByPlayerId(int id) {
+    public List<Reservation> getReservationsByPlayerId(int id) {
 
-        return this.reservationDao.getReservationByPlayerPlayerId(id);
+        return this.reservationDao.getReservationsByPlayerPlayerId(id);
 
     }
 

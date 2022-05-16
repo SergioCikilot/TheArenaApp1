@@ -23,7 +23,6 @@ public class ReservationWithPlayerAndPitchIdDto {
     @JsonIgnore
     private int reservationId;
 
-    @Future
     @Temporal(TemporalType.TIME)
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
     @DateTimeFormat(pattern = "HH:mm:ss")

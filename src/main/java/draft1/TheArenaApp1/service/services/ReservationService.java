@@ -11,7 +11,7 @@ public interface ReservationService {
 
     void updateReservation(Reservation reservation);
     List<Reservation> getAllReservations();
-    Reservation getReservationByPlayerId(int id);
+    List<Reservation> getReservationsByPlayerId(int id);
     void updateReservationTime(String reservationTime, int reservationId);
     void updateReservationDate(String reservationDate, int reservationId);
 

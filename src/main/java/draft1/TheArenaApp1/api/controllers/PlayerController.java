@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class PlayerController {
     }
 
     @PostMapping("/addPlayer")
-    public void addPlayer(@RequestBody PlayerWithUserIdDto playerWithUserIdDto){
+    public void addPlayer(@Valid @RequestBody PlayerWithUserIdDto playerWithUserIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
         Player player = modelMapper.map(playerWithUserIdDto,Player.class);
