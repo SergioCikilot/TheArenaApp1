@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -28,7 +29,7 @@ public class ReservationWithPlayerAndPitchIdDto {
     @DateTimeFormat(pattern = "HH:mm:ss")
     private LocalTime reservationTime;
 
-    @Future
+    @FutureOrPresent
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "dd-MM-yyyy")

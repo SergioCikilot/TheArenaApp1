@@ -86,9 +86,13 @@ public class ReservationController {
     @PutMapping("/updateReservationDate")
     public void updateReservationDate(@Valid @RequestParam LocalDate reservationDate, @RequestParam int reservationId){
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String value = reservationDate.format(dateTimeFormatter);
-        this.reservationService.updateReservationDate(value,reservationId);
+        DateTimeFormatter dateTimeFormatter =
+                DateTimeFormatter
+                .ofPattern("dd-MM-yyyy");
+        String value = reservationDate
+                .format(dateTimeFormatter);
+        this.reservationService
+                .updateReservationDate(value,reservationId);
 
     }
 
