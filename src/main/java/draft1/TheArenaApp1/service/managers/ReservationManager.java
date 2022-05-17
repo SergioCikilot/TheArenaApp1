@@ -76,4 +76,29 @@ public class ReservationManager implements ReservationService {
                 .updateReservationDate(reservationDate,reservationId);
 
     }
+
+    @Override
+    public List<Reservation> getReservationsByReservationDate(String reservationDate) {
+        return this.reservationDao
+                .getReservationsByReservationDate(reservationDate);
+    }
+
+    @Override
+    public List<Reservation> getReservationsByReservationTime(String reservationTime) {
+        return this.reservationDao
+                .getReservationsByReservationTime(reservationTime);
+    }
+
+    @Override
+    public List<Reservation> getReservationsByPitchPitchId(int pitchId) {
+        return this.reservationDao
+                .getReservationsByPlayerPlayerId(pitchId);
+    }
+
+    @Override
+    public Reservation getByReservationId(int id) {
+        return this.reservationDao.getByReservationId(id);
+    }
+
+
 }
