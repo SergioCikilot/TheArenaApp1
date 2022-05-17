@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.core.exceptions;
 
 
 import lombok.Data;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,4 +16,6 @@ public class ExistingEntryException extends Exception {
 
         this.fieldList = fieldList;
     }
+
+
 }

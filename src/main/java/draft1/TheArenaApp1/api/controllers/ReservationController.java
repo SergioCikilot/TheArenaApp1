@@ -1,8 +1,10 @@
 package draft1.TheArenaApp1.api.controllers;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
+import draft1.TheArenaApp1.core.validators.ReservationValidator;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithIdPlayerPitch;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutLocalDateTime;
-import draft1.TheArenaApp1.entities.model.Player;
 import draft1.TheArenaApp1.service.managers.ReservationManager;
 import draft1.TheArenaApp1.service.services.ReservationService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
@@ -11,16 +13,21 @@ import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithPlayerAnd
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Future;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +38,12 @@ import java.util.stream.Collectors;
 public class ReservationController {
 
     private ReservationService reservationService;
+    private ReservationValidator reservationValidator;
 
     @Autowired
-    public ReservationController(ReservationManager reservationManager) {
+    public ReservationController(ReservationManager reservationManager, ReservationValidator reservationValidator) {
         this.reservationService = reservationManager;
+        this.reservationValidator = reservationValidator;
     }
 
     @GetMapping("/getAllReservations")
@@ -66,48 +75,96 @@ public class ReservationController {
     }
 
     @PostMapping("/addReservation")
-    public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto){
+    public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto) throws ExistingEntryException {
 
+       /* DateTimeFormatter dateTimeFormatter =
+                DateTimeFormatter
+                        .ofPattern("dd-MM-yyyy");
+        String value = reservationWithPlayerAndPitchIdDto.getReservationDate()
+                .format(dateTimeFormatter);*/
+        //map
         ModelMapper modelMapper = new ModelMapper();
         Reservation reservation = modelMapper
                 .map(reservationWithPlayerAndPitchIdDto,Reservation.class);
-        this.reservationService
-                .addReservation(reservation);
+        //reservation.setReservationDate(value);
+        ArrayList<String> arrayList = new ArrayList<>();
+        if (!reservationValidator.IsValid(reservation)){
+
+            arrayList.add("Reservation");
+
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+
+        }
+
+        else
+
+            this.reservationService.addReservation(reservation);
 
     }
 
     @PutMapping("/updateReservation")
-    public void updateReservation(@Valid @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch){
+    public void updateReservation(@Valid @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch) throws ExistingEntryException {
 
         ModelMapper modelMapper = new ModelMapper();
         Reservation reservation = modelMapper
                 .map(reservationWithIdPlayerPitch,Reservation.class);
+
+        if (!reservationValidator.IsValid(reservation)){
+
+            ArrayList<String> arrayList = new ArrayList<>();
+            arrayList.add("Reservation");
+
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+
+        }
         this.reservationService
                 .updateReservation(reservation);
 
     }
 
     @PutMapping("/updateReservationTime")
-    public void updateReservationTime(@Valid @RequestParam LocalTime reservationTime, @RequestParam int reservationId){
+    public void updateReservationTime(@Valid @RequestParam LocalTime reservationTime, @RequestParam int reservationId) throws ExistingEntryException {
 
         DateTimeFormatter dateTimeFormatter =
                 DateTimeFormatter
                         .ofPattern("HH:mm:ss");
         String value = reservationTime
                 .format(dateTimeFormatter);
+
+        Reservation reservation = this.reservationService.getByReservationId(reservationId);
+        reservation.setReservationTime(value);
+        if (!reservationValidator.IsValid(reservation)){
+
+            ArrayList<String> arrayList = new ArrayList<>();
+            arrayList.add("Reservation");
+
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+
+        }
+
         this.reservationService
                 .updateReservationTime(value,reservationId);
 
     }
 
     @PutMapping("/updateReservationDate")
-    public void updateReservationDate(@Valid @RequestParam LocalDate reservationDate, @RequestParam int reservationId){
+    public void updateReservationDate(@Valid @RequestParam  LocalDate reservationDate, @RequestParam int reservationId) throws ExistingEntryException {
 
         DateTimeFormatter dateTimeFormatter =
                 DateTimeFormatter
                         .ofPattern("dd-MM-yyyy");
         String value = reservationDate
                 .format(dateTimeFormatter);
+        Reservation reservation = this.reservationService.getByReservationId(reservationId);
+        reservation.setReservationDate(value);
+        if (!reservationValidator.IsValid(reservation)){
+
+            ArrayList<String> arrayList = new ArrayList<>();
+            arrayList.add("Reservation");
+
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+
+        }
         this.reservationService
                 .updateReservationDate(value,reservationId);
 
@@ -135,6 +192,28 @@ public class ReservationController {
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        return  errors;
+    }
+
+    @ExceptionHandler(ExistingEntryException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationExistException(ExistingEntryException exceptions){
+
+        Map<String,String> validationErrors = new HashMap<String,String>();
+
+        for (int i = 0; i < exceptions.getFieldList().size() ; i++) {
+
+            validationErrors
+                    .put(
+                            exceptions.getFieldList()
+                                    .get(i),
+                            exceptions
+                                    .getMessage());
+
+        }
+
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
         return  errors;
     }
 

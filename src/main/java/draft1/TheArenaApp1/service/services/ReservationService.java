@@ -14,5 +14,8 @@ public interface ReservationService {
     List<Reservation> getReservationsByPlayerId(int id);
     void updateReservationTime(String reservationTime, int reservationId);
     void updateReservationDate(String reservationDate, int reservationId);
-
+    List<Reservation> getReservationsByReservationDate(String reservationDate);
+    List<Reservation> getReservationsByReservationTime(String reservationTime);
+    List<Reservation> getReservationsByPitchPitchId(int pitchId);
+    Reservation getByReservationId(int id);
 }

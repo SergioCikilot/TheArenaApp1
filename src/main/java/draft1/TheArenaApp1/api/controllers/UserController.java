@@ -1,5 +1,6 @@
 package draft1.TheArenaApp1.api.controllers;
 
+import draft1.TheArenaApp1.core.exceptions.CustomHandler;
 import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.core.user.User;
@@ -135,6 +136,7 @@ public class UserController {
                 new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
         return  errors;
     }
+
 
     /*@ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
