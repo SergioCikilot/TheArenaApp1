@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.core.utils.DateAndTime;
+package draft1.TheArenaApp1.core.utils.dateAndTime;
 
 
 import java.time.LocalDate;

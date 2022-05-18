@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.entities.dto.ReservationDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import draft1.TheArenaApp1.core.utils.status.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +29,7 @@ public class ReservationWithoutLocalDateTime {
     private int pitchId;
 
     private int playerId;
+
+    private Status status;
 
 }
