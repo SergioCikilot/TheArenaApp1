@@ -77,16 +77,11 @@ public class ReservationController {
     @PostMapping("/addReservation")
     public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto) throws ExistingEntryException {
 
-       /* DateTimeFormatter dateTimeFormatter =
-                DateTimeFormatter
-                        .ofPattern("dd-MM-yyyy");
-        String value = reservationWithPlayerAndPitchIdDto.getReservationDate()
-                .format(dateTimeFormatter);*/
         //map
         ModelMapper modelMapper = new ModelMapper();
         Reservation reservation = modelMapper
                 .map(reservationWithPlayerAndPitchIdDto,Reservation.class);
-        //reservation.setReservationDate(value);
+
         ArrayList<String> arrayList = new ArrayList<>();
         if (!reservationValidator.IsValid(reservation)){
 
