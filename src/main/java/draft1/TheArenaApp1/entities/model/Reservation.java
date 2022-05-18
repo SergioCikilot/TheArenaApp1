@@ -27,6 +27,7 @@ public class Reservation {
     @Column(name = "reservation_date")
     private String reservationDate;
 
+
     @ManyToOne()
     @JoinColumn(name="pitch_id")
     private Pitch pitch;
