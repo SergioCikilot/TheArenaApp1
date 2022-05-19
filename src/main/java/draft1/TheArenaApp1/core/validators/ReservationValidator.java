@@ -32,36 +32,23 @@ public class ReservationValidator {
         List<Reservation> list2 = this.reservationService
                 .getReservationsByReservationTime(reservation.getReservationTime());
 
-        List<Reservation> list3 = this.reservationService
-                .getReservationsByPitchPitchId(pitchId);
+        List<Reservation> list3 = this.reservationService.findReservationsByPitchPitchId(pitchId);
         boolean anyMatch3 = false;
         boolean anyMatch2 = false;
         boolean anyMatch1 = false;
-        for (Reservation res:list) {
+        if (list.size()>0){
 
-            if (res.equals(reservation)){
-
-                anyMatch1 = true;
-
-            }
+            anyMatch1 = true;
 
         }
-        for (Reservation res:list2) {
+        if (list2.size()>0){
 
-            if (res.equals(reservation)){
-
-                anyMatch2 = true;
-
-            }
+            anyMatch2 = true;
 
         }
-        for (Reservation res:list3) {
+        if (list3.size()>0){
 
-            if (res.equals(reservation)){
-
-                anyMatch3 = true;
-
-            }
+            anyMatch3 = true;
 
         }
 

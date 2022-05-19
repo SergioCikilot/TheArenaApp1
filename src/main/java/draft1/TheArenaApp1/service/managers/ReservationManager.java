@@ -92,9 +92,9 @@ public class ReservationManager implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getReservationsByPitchPitchId(int pitchId) {
+    public List<Reservation> findReservationsByPitchPitchId(int pitchId) {
         return this.reservationDao
-                .getReservationsByPlayerPlayerId(pitchId);
+                .findReservationsByPitchPitchId(pitchId);
     }
 
     @Override

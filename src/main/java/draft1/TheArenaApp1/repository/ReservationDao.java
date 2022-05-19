@@ -25,7 +25,7 @@ public interface ReservationDao extends JpaRepository<Reservation,Integer> {
 
     List<Reservation> getReservationsByReservationDate(LocalDate reservationDate);
     List<Reservation> getReservationsByReservationTime(LocalTime reservationTime);
-    List<Reservation> getReservationsByPitchPitchId(int pitchId);
+    List<Reservation> findReservationsByPitchPitchId(int pitchId);
 
     List<Reservation> getReservationsByPlayerPlayerId(int id);
     Reservation getByReservationId(int id);
