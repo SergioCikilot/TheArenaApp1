@@ -18,6 +18,6 @@ public interface ReservationService {
     void updateReservationDate(LocalDate reservationDate, int reservationId);
     List<Reservation> getReservationsByReservationDate(LocalDate reservationDate);
     List<Reservation> getReservationsByReservationTime(LocalTime reservationTime);
-    List<Reservation> getReservationsByPitchPitchId(int pitchId);
+    List<Reservation> findReservationsByPitchPitchId(int pitchId);
     Reservation getByReservationId(int id);
 }
