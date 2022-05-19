@@ -23,41 +23,47 @@ public class ReservationValidator {
 
     public boolean IsValid(Reservation reservation){
 
-        String date = reservation
-                .getReservationDate();
-
-        String time = reservation
-                .getReservationTime();
-
         int pitchId = reservation
                 .getPitch().getPitchId();
 
         List<Reservation> list = this.reservationService
-                .getReservationsByReservationDate(date);
+                .getReservationsByReservationDate(reservation.getReservationDate());
 
         List<Reservation> list2 = this.reservationService
-                .getReservationsByReservationTime(time);
+                .getReservationsByReservationTime(reservation.getReservationTime());
 
         List<Reservation> list3 = this.reservationService
                 .getReservationsByPitchPitchId(pitchId);
+        boolean anyMatch3 = false;
+        boolean anyMatch2 = false;
+        boolean anyMatch1 = false;
+        for (Reservation res:list) {
 
-        boolean anyMatch1 = list.stream()
-                .anyMatch(reservation1 ->
-                        reservation
-                                .getReservationDate()
-                                .equals(date));
+            if (res.equals(reservation)){
 
-        boolean anyMatch2 = list.stream()
-                .anyMatch(reservation1 ->
-                        reservation
-                                .getReservationTime()
-                                .equals(time));
+                anyMatch1 = true;
 
-        boolean anyMatch3 = list.stream()
-                .anyMatch(reservation1 ->
-                        reservation
-                                .getPitch()
-                                .getPitchId() == pitchId);
+            }
+
+        }
+        for (Reservation res:list2) {
+
+            if (res.equals(reservation)){
+
+                anyMatch2 = true;
+
+            }
+
+        }
+        for (Reservation res:list3) {
+
+            if (res.equals(reservation)){
+
+                anyMatch3 = true;
+
+            }
+
+        }
 
         if (anyMatch1 && anyMatch2 && anyMatch3){
 

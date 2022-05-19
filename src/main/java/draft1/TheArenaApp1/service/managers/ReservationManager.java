@@ -6,6 +6,8 @@ import draft1.TheArenaApp1.entities.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -62,7 +64,7 @@ public class ReservationManager implements ReservationService {
 
 
     @Override
-    public void updateReservationTime(String reservationTime, int reservationId) {
+    public void updateReservationTime(LocalTime reservationTime, int reservationId) {
 
         this.reservationDao
                 .updateReservationTime(reservationTime,reservationId);
@@ -70,7 +72,7 @@ public class ReservationManager implements ReservationService {
     }
 
     @Override
-    public void updateReservationDate(String reservationDate, int reservationId) {
+    public void updateReservationDate(LocalDate reservationDate, int reservationId) {
 
         this.reservationDao
                 .updateReservationDate(reservationDate,reservationId);
@@ -78,13 +80,13 @@ public class ReservationManager implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getReservationsByReservationDate(String reservationDate) {
+    public List<Reservation> getReservationsByReservationDate(LocalDate reservationDate) {
         return this.reservationDao
                 .getReservationsByReservationDate(reservationDate);
     }
 
     @Override
-    public List<Reservation> getReservationsByReservationTime(String reservationTime) {
+    public List<Reservation> getReservationsByReservationTime(LocalTime reservationTime) {
         return this.reservationDao
                 .getReservationsByReservationTime(reservationTime);
     }
