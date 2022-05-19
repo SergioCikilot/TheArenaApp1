@@ -5,6 +5,8 @@ import draft1.TheArenaApp1.core.utils.status.WaitingStatus;
 import draft1.TheArenaApp1.entities.model.Reservation;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class StatusTest {
 
     private Status underTest = new Status();
@@ -23,12 +25,13 @@ public class StatusTest {
     @Test
     void itShouldReturnStatusWaiting(){
         //given
-        //Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation(LocalDate.parse("2023-01-01"));
+
         //when-underTest
-        //reservation.setReservationDate("2023-01-01");
-        //reservation.setStatus();
+
+
         //then-assertThat
-        //assert reservation.getStatus().equals(waitingStatus);
+        assert reservation.getStatus().equals(waitingStatus);
 
     }
 

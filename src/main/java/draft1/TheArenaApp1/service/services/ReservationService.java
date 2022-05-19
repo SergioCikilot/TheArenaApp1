@@ -1,5 +1,6 @@
 package draft1.TheArenaApp1.service.services;
 
+import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.entities.model.Reservation;
 
 import java.time.LocalDate;
@@ -19,5 +20,6 @@ public interface ReservationService {
     List<Reservation> getReservationsByReservationDate(LocalDate reservationDate);
     List<Reservation> getReservationsByReservationTime(LocalTime reservationTime);
     List<Reservation> findReservationsByPitchPitchId(int pitchId);
+    Status getReservationStatus(int id);
     Reservation getByReservationId(int id);
 }

@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.api.controllers;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
+import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.core.validators.ReservationValidator;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithIdPlayerPitch;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutLocalDateTime;
@@ -154,6 +155,12 @@ public class ReservationController {
                 .updateReservationDate(reservationDate,reservationId);
 
     }
+@GetMapping("/getReservationStatus")
+    public Status getReservationStatus(@RequestParam int id){
+
+        return this.reservationService.getReservationStatus(id);
+
+}
 
     @DeleteMapping("/deleteReservation")
     public void deleteReservation(@RequestParam int id){

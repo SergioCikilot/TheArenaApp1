@@ -4,16 +4,12 @@ import java.util.HashMap;
 
 public class CanceledStatus extends Status{
 
-    private final String status = "Cancelled";
+    private final String message = "Cancelled";
 
     public CanceledStatus() {
 
+        super("Cancelled");
     }
 
-    @Override
-    public HashMap<String, String> getStatus() {
-        HashMap hashMap = new HashMap<>();
-        hashMap.put(getMessage(),status);
-        return hashMap;
-    }
+
 }

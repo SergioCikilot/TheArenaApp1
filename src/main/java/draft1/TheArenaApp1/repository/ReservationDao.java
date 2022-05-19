@@ -28,6 +28,6 @@ public interface ReservationDao extends JpaRepository<Reservation,Integer> {
     List<Reservation> findReservationsByPitchPitchId(int pitchId);
 
     List<Reservation> getReservationsByPlayerPlayerId(int id);
-    Reservation getByReservationId(int id);
+    Reservation getReservationByReservationId(int id);
 
 }
