@@ -60,6 +60,21 @@ public class ReservationController {
                         .toList());
 
     }
+    @GetMapping("/getAllReservationsByPitchId")
+    public List<ReservationWithoutLocalDateTime> getAllReservationsByPitchId(@RequestParam int id){
+
+        ModelMapper modelMapper = new ModelMapper();
+
+        List <Reservation> list =this.reservationService
+                .findReservationsByPitchPitchId(id);
+        Type listType =
+                new TypeToken<List<ReservationWithoutLocalDateTime>>(){}
+                        .getType();
+        List<ReservationWithoutLocalDateTime> ReservationWithoutLocalDateTime = modelMapper
+                .map(list,listType);
+        return ReservationWithoutLocalDateTime;
+
+    }
     @GetMapping("/getReservationsByPlayerId")
     public List<ReservationWithoutLocalDateTime> getReservationsByPlayerId(@RequestParam int id){
 
