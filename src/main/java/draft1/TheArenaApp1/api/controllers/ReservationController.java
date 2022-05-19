@@ -120,14 +120,8 @@ public class ReservationController {
     @PutMapping("/updateReservationTime")
     public void updateReservationTime(@Valid @RequestParam LocalTime reservationTime, @RequestParam int reservationId) throws ExistingEntryException {
 
-        DateTimeFormatter dateTimeFormatter =
-                DateTimeFormatter
-                        .ofPattern("HH:mm:ss");
-        String value = reservationTime
-                .format(dateTimeFormatter);
-
         Reservation reservation = this.reservationService.getByReservationId(reservationId);
-        reservation.setReservationTime(value);
+
         if (!reservationValidator.IsValid(reservation)){
 
             ArrayList<String> arrayList = new ArrayList<>();
@@ -138,20 +132,16 @@ public class ReservationController {
         }
 
         this.reservationService
-                .updateReservationTime(value,reservationId);
+                .updateReservationTime(reservationTime,reservationId);
 
     }
 
     @PutMapping("/updateReservationDate")
     public void updateReservationDate(@Valid @RequestParam  LocalDate reservationDate, @RequestParam int reservationId) throws ExistingEntryException {
 
-        DateTimeFormatter dateTimeFormatter =
-                DateTimeFormatter
-                        .ofPattern("dd-MM-yyyy");
-        String value = reservationDate
-                .format(dateTimeFormatter);
+
         Reservation reservation = this.reservationService.getByReservationId(reservationId);
-        reservation.setReservationDate(value);
+        reservation.setReservationDate(reservationDate);
         if (!reservationValidator.IsValid(reservation)){
 
             ArrayList<String> arrayList = new ArrayList<>();
@@ -161,7 +151,7 @@ public class ReservationController {
 
         }
         this.reservationService
-                .updateReservationDate(value,reservationId);
+                .updateReservationDate(reservationDate,reservationId);
 
     }
 

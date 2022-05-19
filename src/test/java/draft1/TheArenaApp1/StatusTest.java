@@ -20,17 +20,17 @@ public class StatusTest {
         assert isExist = true;
 
     }
-    /*@Test
+    @Test
     void itShouldReturnStatusWaiting(){
         //given
-        Reservation reservation = new Reservation();
+        //Reservation reservation = new Reservation();
         //when-underTest
-        reservation.setReservationDate("13-10-2023");
-        reservation.setStatus();
+        //reservation.setReservationDate("2023-01-01");
+        //reservation.setStatus();
         //then-assertThat
-        assert reservation.getStatus().equals(waitingStatus);
+        //assert reservation.getStatus().equals(waitingStatus);
 
-    }*/
+    }
 
 
 }

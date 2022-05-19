@@ -1,5 +1,6 @@
 package draft1.TheArenaApp1.entities.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import draft1.TheArenaApp1.core.utils.status.DoneStatus;
 import draft1.TheArenaApp1.core.utils.status.Status;
@@ -9,11 +10,14 @@ import draft1.TheArenaApp1.entities.model.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name="reservations")
@@ -26,14 +30,19 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
     private int reservationId;
-
+    //@Temporal(TemporalType.TIME)
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
     @Column(name = "reservation_time")
-    private String reservationTime;
-
+    private LocalTime reservationTime;
+    @FutureOrPresent
+    //@Temporal(TemporalType.DATE)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "reservation_date")
-    private String reservationDate;
+    private LocalDate reservationDate;
 
-    @NotEmpty
+
     @Transient
     private Status status;
 
@@ -53,24 +62,22 @@ public class Reservation {
     public void setStatus() {
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
-        LocalDate date = LocalDate.parse(reservationDate);
-        LocalTime time = LocalTime.parse(reservationDate);
 
-        if (date.isAfter(dateNow)){
+        if (reservationDate.isAfter(dateNow)){
 
             this.status = new WaitingStatus();
 
-        } else if (date.isBefore(dateNow)) {
+        } else if (reservationDate.isBefore(dateNow)) {
 
             this.status = new DoneStatus();
 
-        } else if (date.isEqual(dateNow)) {
+        } else if (reservationDate.isEqual(dateNow)) {
 
-            if (time.isAfter(timeNow)){
+            if (reservationTime.isAfter(timeNow)){
 
                 this.status = new WaitingStatus();
 
-            } else if (time.isBefore(timeNow)) {
+            } else if (reservationTime.isBefore(timeNow)) {
 
                 this.status = new DoneStatus();
 
