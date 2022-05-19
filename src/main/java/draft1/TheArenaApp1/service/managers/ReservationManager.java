@@ -1,5 +1,6 @@
 package draft1.TheArenaApp1.service.managers;
 
+import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.service.services.ReservationService;
 import draft1.TheArenaApp1.repository.ReservationDao;
 import draft1.TheArenaApp1.entities.model.Reservation;
@@ -33,7 +34,7 @@ public class ReservationManager implements ReservationService {
     public void deleteReservation(int id) {
 
         Reservation reservation = this.reservationDao
-                .getByReservationId(id);
+                .getReservationByReservationId(id);
         this.reservationDao
                 .delete(reservation);
 
@@ -98,8 +99,16 @@ public class ReservationManager implements ReservationService {
     }
 
     @Override
+    public Status getReservationStatus(int id) {
+
+        Reservation reservation = this.reservationDao.getReservationByReservationId(id);
+
+        return reservation.getStatus();
+    }
+
+    @Override
     public Reservation getByReservationId(int id) {
-        return this.reservationDao.getByReservationId(id);
+        return this.reservationDao.getReservationByReservationId(id);
     }
 
 

@@ -11,11 +11,14 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 
 public class Status {
 
-    private String message = "Status:";
+    private String status;
+
+    public Status(String status) {
+        this.status = status;
+    }
 
     public boolean statusFieldExists(Object object){
 
@@ -34,11 +37,6 @@ public class Status {
         return false;
     }
 
-    public HashMap<String,String> getStatus(){
-
-        return null;
-
-    }
 
 }
 

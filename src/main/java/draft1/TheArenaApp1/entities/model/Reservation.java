@@ -58,35 +58,48 @@ public class Reservation {
         return status;
     }
 
+    public Reservation(int reservationId, LocalTime reservationTime, LocalDate reservationDate, Pitch pitch, Player player) {
+        this.reservationId = reservationId;
+        this.reservationTime = reservationTime;
+        this.reservationDate = reservationDate;
+        this.status = setStatus();
+        this.pitch = pitch;
+        this.player = player;
+    }
 
-    public void setStatus() {
+    public Reservation(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+        this.status = setStatus();
+    }
+
+    public Status setStatus() {
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
 
         if (reservationDate.isAfter(dateNow)){
 
-            this.status = new WaitingStatus();
+            return this.status = new WaitingStatus();
 
         } else if (reservationDate.isBefore(dateNow)) {
 
-            this.status = new DoneStatus();
+            return this.status = new DoneStatus();
 
         } else if (reservationDate.isEqual(dateNow)) {
 
             if (reservationTime.isAfter(timeNow)){
 
-                this.status = new WaitingStatus();
+                return this.status = new WaitingStatus();
 
             } else if (reservationTime.isBefore(timeNow)) {
 
-                this.status = new DoneStatus();
+                return this.status = new DoneStatus();
 
             }
 
-            this.status = new Status();
+            return this.status = new Status();
 
         }
-        this.status = new Status();
+        return this.status = new Status();
 
 
     }
