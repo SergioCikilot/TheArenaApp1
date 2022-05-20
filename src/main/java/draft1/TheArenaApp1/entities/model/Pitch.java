@@ -3,9 +3,7 @@ package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +13,8 @@ import java.util.List;
 
     @Entity
     @Table(name="pitches")
-    @Data
+    @Getter
+    @Setter
     @AllArgsConstructor
     @NoArgsConstructor
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations"})
