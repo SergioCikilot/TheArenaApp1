@@ -1,33 +1,27 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
+import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.core.validators.ReservationValidator;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithIdPlayerPitch;
+import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithPlayerAndPitchIdDto;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutLocalDateTime;
+import draft1.TheArenaApp1.entities.model.Reservation;
 import draft1.TheArenaApp1.service.managers.ReservationManager;
 import draft1.TheArenaApp1.service.services.ReservationService;
-import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.model.Reservation;
-import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithPlayerAndPitchIdDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Future;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +32,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/reservation")
 public class ReservationController {
 
-    private ReservationService reservationService;
-    private ReservationValidator reservationValidator;
+    private final ReservationService reservationService;
+    private final ReservationValidator reservationValidator;
 
     @Autowired
     public ReservationController(ReservationManager reservationManager, ReservationValidator reservationValidator) {
@@ -64,7 +58,6 @@ public class ReservationController {
     public List<ReservationWithoutLocalDateTime> getAllReservationsByPitchId(@RequestParam int id){
 
         ModelMapper modelMapper = new ModelMapper();
-
         List <Reservation> list =this.reservationService
                 .findReservationsByPitchPitchId(id);
         Type listType =

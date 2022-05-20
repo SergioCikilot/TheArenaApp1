@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Repository
 @Data
@@ -19,46 +21,45 @@ public class ReservationValidator {
     public ReservationValidator(ReservationService reservationService) {
 
         this.reservationService = reservationService;
+
     }
 
     public boolean IsValid(Reservation reservation){
 
-        int pitchId = reservation
-                .getPitch().getPitchId();
+        ArrayList<Reservation> list = new ArrayList<>(this.reservationService
+                .findReservationsByPitchPitchId(
+                        reservation
+                                .getPitch()
+                                .getPitchId()));
 
-        List<Reservation> list = this.reservationService
-                .getReservationsByReservationDate(reservation.getReservationDate());
+        List<Reservation> listForDateMatches = new ArrayList<>();
 
-        List<Reservation> list2 = this.reservationService
-                .getReservationsByReservationTime(reservation.getReservationTime());
 
-        List<Reservation> list3 = this.reservationService.findReservationsByPitchPitchId(pitchId);
-        boolean anyMatch3 = false;
-        boolean anyMatch2 = false;
-        boolean anyMatch1 = false;
-        if (list.size()>0){
+        for (Reservation r : list) {
 
-            anyMatch1 = true;
+            LocalDate date = r.getReservationDate();
+            LocalDate resDate =reservation.getReservationDate();
+            boolean match =  resDate
+                    .isEqual(date);
+            if (match){
 
+                listForDateMatches.add(r);
+            }
+            boolean isExist = listForDateMatches
+                    .stream()
+                    .anyMatch(reservation1 ->
+                            reservation1
+                                    .getReservationTime()
+                                    .equals(reservation
+                                            .getReservationTime()));
+            if (isExist){
+
+                return false;
+
+            }
         }
-        if (list2.size()>0){
 
-            anyMatch2 = true;
-
-        }
-        if (list3.size()>0){
-
-            anyMatch3 = true;
-
-        }
-
-        if (anyMatch1 && anyMatch2 && anyMatch3){
-
-            return false;
-
-        }
-        else
-            return true;
+        return true;
 
     }
 

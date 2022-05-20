@@ -1,27 +1,22 @@
 package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import draft1.TheArenaApp1.core.utils.status.DoneStatus;
 import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.core.utils.status.WaitingStatus;
-import draft1.TheArenaApp1.entities.model.Pitch;
-import draft1.TheArenaApp1.entities.model.Player;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name="reservations")
-@Data
+@Getter
+@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reservation {
@@ -30,13 +25,12 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
     private int reservationId;
-    //@Temporal(TemporalType.TIME)
+
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
     @DateTimeFormat(pattern = "HH:mm:ss")
     @Column(name = "reservation_time")
     private LocalTime reservationTime;
     @FutureOrPresent
-    //@Temporal(TemporalType.DATE)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "reservation_date")
@@ -56,15 +50,6 @@ public class Reservation {
 
     public Status getStatus() {
         return status;
-    }
-
-    public Reservation(int reservationId, LocalTime reservationTime, LocalDate reservationDate, Pitch pitch, Player player) {
-        this.reservationId = reservationId;
-        this.reservationTime = reservationTime;
-        this.reservationDate = reservationDate;
-        this.status = setStatus();
-        this.pitch = pitch;
-        this.player = player;
     }
 
     public Reservation(LocalDate reservationDate) {
