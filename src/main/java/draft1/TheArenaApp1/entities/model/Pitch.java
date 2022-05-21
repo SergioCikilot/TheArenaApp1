@@ -37,7 +37,7 @@ import java.util.List;
         private String pitchAddressLink;
 
         @Column(name = "pitch_rating")
-        private int pitchRating;
+        private double pitchRating;
 
         @Column(name = "pitch_price")
         private BigDecimal pitchPrice;
@@ -55,10 +55,10 @@ import java.util.List;
         private String pitchMatchDuration;
 
         @Column(name = "pitch_xCoordinate")
-        private int pitchXCoordinate;
+        private double pitchXCoordinate;
 
         @Column(name = "pitch_yCoordinate")
-        private int pitchYCoordinate;
+        private double pitchYCoordinate;
 
         @Column(name = "pitchLength")
         private int pitchLength;
