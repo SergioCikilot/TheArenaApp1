@@ -21,7 +21,6 @@ import java.util.List;
 
     public class Pitch {
 
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "pitch_id")
