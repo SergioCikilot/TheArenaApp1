@@ -12,7 +12,7 @@ public class StatusTest {
     private Status underTest = new Status();
     private Status waitingStatus = new WaitingStatus();
 
-    @Test
+   /* @Test
     void itShouldReturnTrue(){
         //given
         Reservation reservation = new Reservation();
@@ -33,7 +33,7 @@ public class StatusTest {
         //then-assertThat
         assert reservation.getStatus().equals(waitingStatus);
 
-    }
+    }*/
 
 
 }
