@@ -20,7 +20,7 @@ public class Status {
         this.status = status;
     }
 
-    public boolean statusFieldExists(Object object){
+    /*public boolean statusFieldExists(Object object){
 
         List<Field> arrayList = new ArrayList<>();
         arrayList = List
@@ -35,7 +35,7 @@ public class Status {
 
         }
         return false;
-    }
+    }*/
 
 
 }
