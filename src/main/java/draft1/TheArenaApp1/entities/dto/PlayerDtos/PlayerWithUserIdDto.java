@@ -51,6 +51,6 @@ public class PlayerWithUserIdDto {
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past
-    private LocalDate ageBirthDate;
+    private LocalDate playerBirthDate;
 
 }
