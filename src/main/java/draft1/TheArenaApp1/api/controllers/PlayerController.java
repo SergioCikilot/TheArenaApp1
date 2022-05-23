@@ -57,8 +57,10 @@ public class PlayerController {
     @GetMapping("/getPlayerByUserId")
     public PlayerWithUserIdDto getPlayerByUserId(@RequestParam int userId){
         ModelMapper modelMapper = new ModelMapper();
-        Player player = this.playerService.getPlayerByUserId(userId);
-        PlayerWithUserIdDto playerWithUserIdDto =modelMapper.map(player,PlayerWithUserIdDto.class);
+        Player player = this.playerService
+                .getPlayerByUserId(userId);
+        PlayerWithUserIdDto playerWithUserIdDto =modelMapper
+                .map(player,PlayerWithUserIdDto.class);
         return playerWithUserIdDto;
 
     }

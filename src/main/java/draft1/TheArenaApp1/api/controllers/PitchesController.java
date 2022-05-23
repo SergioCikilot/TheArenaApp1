@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchWithoutIdDto;
+import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutLocalDateTime;
 import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Pitch;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pitch")
@@ -28,10 +30,16 @@ public class PitchesController {
     }
 
     @GetMapping("/getAllPitches")
-    public List<Pitch> getAllPitches(){
+    public List<PitchDto> getAllPitches(){
 
+        ModelMapper modelMapper = new ModelMapper();
         return this.pitchService
-                .getAllPitches();
+                .getAllPitches()
+                .stream()
+                .map(pitch -> modelMapper
+                        .map(pitch, PitchDto.class))
+                .collect(Collectors
+                        .toList());
 
     }
 
