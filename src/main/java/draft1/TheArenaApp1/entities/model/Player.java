@@ -3,10 +3,11 @@ package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import draft1.TheArenaApp1.core.entities.comments.Comment;
 import draft1.TheArenaApp1.core.entities.foots.FootEnum;
+import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import draft1.TheArenaApp1.core.user.User;
 import lombok.*;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.List;
@@ -45,7 +46,6 @@ public class Player {
     private FootEnum playerFoot;
 
     @Column(name = "player_isForward")
-
     private boolean playerIsForward;
     @Column(name = "player_isMidfielder")
     private boolean playerIsMidfielder;
@@ -60,6 +60,13 @@ public class Player {
 
     @OneToMany(mappedBy = "player")
     private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "player")
+    private List<Comment> remarkedComments;
+
+    @OneToMany(mappedBy = "player")
+    private List<PitchRating> remarkedRatings ;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = true)
     @JsonIgnore

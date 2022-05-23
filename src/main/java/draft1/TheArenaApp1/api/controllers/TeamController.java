@@ -20,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/team")
 public class TeamController {
 
-    private TeamService teamService;
+    private final TeamService teamService;
 
     @Autowired
 

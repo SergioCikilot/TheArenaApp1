@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DateManager implements DateService {
 
-    private DateAdapter dateAdapter;
+    private final DateAdapter dateAdapter;
 
     @Autowired
     public DateManager(DateAdapter dateAdapter) {

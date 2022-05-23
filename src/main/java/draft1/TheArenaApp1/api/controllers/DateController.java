@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/date")
 public class DateController {
 
-    private DateService dateService;
+    private final DateService dateService;
 
     @Autowired
     public DateController(DateService dateService) {

@@ -27,8 +27,6 @@ public class PitchWithoutIdDto {
 
     private String pitchAddressLink;
 
-    private int pitchRating;
-
     private BigDecimal pitchPrice;
 
     private String pitchImageLink; //!!!

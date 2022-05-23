@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class UserManager implements UserService {
 
-    private UserDao userDao;
-    private PasswordConfig passwordConfig;
+    private final UserDao userDao;
+    private final PasswordConfig passwordConfig;
 
     @Autowired
     public UserManager(UserDao userDao, PasswordConfig passwordConfig) {

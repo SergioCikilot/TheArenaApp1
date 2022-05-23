@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class TeamManager implements TeamService {
 
-    private TeamDao teamDao;
+    private final TeamDao teamDao;
 
     @Autowired
     public TeamManager(TeamDao teamDao) {
