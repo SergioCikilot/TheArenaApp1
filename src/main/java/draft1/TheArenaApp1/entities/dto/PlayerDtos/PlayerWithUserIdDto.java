@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PlayerWithUserIdDto {
 
-    @JsonIgnore
+
     private int playerId ;
 
     private int userId;
