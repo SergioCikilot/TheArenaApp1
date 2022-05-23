@@ -36,9 +36,9 @@ public class PitchDto {
 
     private String pitchMatchDuration;
 
-    private int pitchXCoordinate;
+    private double pitchXCoordinate;
 
-    private int pitchYCoordinate;
+    private double pitchYCoordinate;
 
     private int pitchLength;
 

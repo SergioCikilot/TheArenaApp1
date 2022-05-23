@@ -29,19 +29,19 @@ public class PitchesController {
     }
 
     @GetMapping("/getAllPitches")
-    public List<PitchDto> getAllPitches(){
+    public List<Pitch> getAllPitches(){
 
-        /*return this.pitchService
+        return this.pitchService
                 .getAllPitches();
-*/
-         ModelMapper modelMapper = new ModelMapper();
+
+         /*ModelMapper modelMapper = new ModelMapper();
         return this.pitchService
                 .getAllPitches()
                 .stream()
                 .map(pitch -> modelMapper
                         .map(pitch, PitchDto.class))
                 .collect(Collectors
-                        .toList());
+                        .toList());*/
     }
 
     @GetMapping("/getAllPitchesByPage")

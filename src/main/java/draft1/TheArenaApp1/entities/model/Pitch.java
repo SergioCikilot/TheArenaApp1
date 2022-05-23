@@ -1,6 +1,7 @@
 package draft1.TheArenaApp1.entities.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import draft1.TheArenaApp1.core.entities.comments.Comment;
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
@@ -18,7 +19,7 @@ import java.util.List;
     @Setter
     @AllArgsConstructor
     @NoArgsConstructor
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","remarkedComments","remarkedRatings"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","receivedComments","receivedRatings"})
 
     public class Pitch {
 
@@ -69,8 +70,10 @@ import java.util.List;
         @Column(name = "pitch_isCamera")
         private boolean pitchIsCamera;
 
+
         @OneToMany(mappedBy = "pitch")
         private List<Comment> receivedComments;
+
 
         @OneToMany(mappedBy = "pitch")
         private List<PitchRating> receivedRatings;
