@@ -30,20 +30,11 @@ public class PitchDto {
 
     private String pitchImageLink; //!!!
 
-    @Temporal(TemporalType.TIME)
-    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private LocalTime pitchOpeningTime;
+    private String pitchOpeningTime;
 
-    @Temporal(TemporalType.TIME)
-    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private LocalTime pitchClosingTime;
+    private String pitchClosingTime;
 
-    @Temporal(TemporalType.TIME)
-    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "HH:mm:ss")
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private LocalTime pitchMatchDuration;
+    private String pitchMatchDuration;
 
     private int pitchXCoordinate;
 
