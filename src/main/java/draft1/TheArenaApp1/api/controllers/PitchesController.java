@@ -20,7 +20,7 @@ import java.util.*;
 @RequestMapping("/pitch")
 public class PitchesController {
 
-    private PitchService pitchService;
+    private final PitchService pitchService;
 
     @Autowired
     public PitchesController(PitchService pitchService) {

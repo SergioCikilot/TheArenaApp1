@@ -12,8 +12,8 @@ import java.util.List;
 @Service
 public class PlayerManager implements PlayerService {
 
-    private PlayerDao playerDao;
-    private AgeManager ageManager;
+    private final PlayerDao playerDao;
+    private final AgeManager ageManager;
 
     @Autowired
     public PlayerManager(PlayerDao playerDao, AgeManager ageManager) {

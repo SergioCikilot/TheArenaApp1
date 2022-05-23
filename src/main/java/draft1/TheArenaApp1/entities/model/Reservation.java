@@ -36,7 +36,6 @@ public class Reservation {
     @Column(name = "reservation_date")
     private LocalDate reservationDate;
 
-
     @Transient
     private Status status;
 

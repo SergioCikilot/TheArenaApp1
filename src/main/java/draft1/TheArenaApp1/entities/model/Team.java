@@ -25,6 +25,9 @@ public class Team {
     @Column(name = "team_id")
     private int teamId;
 
+    @Column(name = "team_logo_url")
+    private String teamLogoUrl;
+
     @Column(name = "team_name")
     private String teamName;
 

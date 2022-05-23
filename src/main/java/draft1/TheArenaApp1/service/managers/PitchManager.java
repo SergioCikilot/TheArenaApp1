@@ -13,10 +13,7 @@ import java.util.List;
 @Service
 public class PitchManager implements PitchService {
 
-    private PitchDao pitchDao;
-
-    public PitchManager() {
-    }
+    private final PitchDao pitchDao;
 
     @Autowired
     public PitchManager(PitchDao pitchDao) {

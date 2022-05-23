@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class ReservationManager implements ReservationService {
 
-    private ReservationDao reservationDao;
+    private final ReservationDao reservationDao;
 
     @Autowired
     public ReservationManager(ReservationDao reservationDao) {
