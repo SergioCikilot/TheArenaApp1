@@ -10,6 +10,7 @@ import draft1.TheArenaApp1.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -38,7 +39,7 @@ public class Player {
     private String playerSirName;
 
     @Column(name = "player_birthDate")
-    private String playerBirthDate;
+    private LocalDate playerBirthDate;
 
     @Column(name = "player_height")
     private int playerHeight;

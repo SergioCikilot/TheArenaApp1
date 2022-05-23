@@ -59,7 +59,7 @@ public class PlayerController {
         ModelMapper modelMapper = new ModelMapper();
         Player player = this.playerService
                 .getPlayerByUserId(userId);
-        if (!(player instanceof Player)){
+        if (player == null){
 
             throw new ApiRequestException("Player does not exist");
 
