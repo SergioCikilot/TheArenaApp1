@@ -36,14 +36,16 @@ public class RatingController {
         ModelMapper modelMapper = new ModelMapper();
         PitchRating pitchRating = modelMapper
                 .map(pitchRatingDto,PitchRating.class);
-        this.pitchRatingService.addPitchRating(pitchRating);
+        this.pitchRatingService
+                .addPitchRating(pitchRating);
 
     }
 
     @DeleteMapping("deletePitchRating")
     public void deletePitchRating(@RequestParam int id){
 
-        this.pitchRatingService.deletePitchRating(id);
+        this.pitchRatingService
+                .deletePitchRating(id);
 
     }
     @PutMapping("updatePitchRating")
@@ -52,13 +54,15 @@ public class RatingController {
         ModelMapper modelMapper = new ModelMapper();
         PitchRating pitchRating = modelMapper
                 .map(pitchRatingDto,PitchRating.class);
-        this.pitchRatingService.addPitchRating(pitchRating);
+        this.pitchRatingService
+                .addPitchRating(pitchRating);
 
     }
     @GetMapping("getPitchRatingsByPitchId")
     public void getPitchRatingsByPitchId(@RequestParam int id){
 
-        this.pitchRatingService.getPitchRatingsByPitchId(id);
+        this.pitchRatingService
+                .getPitchRatingsByPitchId(id);
 
     }
 
@@ -67,7 +71,6 @@ public class RatingController {
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
         Map<String,String> validationErrors = new HashMap<String,String>();
         for (FieldError fieldError :exceptions.getBindingResult().getFieldErrors()) {
-
             validationErrors
                     .put(
                             fieldError.getField(),
