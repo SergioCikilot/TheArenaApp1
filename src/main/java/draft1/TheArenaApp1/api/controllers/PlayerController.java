@@ -1,7 +1,6 @@
 package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.exceptions.ApiRequestException;
-import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithIdUser;
 import draft1.TheArenaApp1.service.services.PlayerService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Player;
@@ -91,7 +90,7 @@ public class PlayerController {
     }
 
     @PutMapping("/updatePlayer")
-    public void updatePlayer(@RequestBody PlayerWithIdUser playerWithIdUser) {
+    public void updatePlayer(@RequestBody PlayerWithUserIdDto playerWithIdUser) {
 
         ModelMapper modelMapper = new ModelMapper();
         Player player = modelMapper

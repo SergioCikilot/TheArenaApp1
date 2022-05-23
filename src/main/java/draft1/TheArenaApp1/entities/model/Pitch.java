@@ -70,10 +70,8 @@ import java.util.List;
         @Column(name = "pitch_isCamera")
         private boolean pitchIsCamera;
 
-
         @OneToMany(mappedBy = "pitch")
         private List<Comment> receivedComments;
-
 
         @OneToMany(mappedBy = "pitch")
         private List<PitchRating> receivedRatings;
