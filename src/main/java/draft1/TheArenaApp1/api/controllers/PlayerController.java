@@ -1,5 +1,6 @@
 package draft1.TheArenaApp1.api.controllers;
 
+import draft1.TheArenaApp1.core.exceptions.ApiRequestException;
 import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithIdUser;
 import draft1.TheArenaApp1.service.services.PlayerService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
@@ -59,7 +60,12 @@ public class PlayerController {
         ModelMapper modelMapper = new ModelMapper();
         Player player = this.playerService
                 .getPlayerByUserId(userId);
-        PlayerWithUserIdDto playerWithUserIdDto =modelMapper
+        if (!(player instanceof Player)){
+
+            throw new ApiRequestException("Player does not exist");
+
+        }
+        PlayerWithUserIdDto playerWithUserIdDto = modelMapper
                 .map(player,PlayerWithUserIdDto.class);
         return playerWithUserIdDto;
 
