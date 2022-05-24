@@ -16,6 +16,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -58,9 +59,9 @@ public class RatingController {
     }
 
     @GetMapping("getPitchRatingsByPitchId")
-    public void getPitchRatingsByPitchId(@RequestParam int id){
+    public List<PitchRating> getPitchRatingsByPitchId(@RequestParam int id){
 
-        this.pitchRatingService
+        return this.pitchRatingService
                 .getPitchRatingsByPitchId(id);
     }
 

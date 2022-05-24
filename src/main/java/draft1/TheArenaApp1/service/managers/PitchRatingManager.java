@@ -42,8 +42,8 @@ public class PitchRatingManager implements PitchRatingService {
     }
 
     @Override
-    public List<Comment> getPitchRatingsByPitchId(int id) {
+    public List<PitchRating> getPitchRatingsByPitchId(int id) {
 
-        return null;
+        return this.pitchRatingDao.getPitchRatingsByPitchPitchId(id);
     }
 }

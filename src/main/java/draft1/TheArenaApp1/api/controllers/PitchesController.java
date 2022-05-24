@@ -1,12 +1,16 @@
 package draft1.TheArenaApp1.api.controllers;
 
+
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchWithoutIdDto;
+
 import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Pitch;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/pitch")
@@ -23,10 +27,18 @@ public class PitchesController {
 
     private final PitchService pitchService;
 
+
     @Autowired
     public PitchesController(PitchService pitchService) {
         this.pitchService = pitchService;
+
     }
+
+    /*@GetMapping("/searchPitchByName")
+    List<Pitch> searchPitchByName(@RequestParam String name){
+
+        return this.pitchService.findByPitchName(name);
+    }*/
 
     @GetMapping("/getAllPitches")
     public List<Pitch> getAllPitches(){

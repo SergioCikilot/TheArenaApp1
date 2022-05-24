@@ -13,7 +13,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 
 @SpringBootApplication
-
 public class TheArenaApp1Application {
 
 	public static void main(String[] args) {

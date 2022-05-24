@@ -8,5 +8,4 @@ import java.util.List;
 public interface PitchRatingDao extends JpaRepository<PitchRating,Integer> {
 
     List<PitchRating> getPitchRatingsByPitchPitchId(int id);
-
 }
