@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
+import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.entities.dto.PitchRatingDtos.PitchRatingDto;
 import draft1.TheArenaApp1.service.services.PitchRatingService;
 import org.modelmapper.ModelMapper;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rating")
@@ -59,10 +61,16 @@ public class RatingController {
     }
 
     @GetMapping("getPitchRatingsByPitchId")
-    public List<PitchRating> getPitchRatingsByPitchId(@RequestParam int id){
+    public List<PitchRatingDto> getPitchRatingsByPitchId(@RequestParam int id){
 
+        ModelMapper modelMapper = new ModelMapper();
         return this.pitchRatingService
-                .getPitchRatingsByPitchId(id);
+                .getPitchRatingsByPitchId(id)
+                .stream()
+                .map(PitchRating -> modelMapper
+                        .map(PitchRating, PitchRatingDto.class))
+                .collect(Collectors
+                        .toList());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

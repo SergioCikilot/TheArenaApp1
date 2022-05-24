@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/comment")
@@ -54,10 +55,16 @@ public class CommentController {
     }
 
     @GetMapping("getCommentsByCommentTarget")
-    public List<Comment> getCommentsByCommentTarget(@RequestParam int id){
+    public List<CommentDto> getCommentsByCommentTarget(@RequestParam int id){
 
+        ModelMapper modelMapper = new ModelMapper();
         return this.commentService
-                .findCommentsByCommentTarget(id);
+                .findCommentsByCommentTarget(id)
+                .stream()
+                .map(comment -> modelMapper
+                        .map(comment,CommentDto.class))
+                .collect(Collectors
+                        .toList());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
