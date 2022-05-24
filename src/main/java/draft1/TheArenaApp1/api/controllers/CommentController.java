@@ -12,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -53,9 +54,9 @@ public class CommentController {
     }
 
     @GetMapping("getCommentsByCommentTarget")
-    public void getCommentsByCommentTarget(@RequestParam int id){
+    public List<Comment> getCommentsByCommentTarget(@RequestParam int id){
 
-        this.commentService
+        return this.commentService
                 .findCommentsByCommentTarget(id);
     }
 

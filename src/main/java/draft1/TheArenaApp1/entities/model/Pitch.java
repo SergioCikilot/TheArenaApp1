@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import draft1.TheArenaApp1.core.entities.comments.Comment;
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import lombok.*;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,13 +18,13 @@ import java.util.stream.Collectors;
 
 
 @Entity
-    @Table(name="pitches")
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","receivedComments","receivedRatings"})
-
+@Table(name="pitches")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","receivedComments","receivedRatings"})
+@Document(indexName = "ptc")
     public class Pitch {
 
         @Id
@@ -29,6 +32,7 @@ import java.util.stream.Collectors;
         @Column(name = "pitch_id")
         private int pitchId;
 
+        @Field(type = FieldType.Text)
         @Column(name = "pitch_name")
         private String pitchName;
 

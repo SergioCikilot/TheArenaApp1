@@ -10,6 +10,6 @@ public interface PitchRatingService {
     void addPitchRating (PitchRating pitchRating);
     void deletePitchRating(int id);
     void updatePitchRating(PitchRating pitchRating);
-    List<Comment> getPitchRatingsByPitchId(int id);
+    List<PitchRating> getPitchRatingsByPitchId(int id);
 
 }

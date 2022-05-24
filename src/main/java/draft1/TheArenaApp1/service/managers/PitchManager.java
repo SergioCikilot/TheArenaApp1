@@ -1,9 +1,12 @@
 package draft1.TheArenaApp1.service.managers;
 
+import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
+
 import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.repository.PitchDao;
 import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,7 @@ public class PitchManager implements PitchService {
     @Autowired
     public PitchManager(PitchDao pitchDao) {
         this.pitchDao = pitchDao;
+
     }
 
     @Override
@@ -80,6 +84,17 @@ public class PitchManager implements PitchService {
         this.pitchDao
                 .updatePitchMatchDuration(matchDuration,pitchId);
     }
+
+    /*@Override
+    public List<Pitch> findByPitchName(String name) {
+        Page<Pitch> pitchPage = pitchSearchDao
+                .findByPitchName(
+                        name,
+                        PageRequest
+                                .of(0,20));
+        return pitchPage.getContent();
+
+    }*/
 
 
 }
