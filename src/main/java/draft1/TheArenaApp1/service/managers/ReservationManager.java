@@ -27,7 +27,6 @@ public class ReservationManager implements ReservationService {
 
         this.reservationDao
                 .save(reservation);
-
     }
 
     @Override
@@ -37,7 +36,6 @@ public class ReservationManager implements ReservationService {
                 .getReservationByReservationId(id);
         this.reservationDao
                 .delete(reservation);
-
     }
 
     @Override
@@ -45,7 +43,6 @@ public class ReservationManager implements ReservationService {
 
         this.reservationDao
                 .save(reservation);
-
     }
 
     @Override
@@ -60,7 +57,6 @@ public class ReservationManager implements ReservationService {
 
         return this.reservationDao
                 .getReservationsByPlayerPlayerId(id);
-
     }
 
 
@@ -69,7 +65,6 @@ public class ReservationManager implements ReservationService {
 
         this.reservationDao
                 .updateReservationTime(reservationTime,reservationId);
-
     }
 
     @Override
@@ -77,23 +72,25 @@ public class ReservationManager implements ReservationService {
 
         this.reservationDao
                 .updateReservationDate(reservationDate,reservationId);
-
     }
 
     @Override
     public List<Reservation> getReservationsByReservationDate(LocalDate reservationDate) {
+
         return this.reservationDao
                 .getReservationsByReservationDate(reservationDate);
     }
 
     @Override
     public List<Reservation> getReservationsByReservationTime(LocalTime reservationTime) {
+
         return this.reservationDao
                 .getReservationsByReservationTime(reservationTime);
     }
 
     @Override
     public List<Reservation> findReservationsByPitchPitchId(int pitchId) {
+
         return this.reservationDao
                 .findReservationsByPitchPitchId(pitchId);
     }
@@ -101,14 +98,18 @@ public class ReservationManager implements ReservationService {
     @Override
     public Status getReservationStatus(int id) {
 
-        Reservation reservation = this.reservationDao.getReservationByReservationId(id);
+        Reservation reservation = this.reservationDao
+                .getReservationByReservationId(id);
 
-        return reservation.getStatus();
+        return reservation.
+                getStatus();
     }
 
     @Override
     public Reservation getByReservationId(int id) {
-        return this.reservationDao.getReservationByReservationId(id);
+
+        return this.reservationDao
+                .getReservationByReservationId(id);
     }
 
 

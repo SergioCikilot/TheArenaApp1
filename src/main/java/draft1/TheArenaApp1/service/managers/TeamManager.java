@@ -24,7 +24,6 @@ public class TeamManager implements TeamService {
 
         this.teamDao
                 .save(team);
-
     }
 
     @Override

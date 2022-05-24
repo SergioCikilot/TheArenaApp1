@@ -30,14 +30,12 @@ public class UserController {
     public UserController(UserService userService) {
 
         this.userService = userService;
-
     }
 
     @PostMapping("/login")
     public String login() throws Exception {
 
             return "login screen";
-
     }
 
     @PostMapping("/signup")
@@ -45,7 +43,6 @@ public class UserController {
 
         this.userService
                 .add(user);
-
     }
 
     @GetMapping("/getUserDetailsByUsername")
@@ -53,7 +50,6 @@ public class UserController {
 
         return this.userService
                 .loadUserByUsername(username);
-
     }
 
     @GetMapping("/getUserIdByUsername")
@@ -67,7 +63,6 @@ public class UserController {
         int id = user
                 .getUserId();
         return id;
-
     }
 
     @GetMapping("/getAllUsers")
@@ -75,14 +70,12 @@ public class UserController {
 
         return this.userService
                 .getAll();
-
     }
     @GetMapping("/getUserByUsername")
     public User getUserByUsername(@RequestParam String username){
 
         return this.userService
                 .findUserByUsername(username);
-
     }
 
     @DeleteMapping("/deleteUser")
@@ -90,7 +83,6 @@ public class UserController {
 
         this.userService
                 .delete(user);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -108,7 +100,6 @@ public class UserController {
                     .put(
                             field,
                             message);
-
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
@@ -129,7 +120,6 @@ public class UserController {
                             .get(i),
                     exceptions
                             .getMessage());
-
         }
 
         ErrorDataResult<Object> errors =

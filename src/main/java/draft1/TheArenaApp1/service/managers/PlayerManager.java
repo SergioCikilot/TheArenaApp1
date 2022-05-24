@@ -27,7 +27,6 @@ public class PlayerManager implements PlayerService {
 
         this.playerDao
                 .save(player);
-
     }
 
     @Override
@@ -37,7 +36,6 @@ public class PlayerManager implements PlayerService {
                 .getByPlayerId(id);
         this.playerDao
                 .delete(player);
-
     }
 
     @Override
@@ -45,7 +43,6 @@ public class PlayerManager implements PlayerService {
 
         this.playerDao
                 .save(player);
-
     }
 
     @Override
@@ -53,7 +50,6 @@ public class PlayerManager implements PlayerService {
 
         return this.playerDao
                 .findAll();
-
     }
 
     @Override
@@ -74,7 +70,6 @@ public class PlayerManager implements PlayerService {
         //String age = this.ageManager.AgeCalculator(player);
 
         return null ;
-
     }
 
     @Override
@@ -82,7 +77,6 @@ public class PlayerManager implements PlayerService {
 
         this.playerDao
                 .addTeam(teamId,playerId);
-
     }
 
     @Override
@@ -90,7 +84,6 @@ public class PlayerManager implements PlayerService {
 
         return this.playerDao
                 .getPlayerByUserUserId(id);
-
     }
 
 

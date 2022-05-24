@@ -31,30 +31,32 @@ public class CommentController {
         ModelMapper modelMapper = new ModelMapper();
         Comment comment = modelMapper
                 .map(commentDto,Comment.class);
-        this.commentService.addComment(comment);
-
+        this.commentService
+                .addComment(comment);
     }
 
     @DeleteMapping ("deleteComment")
     public void deleteComment(@RequestParam int id){
 
-        this.commentService.deleteComment(id);
-
+        this.commentService
+                .deleteComment(id);
     }
+
     @PutMapping("updateComment")
     public void updateComment(@RequestBody CommentDto commentDto){
 
         ModelMapper modelMapper = new ModelMapper();
         Comment comment = modelMapper
                 .map(commentDto,Comment.class);
-        this.commentService.addComment(comment);
-
+        this.commentService
+                .addComment(comment);
     }
+
     @GetMapping("getCommentsByCommentTarget")
     public void getCommentsByCommentTarget(@RequestParam int id){
 
-        this.commentService.findCommentsByCommentTarget(id);
-
+        this.commentService
+                .findCommentsByCommentTarget(id);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -67,12 +69,9 @@ public class CommentController {
                     .put(
                             fieldError.getField(),
                             fieldError.getDefaultMessage());
-
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
-
 }

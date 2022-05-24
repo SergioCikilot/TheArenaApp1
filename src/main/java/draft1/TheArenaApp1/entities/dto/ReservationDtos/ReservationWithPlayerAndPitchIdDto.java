@@ -41,7 +41,5 @@ public class ReservationWithPlayerAndPitchIdDto {
         this.reservationTime = reservationTime;
     }
 
-    public void setReservationDate(LocalDate reservationDate) {
-        this.reservationDate = reservationDate;
-    }
+    public void setReservationDate(LocalDate reservationDate) { this.reservationDate = reservationDate;}
 }

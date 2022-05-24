@@ -22,7 +22,9 @@ public class PitchManager implements PitchService {
 
     @Override
     public List<Pitch> getAllPitches() {
-        return pitchDao.findAll();
+
+        return pitchDao
+                .findAll();
     }
 
     @Override
@@ -40,7 +42,6 @@ public class PitchManager implements PitchService {
 
         this.pitchDao
                 .save(pitch);
-
     }
 
     @Override
@@ -50,7 +51,6 @@ public class PitchManager implements PitchService {
                 .getByPitchId(id);
         this.pitchDao
                 .delete(pitch);
-
     }
 
     @Override
@@ -58,7 +58,6 @@ public class PitchManager implements PitchService {
 
         this.pitchDao
                 .save(pitch);
-
     }
 
     @Override
@@ -66,7 +65,6 @@ public class PitchManager implements PitchService {
 
         this.pitchDao
                 .updatePitchOpeningTime(openingTime,pitchId);
-
     }
 
     @Override
@@ -74,7 +72,6 @@ public class PitchManager implements PitchService {
 
         this.pitchDao
                 .updatePitchClosingTime(closingTime,pitchId);
-
     }
 
     @Override
@@ -82,7 +79,6 @@ public class PitchManager implements PitchService {
 
         this.pitchDao
                 .updatePitchMatchDuration(matchDuration,pitchId);
-
     }
 
 
