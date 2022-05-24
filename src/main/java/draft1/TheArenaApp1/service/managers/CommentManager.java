@@ -22,7 +22,6 @@ public class CommentManager implements CommentService {
 
         this.commentDao
                 .save(comment);
-
     }
 
     @Override
@@ -32,7 +31,6 @@ public class CommentManager implements CommentService {
                 .getById(id);
         this.commentDao
                 .delete(comment);
-
     }
 
     @Override
@@ -40,7 +38,6 @@ public class CommentManager implements CommentService {
 
         this.commentDao
                 .save(comment);
-
     }
 
     @Override
@@ -48,6 +45,5 @@ public class CommentManager implements CommentService {
 
         return this.commentDao
                 .findCommentsByPitchPitchId(id);
-
     }
 }

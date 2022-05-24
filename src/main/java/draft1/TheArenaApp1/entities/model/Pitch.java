@@ -11,9 +11,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
-    @Entity
+@Entity
     @Table(name="pitches")
     @Getter
     @Setter
@@ -37,6 +38,7 @@ import java.util.List;
         @Column(name = "pitch_addressLink")
         private String pitchAddressLink;
 
+        @Transient
         @Column(name = "pitch_rating")
         private double pitchRatingAvg;
 
@@ -78,6 +80,18 @@ import java.util.List;
 
         @OneToMany(mappedBy = "pitch")
         private List<Reservation> reservations;
+
+        public double getPitchRatingAvg() {
+
+            double average = receivedRatings
+                    .stream()
+                    .mapToDouble(PitchRating::getRatingScore)
+                    .average()
+                    .orElse(Double.NaN);
+
+            return average;
+
+        }
 
         //players looking for
 

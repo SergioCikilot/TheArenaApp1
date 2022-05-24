@@ -27,7 +27,6 @@ public class PlayerController {
     public PlayerController(PlayerService playerService) {
 
         this.playerService = playerService;
-
     }
 
     @GetMapping("/getAllPlayers")
@@ -51,7 +50,6 @@ public class PlayerController {
                 .getByPlayerPlayerId(playerId);
         return this.playerService
                 .getPlayerAge(player);
-
     }
 
     @GetMapping("/getPlayerByUserId")
@@ -67,7 +65,6 @@ public class PlayerController {
         PlayerWithUserIdDto playerWithUserIdDto = modelMapper
                 .map(player,PlayerWithUserIdDto.class);
         return playerWithUserIdDto;
-
     }
 
     @PostMapping("/addPlayer")
@@ -78,7 +75,6 @@ public class PlayerController {
                 .map(playerWithUserIdDto,Player.class);
         this.playerService
                 .add(player);
-
     }
 
     @DeleteMapping("delete")
@@ -86,7 +82,6 @@ public class PlayerController {
 
         this.playerService
                 .delete(id);
-
     }
 
     @PutMapping("/updatePlayer")
@@ -97,7 +92,6 @@ public class PlayerController {
                 .map(playerWithIdUser,Player.class);
         this.playerService
                 .updatePlayer(player);
-
     }
 
     @PutMapping("/updateTeamOfPlayer")
@@ -105,7 +99,6 @@ public class PlayerController {
 
         this.playerService
                 .addTeam(teamId, playerId);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -118,7 +111,6 @@ public class PlayerController {
                     .put(
                     fieldError.getField(),
                     fieldError.getDefaultMessage());
-
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");

@@ -65,7 +65,6 @@ public class UserManager implements UserService {
         ArrayList<String> list = new ArrayList<>();
 
         if (usernameExists && emailExists) {
-
             list.add(
                     user.getField("username"));
             list.add(
@@ -80,20 +79,17 @@ public class UserManager implements UserService {
 
 
         } else if (emailExists) {
-
             list.add(
                     user.getField("email"));
             throw new ExistingEntryException("Email is already exists", list);
 
         } else
-
             this.userDao
                     .save(user);
 
     }
 
     public void delete(User user) {
-
         this.userDao
                 .delete(user);
 
@@ -103,7 +99,5 @@ public class UserManager implements UserService {
         return this.userDao
                 .findAll();
     }
-
-
 }
 

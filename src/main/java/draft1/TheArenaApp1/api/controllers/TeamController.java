@@ -31,8 +31,8 @@ public class TeamController {
     @GetMapping("/getAllTeams")
     public List<Team> getAllTeams(){
 
-        return this.teamService.getAllTeams();
-
+        return this.teamService
+                .getAllTeams();
     }
 
     @PostMapping("/addTeam")
@@ -43,7 +43,6 @@ public class TeamController {
                 .map(teamWithoutIdDto,Team.class);
         this.teamService
                 .addTeam(team);
-
     }
 
     @PutMapping("updateTeam")
@@ -51,7 +50,6 @@ public class TeamController {
 
         this.teamService
                 .updateTeam(team);
-
     }
 
     @DeleteMapping("/deleteTeam")
@@ -59,7 +57,6 @@ public class TeamController {
 
         this.teamService
                 .deleteTeam(id);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -72,7 +69,6 @@ public class TeamController {
                     .put(
                     fieldError.getField(),
                     fieldError.getDefaultMessage());
-
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");

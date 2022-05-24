@@ -49,7 +49,6 @@ public class PitchesController {
 
         return this.pitchService
                 .getAllPitchesWithPage(pageNo,pageSize);
-
     }
 
     @PostMapping("/addPitch")
@@ -60,7 +59,6 @@ public class PitchesController {
                 .map(pitchWithoutIdDto,Pitch.class);
         this.pitchService
                 .addPitch(pitch);
-
     }
 
     @DeleteMapping("/deletePitch")
@@ -68,7 +66,6 @@ public class PitchesController {
 
         this.pitchService
                 .deletePitch(id);
-
     }
 
     @PutMapping("/updatePitch")
@@ -79,7 +76,6 @@ public class PitchesController {
                 .map(pitchDto,Pitch.class);
         this.pitchService
                 .updatePitch(pitch);
-
     }
 
     @PutMapping("/updatePitchOpeningTime")
@@ -90,7 +86,6 @@ public class PitchesController {
                 .format(dateTimeFormatter);
         this.pitchService
                 .updatePitchOpeningTime(value,pitchId);
-
     }
 
     @PutMapping("/updatePitchClosingTime")
@@ -102,7 +97,6 @@ public class PitchesController {
                 .format(dateTimeFormatter);
         this.pitchService
                 .updatePitchClosingTime(value,pitchId);
-
     }
 
     @PutMapping("/updatePitchMatchDuration")
@@ -114,7 +108,6 @@ public class PitchesController {
                 .format(dateTimeFormatter);
         this.pitchService
                 .updatePitchMatchDuration(value,pitchId);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -127,7 +120,6 @@ public class PitchesController {
                     .put(
                     fieldError.getField(),
                     fieldError.getDefaultMessage());
-
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");

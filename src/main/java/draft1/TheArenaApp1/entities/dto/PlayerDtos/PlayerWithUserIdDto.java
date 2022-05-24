@@ -34,8 +34,6 @@ public class PlayerWithUserIdDto {
     private String playerSirName;
 
     private int playerHeight;
-    /*@Enumerated
-    private PositionEnum playerPosition;*/
 
     private boolean playerIsForward;
 

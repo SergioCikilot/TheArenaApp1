@@ -38,7 +38,6 @@ public class RatingController {
                 .map(pitchRatingDto,PitchRating.class);
         this.pitchRatingService
                 .addPitchRating(pitchRating);
-
     }
 
     @DeleteMapping("deletePitchRating")
@@ -46,8 +45,8 @@ public class RatingController {
 
         this.pitchRatingService
                 .deletePitchRating(id);
-
     }
+
     @PutMapping("updatePitchRating")
     public void updatePitchRating(@RequestBody PitchRatingDto pitchRatingDto){
 
@@ -56,14 +55,13 @@ public class RatingController {
                 .map(pitchRatingDto,PitchRating.class);
         this.pitchRatingService
                 .addPitchRating(pitchRating);
-
     }
+
     @GetMapping("getPitchRatingsByPitchId")
     public void getPitchRatingsByPitchId(@RequestParam int id){
 
         this.pitchRatingService
                 .getPitchRatingsByPitchId(id);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -75,12 +73,9 @@ public class RatingController {
                     .put(
                             fieldError.getField(),
                             fieldError.getDefaultMessage());
-
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
-
 }

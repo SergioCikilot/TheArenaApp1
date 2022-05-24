@@ -27,7 +27,6 @@ public class DateController {
 
         return this.dateService
                 .getFormattedCurrentTime12Hour();
-
     }
 
     @GetMapping("/getTime24Hour")
@@ -35,7 +34,6 @@ public class DateController {
 
         return this.dateService
                 .getFormattedCurrentTime24Hour();
-
     }
 
     @GetMapping("/getTimeIstanbul24Hour")
@@ -43,7 +41,6 @@ public class DateController {
 
         return this.dateService
                 .getFormattedCurrentTimeIstanbul24Hour();
-
     }
 
     @GetMapping("/getDateIstanbul")
@@ -51,7 +48,6 @@ public class DateController {
 
         return this.dateService
                 .getFormattedCurrentDateIstanbul();
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -64,12 +60,9 @@ public class DateController {
                     .put(
                     fieldError.getField(),
                     fieldError.getDefaultMessage());
-
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors, "Validation Errors");
         return  errors;
     }
-
-
 }

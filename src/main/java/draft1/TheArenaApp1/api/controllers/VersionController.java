@@ -12,7 +12,7 @@ public class VersionController {
     @GetMapping("/showCurrentVersion")
     public String showCurrentVersion(){
 
-        return "Running Version: _v.0.6.5t fix azure try2";
+        return "Running Version: _v.0.6.5t fix azure ";
 
     }
 

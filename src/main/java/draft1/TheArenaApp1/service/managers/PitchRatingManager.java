@@ -23,7 +23,6 @@ public class PitchRatingManager implements PitchRatingService {
 
         this.pitchRatingDao
                 .save(pitchRating);
-
     }
 
     @Override
@@ -31,8 +30,8 @@ public class PitchRatingManager implements PitchRatingService {
 
         PitchRating pitchRating = this.pitchRatingDao
                 .getById(id);
-        this.pitchRatingDao.delete(pitchRating);
-
+        this.pitchRatingDao
+                .delete(pitchRating);
     }
 
     @Override
@@ -40,13 +39,11 @@ public class PitchRatingManager implements PitchRatingService {
 
         this.pitchRatingDao
                 .save(pitchRating);
-
     }
 
     @Override
     public List<Comment> getPitchRatingsByPitchId(int id) {
 
         return null;
-
     }
 }
