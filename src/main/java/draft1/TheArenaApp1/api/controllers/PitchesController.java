@@ -93,7 +93,8 @@ public class PitchesController {
     @PutMapping("/updatePitchOpeningTime")
     public void updateTOpeningTimeToPitch(@RequestParam LocalTime openingTime, @RequestParam int pitchId){
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+                .ofPattern("HH:mm:ss");
         String value = openingTime
                 .format(dateTimeFormatter);
         this.pitchService

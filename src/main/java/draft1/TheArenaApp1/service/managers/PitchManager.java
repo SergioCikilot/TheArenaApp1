@@ -36,7 +36,6 @@ public class PitchManager implements PitchService {
     {
         Pageable pageable = PageRequest
                 .of(pageNo,pageSize);
-
         return this.pitchDao
                 .findAll(pageable).getContent();
     }

@@ -91,7 +91,7 @@ import java.util.stream.Collectors;
                     .stream()
                     .mapToDouble(PitchRating::getRatingScore)
                     .average()
-                    .orElse(Double.NaN);
+                    .orElse(-1);
 
             return average;
 
