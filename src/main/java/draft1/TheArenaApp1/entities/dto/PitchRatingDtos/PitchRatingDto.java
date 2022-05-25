@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class PitchRatingDto {
 
-    @Id
+
     @JsonIgnore
     private int ratingId;
 

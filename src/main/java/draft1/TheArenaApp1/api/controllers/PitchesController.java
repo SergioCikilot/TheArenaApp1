@@ -40,7 +40,7 @@ public class PitchesController {
         this.pitchRatingService = pitchRatingService;
     }
 
-    @PostMapping("/addCommentAndRating")
+    /*@PostMapping("/addCommentAndRating")
     public void addCommentAndRating(@RequestBody CommentDto commentDto, @RequestBody PitchRatingDto pitchRatingDto){
 
         ModelMapper modelMapper = new ModelMapper();
@@ -54,7 +54,7 @@ public class PitchesController {
         this.pitchRatingService
                 .addPitchRating(pitchRating);
 
-    }
+    }/*
 
 
     /*@GetMapping("/searchPitchByName")

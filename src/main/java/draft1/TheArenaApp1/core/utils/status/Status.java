@@ -11,18 +11,11 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name="status")
 
 public class Status {
-    @Id
-    @Column(name = "status_id")
-    private int statusId;
+
     @Column(name = "status_status")
     private String status;
-
-    @OneToMany(mappedBy = "status",cascade=CascadeType.ALL)
-    private List<Reservation> reservations;
 
     public Status(String status) {
         this.status = status;
