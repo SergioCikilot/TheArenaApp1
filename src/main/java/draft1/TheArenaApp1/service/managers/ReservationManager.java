@@ -25,8 +25,10 @@ public class ReservationManager implements ReservationService {
     @Override
     public void addReservation(Reservation reservation) {
 
-        this.reservationDao
-                .save(reservation);
+
+        reservation.setStatus();
+                this.reservationDao
+                        .save(reservation);
     }
 
     @Override

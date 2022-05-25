@@ -48,7 +48,15 @@ public class Reservation {
     private Player player;
 
     public Status getStatus() {
+        return status;
+    }
 
+    public Reservation(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+        this.status = setStatus();
+    }
+
+    public Status setStatus() {
         LocalDate dateNow = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
 
@@ -77,6 +85,6 @@ public class Reservation {
         }
         return this.status = new Status();
 
-    }
 
+    }
 }

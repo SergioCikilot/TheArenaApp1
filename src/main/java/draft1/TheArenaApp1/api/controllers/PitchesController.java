@@ -1,16 +1,20 @@
 package draft1.TheArenaApp1.api.controllers;
 
 
+import draft1.TheArenaApp1.core.entities.comments.Comment;
+import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
+import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchWithoutIdDto;
 
+import draft1.TheArenaApp1.entities.dto.PitchRatingDtos.PitchRatingDto;
+import draft1.TheArenaApp1.service.services.CommentService;
+import draft1.TheArenaApp1.service.services.PitchRatingService;
 import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Pitch;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,13 +30,32 @@ import java.util.*;
 public class PitchesController {
 
     private final PitchService pitchService;
-
-
+    private final CommentService commentService;
+    private final PitchRatingService pitchRatingService;
     @Autowired
-    public PitchesController(PitchService pitchService) {
+    public PitchesController(PitchService pitchService, CommentService commentService, PitchRatingService pitchRatingService) {
+
         this.pitchService = pitchService;
+        this.commentService = commentService;
+        this.pitchRatingService = pitchRatingService;
+    }
+
+    @PostMapping("/addCommentAndRating")
+    public void addCommentAndRating(@RequestBody CommentDto commentDto, @RequestBody PitchRatingDto pitchRatingDto){
+
+        ModelMapper modelMapper = new ModelMapper();
+        Comment comment = modelMapper
+                .map(commentDto,Comment.class);
+        this.commentService
+                .addComment(comment);
+
+        PitchRating pitchRating = modelMapper
+                .map(pitchRatingDto,PitchRating.class);
+        this.pitchRatingService
+                .addPitchRating(pitchRating);
 
     }
+
 
     /*@GetMapping("/searchPitchByName")
     List<Pitch> searchPitchByName(@RequestParam String name){
