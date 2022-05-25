@@ -9,8 +9,7 @@ import java.time.LocalDate;
 
 public class StatusTest {
 
-    private Status underTest = new Status();
-    private Status waitingStatus = new WaitingStatus();
+
 
    /* @Test
     void itShouldReturnTrue(){
