@@ -36,7 +36,7 @@ public class Player {
     @org.springframework.data.annotation.Id
     private int playerId;
 
-    @Field(type = FieldType.Auto)
+    @Field(type = FieldType.Text,name = "playerName")
     @Column(name = "player_name")
     private String playerName;
 
@@ -80,6 +80,7 @@ public class Player {
     @OneToMany(mappedBy = "player")
     private List<Reservation> reservations;
 
+    @Field(type = FieldType.Nested, includeInParent = true)
     @OneToMany(mappedBy = "player")
     private List<Comment> remarkedComments;
 

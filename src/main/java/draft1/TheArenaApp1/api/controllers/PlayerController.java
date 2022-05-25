@@ -8,6 +8,8 @@ import draft1.TheArenaApp1.entities.model.Player;
 import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,21 +25,22 @@ import java.util.Map;
 public class PlayerController {
 
     private final PlayerService playerService;
-
+    private final PlayerSearchDao playerSearchDao;
 
     @Autowired
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(PlayerService playerService, PlayerSearchDao playerSearchDao) {
 
         this.playerService = playerService;
 
+        this.playerSearchDao = playerSearchDao;
     }
 
-    /*@GetMapping("/search")
+    @GetMapping("/search")
     public List<Player> getPlayersBySearch(@RequestParam String name){
 
-        return this.playerSearchDao.findByPlayerNameLike(name);
+        return this.playerSearchDao.findByPlayerNameUsingCustomQuery(name);
 
-    }*/
+    }
 
     @GetMapping("/getAllPlayers")
     public List<Player> getAllPlayers(){
