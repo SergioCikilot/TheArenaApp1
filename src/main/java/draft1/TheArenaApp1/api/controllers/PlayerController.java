@@ -60,7 +60,6 @@ public class PlayerController {
         if (player == null){
 
             throw new ApiRequestException("Player does not exist");
-
         }
         PlayerWithUserIdDto playerWithUserIdDto = modelMapper
                 .map(player,PlayerWithUserIdDto.class);
