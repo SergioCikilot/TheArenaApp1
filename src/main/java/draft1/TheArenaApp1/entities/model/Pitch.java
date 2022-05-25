@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
         private double pitchRatingAvg;
 
         @Column(name = "pitch_price")
-        private BigDecimal pitchPrice;
+        private int pitchPrice;
 
         @Column(name = "pitch_imageLink")
         private String pitchImageLink; //!!!

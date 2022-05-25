@@ -8,11 +8,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.spring.web.plugins.Docket;
 
 
 
 @SpringBootApplication
+@EnableElasticsearchRepositories(basePackages = "draft1.TheArenaApp1.repository.search")
+@EnableJpaRepositories(basePackages = "draft1.TheArenaApp1.repository.jparepository")
 public class TheArenaApp1Application {
 
 	public static void main(String[] args) {

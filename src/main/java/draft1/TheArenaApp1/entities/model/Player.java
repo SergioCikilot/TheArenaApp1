@@ -8,6 +8,9 @@ import draft1.TheArenaApp1.core.entities.foots.FootEnum;
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import draft1.TheArenaApp1.core.user.User;
 import lombok.*;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","remarkedComments","remarkedRatings"})
-
+@Document(indexName = "players")
 
 
 
@@ -29,31 +32,44 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "player_id")
-
+    @Field(type = FieldType.Auto)
+    @org.springframework.data.annotation.Id
     private int playerId;
 
+    @Field(type = FieldType.Auto)
     @Column(name = "player_name")
     private String playerName;
 
+    @Field(type = FieldType.Auto)
     @Column(name = "player_sirName")
     private String playerSirName;
 
+    @Field(type = FieldType.Auto)
     @Column(name = "player_birthDate")
     private LocalDate playerBirthDate;
 
+    @Field(type = FieldType.Auto)
     @Column(name = "player_height")
     private int playerHeight;
 
+    @Field(type = FieldType.Auto)
     @Enumerated
     @Column(name = "player_foot")
     private FootEnum playerFoot;
 
+    @Field(type = FieldType.Auto)
     @Column(name = "player_isForward")
     private boolean playerIsForward;
+
+    @Field(type = FieldType.Auto)
     @Column(name = "player_isMidfielder")
     private boolean playerIsMidfielder;
+
+    @Field(type = FieldType.Auto)
     @Column(name = "player_isDefender")
     private boolean playerIsDefender;
+
+    @Field(type = FieldType.Auto)
     @Column(name = "player_isGoalkeeper")
     private boolean playerIsGoalkeeper ;
     @ManyToOne()

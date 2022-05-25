@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.service.managers;
 
 import draft1.TheArenaApp1.service.services.TeamService;
-import draft1.TheArenaApp1.repository.TeamDao;
+import draft1.TheArenaApp1.repository.jparepository.TeamDao;
 import draft1.TheArenaApp1.entities.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

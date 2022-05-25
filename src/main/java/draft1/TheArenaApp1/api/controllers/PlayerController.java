@@ -1,6 +1,7 @@
 package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.exceptions.ApiRequestException;
+import draft1.TheArenaApp1.repository.search.PlayerSearchDao;
 import draft1.TheArenaApp1.service.services.PlayerService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Player;
@@ -23,11 +24,20 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
+
     @Autowired
     public PlayerController(PlayerService playerService) {
 
         this.playerService = playerService;
+
     }
+
+    /*@GetMapping("/search")
+    public List<Player> getPlayersBySearch(@RequestParam String name){
+
+        return this.playerSearchDao.findByPlayerNameLike(name);
+
+    }*/
 
     @GetMapping("/getAllPlayers")
     public List<Player> getAllPlayers(){

@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.repository;
+package draft1.TheArenaApp1.repository.jparepository;
 
 import draft1.TheArenaApp1.entities.model.Team;
 import org.springframework.data.jpa.repository.JpaRepository;

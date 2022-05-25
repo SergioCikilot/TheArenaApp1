@@ -1,8 +1,7 @@
 package draft1.TheArenaApp1.service.managers;
 
-import draft1.TheArenaApp1.core.entities.comments.Comment;
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
-import draft1.TheArenaApp1.repository.PitchRatingDao;
+import draft1.TheArenaApp1.repository.jparepository.PitchRatingDao;
 import draft1.TheArenaApp1.service.services.PitchRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -40,29 +40,6 @@ public class PitchesController {
         this.pitchRatingService = pitchRatingService;
     }
 
-    /*@PostMapping("/addCommentAndRating")
-    public void addCommentAndRating(@RequestBody CommentDto commentDto, @RequestBody PitchRatingDto pitchRatingDto){
-
-        ModelMapper modelMapper = new ModelMapper();
-        Comment comment = modelMapper
-                .map(commentDto,Comment.class);
-        this.commentService
-                .addComment(comment);
-
-        PitchRating pitchRating = modelMapper
-                .map(pitchRatingDto,PitchRating.class);
-        this.pitchRatingService
-                .addPitchRating(pitchRating);
-
-    }/*
-
-
-    /*@GetMapping("/searchPitchByName")
-    List<Pitch> searchPitchByName(@RequestParam String name){
-
-        return this.pitchService.findByPitchName(name);
-    }*/
-
     @GetMapping("/getAllPitches")
     public List<Pitch> getAllPitches(){
 
