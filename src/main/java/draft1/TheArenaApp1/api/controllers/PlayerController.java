@@ -4,7 +4,7 @@ import draft1.TheArenaApp1.core.exceptions.ApiRequestException;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
 import draft1.TheArenaApp1.entities.model.Player;
-import draft1.TheArenaApp1.repository.search.PlayerSearchDao;
+
 import draft1.TheArenaApp1.service.services.PlayerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +23,21 @@ import java.util.Map;
 public class PlayerController {
 
     private final PlayerService playerService;
-    private final PlayerSearchDao playerSearchDao;
+
 
     @Autowired
-    public PlayerController(PlayerService playerService, PlayerSearchDao playerSearchDao) {
+    public PlayerController(PlayerService playerService) {
 
         this.playerService = playerService;
 
-        this.playerSearchDao = playerSearchDao;
     }
 
-    @GetMapping("/search")
+   /* @GetMapping("/search")
     public List<Player> getPlayersBySearch(@RequestParam String name){
 
         return this.playerSearchDao.findByPlayerNameUsingCustomQuery(name);
 
-    }
+    }*/
 
     @GetMapping("/getAllPlayers")
     public List<Player> getAllPlayers(){
