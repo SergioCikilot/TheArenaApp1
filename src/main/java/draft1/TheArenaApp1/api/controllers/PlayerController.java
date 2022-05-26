@@ -1,15 +1,13 @@
 package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.exceptions.ApiRequestException;
+import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
+import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
+import draft1.TheArenaApp1.entities.model.Player;
 import draft1.TheArenaApp1.repository.search.PlayerSearchDao;
 import draft1.TheArenaApp1.service.services.PlayerService;
-import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.model.Player;
-import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

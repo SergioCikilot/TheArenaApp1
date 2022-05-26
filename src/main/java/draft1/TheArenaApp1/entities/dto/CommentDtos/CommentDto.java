@@ -27,4 +27,9 @@ public class CommentDto {
     private int playerId;
 
     private int pitchId;
+
+    private String playerName;
+
+    private String playerSir;
+
 }
