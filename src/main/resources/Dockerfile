@@ -1,7 +1,9 @@
 # Elasticsearch 7.17.4
 
 # This image re-bundles the Docker image from the upstream provider, Elastic.
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.4@sha256:b3fed35f7a43a3e16aa037bf9c8cb8139d1eec879ab5616f3c20746484de4010
+#FROM esregistery.azurecr.io/elasticsearch:7.17.4
+#ENV discovery.type=single-node
+#EXPOSE 9200
 # Supported Bashbrew Architectures: amd64 arm64v8
 
 # The upstream image was built by:
