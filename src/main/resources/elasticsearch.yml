@@ -1,41 +1,6 @@
-# ======================== Elasticsearch Configuration =========================
-#
-# NOTE: Elasticsearch comes with reasonable defaults for most settings.
-#       Before you set out to tweak and tune the configuration, make sure you
-#       understand what are you trying to accomplish and the consequences.
-#
-# The primary way of configuring a node is via this file. This template lists
-# the most important settings you may want to configure for a production cluster.
-#
-# Please consult the documentation for further information on configuration options:
-# https://www.elastic.co/guide/en/elasticsearch/reference/index.html
-#
-# ---------------------------------- Cluster -----------------------------------
-#
-# Use a descriptive name for your cluster:
-#
-#cluster.name: docker-cluster
-#
-# ------------------------------------ Node ------------------------------------
-#
-# Use a descriptive name for the node:
-#
-#node.name: dfdc81a316e0
-#
-# Add custom attributes to the node:
-#
-#node.attr.rack: r1
-#
-# ----------------------------------- Paths ------------------------------------
-#
-# Path to directory where to store the data (separate multiple locations by comma):
-#
-#path.data: /path/to/data
-#
-#cluster.uuid: iJ_k_xhrSQauBFStYN4VSQ
-#node.id: qe2KUuhASXK8pSO9cvwF9Q
-#network:
-#host: localhost:9200
-name : "fc91a71b29ce"
-cluster_name : "docker-cluster"
-cluster_uuid : "iJ_k_xhrSQauBFStYN4VSQ"
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+discovery.zen.minimum_master_nodes: 1
+discovery.type: single-node
+xpack.security.enabled: false
+
