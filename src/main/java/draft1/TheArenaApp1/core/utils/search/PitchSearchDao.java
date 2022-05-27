@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 /*public interface PitchSearchDao extends ElasticsearchRepository<Pitch,Integer> {
 
     Page<Pitch> findByPitchName(String name, Pageable pageable);
+
 }*/
