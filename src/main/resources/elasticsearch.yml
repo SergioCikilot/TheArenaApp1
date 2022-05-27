@@ -14,13 +14,13 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: docker-cluster
+#cluster.name: docker-cluster
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
 #
-node.name: dfdc81a316e0
+#node.name: dfdc81a316e0
 #
 # Add custom attributes to the node:
 #
@@ -32,7 +32,10 @@ node.name: dfdc81a316e0
 #
 #path.data: /path/to/data
 #
-cluster.uuid: iJ_k_xhrSQauBFStYN4VSQ
-node.id: qe2KUuhASXK8pSO9cvwF9Q
-network:
-  host: localhost:9200
+#cluster.uuid: iJ_k_xhrSQauBFStYN4VSQ
+#node.id: qe2KUuhASXK8pSO9cvwF9Q
+#network:
+#host: localhost:9200
+name : "fc91a71b29ce"
+cluster_name : "docker-cluster"
+cluster_uuid : "iJ_k_xhrSQauBFStYN4VSQ"
