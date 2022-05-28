@@ -3,6 +3,7 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.entities.comments.Comment;
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
+import draft1.TheArenaApp1.entities.dto.CommentAndPitchRatingDto;
 import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchWithoutIdDto;
@@ -54,6 +55,24 @@ public class PitchesController {
                         .map(pitch, PitchDto.class))
                 .collect(Collectors
                         .toList());*/
+    }
+
+    @PostMapping("addComment")
+    public void addCommentAndRating(@RequestBody CommentAndPitchRatingDto commentAndPitchRatingDto){
+
+        ModelMapper modelMapper = new ModelMapper();
+        CommentDto commentDto = commentAndPitchRatingDto
+                .getCommentDto();
+        Comment comment = modelMapper
+                .map(commentDto,Comment.class);
+        this.commentService
+                .addComment(comment);
+        PitchRatingDto pitchRatingDto = commentAndPitchRatingDto
+                .getPitchRatingDto();
+        PitchRating pitchRating = modelMapper
+                .map(pitchRatingDto,PitchRating.class);
+        this.pitchRatingService
+                .addPitchRating(pitchRating);
     }
 
     @GetMapping("/getAllPitchesByPage")

@@ -1,5 +1,5 @@
 package draft1.TheArenaApp1.repository.search;
-
+/*
 
 import draft1.TheArenaApp1.entities.model.Player;
 import org.springframework.data.domain.Page;
@@ -21,4 +21,4 @@ public interface PlayerSearchDao extends ElasticsearchRepository<Player,Integer>
     @Query("{\"bool\": {\"must\": [{\"match\": {\"playerName\": \"?0\"}}]}}")
     List<Player> findByPlayerNameUsingCustomQuery(String name);
 
-}
+}*/

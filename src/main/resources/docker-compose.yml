@@ -1,12 +1,11 @@
 version: '3.1'
 services:
   elasticsearch:
-    image: elasticsearch:7.17.4
+    image: elasticsearch:5.6.14-alpine
     volumes:
       - ./C:\TheArenaAppDraft1\TheArenaApp1\TheArenaApp1\src\main\resources\elasticsearch.yml
     ports:
-      - '9200:9200'
-      - '9300:9300'
+      - '80:80'
     environment:
       - discovery.type=single-node
-      
+
