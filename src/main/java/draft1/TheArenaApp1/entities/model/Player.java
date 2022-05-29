@@ -7,10 +7,14 @@ import draft1.TheArenaApp1.core.entities.comments.Comment;
 import draft1.TheArenaApp1.core.entities.foots.FootEnum;
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import draft1.TheArenaApp1.core.user.User;
-import lombok.*;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,53 +27,49 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","remarkedComments","remarkedRatings"})
-@Document(indexName = "players")
-
-
+@Indexed
 
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "player_id")
-    @Field(type = FieldType.Auto)
-    @org.springframework.data.annotation.Id
     private int playerId;
 
-    @Field(type = FieldType.Text,name = "playerName")
+    @Field(termVector = TermVector.YES)
     @Column(name = "player_name")
     private String playerName;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Column(name = "player_sirName")
     private String playerSirName;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Column(name = "player_birthDate")
     private LocalDate playerBirthDate;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Column(name = "player_height")
     private int playerHeight;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Enumerated
     @Column(name = "player_foot")
     private FootEnum playerFoot;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Column(name = "player_isForward")
     private boolean playerIsForward;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Column(name = "player_isMidfielder")
     private boolean playerIsMidfielder;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Column(name = "player_isDefender")
     private boolean playerIsDefender;
 
-    @Field(type = FieldType.Auto)
+    @Field
     @Column(name = "player_isGoalkeeper")
     private boolean playerIsGoalkeeper ;
     @ManyToOne()
@@ -80,7 +80,6 @@ public class Player {
     @OneToMany(mappedBy = "player")
     private List<Reservation> reservations;
 
-    @Field(type = FieldType.Nested, includeInParent = true)
     @OneToMany(mappedBy = "player")
     private List<Comment> remarkedComments;
 

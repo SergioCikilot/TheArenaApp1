@@ -7,7 +7,6 @@ import draft1.TheArenaApp1.entities.dto.CommentAndPitchRatingDto;
 import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchWithoutIdDto;
-
 import draft1.TheArenaApp1.entities.dto.PitchRatingDtos.PitchRatingDto;
 import draft1.TheArenaApp1.service.services.CommentService;
 import draft1.TheArenaApp1.service.services.PitchRatingService;
@@ -61,16 +60,19 @@ public class PitchesController {
     public void addCommentAndRating(@RequestBody CommentAndPitchRatingDto commentAndPitchRatingDto){
 
         ModelMapper modelMapper = new ModelMapper();
+
         CommentDto commentDto = commentAndPitchRatingDto
                 .getCommentDto();
         Comment comment = modelMapper
-                .map(commentDto,Comment.class);
+                .map(commentDto, Comment.class);
         this.commentService
                 .addComment(comment);
+
         PitchRatingDto pitchRatingDto = commentAndPitchRatingDto
                 .getPitchRatingDto();
         PitchRating pitchRating = modelMapper
-                .map(pitchRatingDto,PitchRating.class);
+                .map(pitchRatingDto, PitchRating.class
+                );
         this.pitchRatingService
                 .addPitchRating(pitchRating);
     }

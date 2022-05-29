@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.service.managers;
 
 import draft1.TheArenaApp1.core.entities.comments.Comment;
-import draft1.TheArenaApp1.repository.jparepository.CommentDao;
+import draft1.TheArenaApp1.repository.CommentDao;
 import draft1.TheArenaApp1.service.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

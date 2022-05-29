@@ -2,7 +2,7 @@ package draft1.TheArenaApp1.service.managers;
 
 import draft1.TheArenaApp1.service.services.PlayerService;
 import draft1.TheArenaApp1.core.utils.dateAndTime.AgeManager;
-import draft1.TheArenaApp1.repository.jparepository.PlayerDao;
+import draft1.TheArenaApp1.repository.PlayerDao;
 import draft1.TheArenaApp1.entities.model.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

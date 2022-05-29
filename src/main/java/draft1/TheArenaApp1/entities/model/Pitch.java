@@ -1,20 +1,16 @@
 package draft1.TheArenaApp1.entities.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import draft1.TheArenaApp1.core.entities.comments.Comment;
 import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import lombok.*;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 
 @Entity
@@ -24,7 +20,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","receivedComments","receivedRatings"})
-@Document(indexName = "ptc")
+
     public class Pitch {
 
         @Id
@@ -32,7 +28,7 @@ import java.util.stream.Collectors;
         @Column(name = "pitch_id")
         private int pitchId;
 
-        @Field(type = FieldType.Text)
+
         @Column(name = "pitch_name")
         private String pitchName;
 

@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.service.managers;
 
 import draft1.TheArenaApp1.service.services.PitchService;
-import draft1.TheArenaApp1.repository.jparepository.PitchDao;
+import draft1.TheArenaApp1.repository.PitchDao;
 import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

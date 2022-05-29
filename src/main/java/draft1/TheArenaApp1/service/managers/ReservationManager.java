@@ -2,7 +2,7 @@ package draft1.TheArenaApp1.service.managers;
 
 import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.service.services.ReservationService;
-import draft1.TheArenaApp1.repository.jparepository.ReservationDao;
+import draft1.TheArenaApp1.repository.ReservationDao;
 import draft1.TheArenaApp1.entities.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

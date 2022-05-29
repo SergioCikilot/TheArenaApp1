@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.repository.search;
+package draft1.TheArenaApp1.core.utils.search;
 /*
 
 import draft1.TheArenaApp1.entities.model.Player;

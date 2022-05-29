@@ -82,19 +82,11 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>31.1-jre</version>
-		</dependency>
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -117,32 +109,46 @@
 			<artifactId>java-jwt</artifactId>
 			<version>3.19.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-elasticsearch -->
 		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.196</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-search-orm</artifactId>
+			<version>5.11.10.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-elasticsearch -->
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 			<version>2.7.0</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
-		<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
-		<dependency>
+		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-search-orm -->
+		<!--<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-high-level-client</artifactId>
 			<version>7.17.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
+		&lt;!&ndash; https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch &ndash;&gt;
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
 			<version>7.17.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.elasticsearch.plugin/transport-netty4-client -->
+		&lt;!&ndash; https://mvnrepository.com/artifact/org.elasticsearch.plugin/transport-netty4-client &ndash;&gt;
 		<dependency>
 			<groupId>org.elasticsearch.plugin</groupId>
 			<artifactId>transport-netty4-client</artifactId>
 			<version>7.17.4</version>
 		</dependency>
+--><!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+
+
 
 
 

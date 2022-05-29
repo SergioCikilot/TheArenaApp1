@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.core.user;
 
 import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
-import draft1.TheArenaApp1.repository.jparepository.UserDao;
+import draft1.TheArenaApp1.repository.UserDao;
 import draft1.TheArenaApp1.security.config.PasswordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

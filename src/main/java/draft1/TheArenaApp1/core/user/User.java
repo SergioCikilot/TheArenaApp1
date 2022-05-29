@@ -4,18 +4,13 @@ package draft1.TheArenaApp1.core.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import draft1.TheArenaApp1.entities.model.Player;
 import lombok.Data;
-import org.checkerframework.common.aliasing.qual.Unique;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity

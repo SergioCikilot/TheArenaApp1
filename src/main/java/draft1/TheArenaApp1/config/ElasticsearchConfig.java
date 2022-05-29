@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.config;
 
 
-
+/*
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +33,6 @@ public class ElasticsearchConfig  {
     public ElasticsearchOperations elasticsearchTemplate() {
         return new ElasticsearchRestTemplate(client());
     }
-}
+}*/
 
 

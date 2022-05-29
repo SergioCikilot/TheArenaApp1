@@ -2,10 +2,14 @@ package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.exceptions.ApiRequestException;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
+import draft1.TheArenaApp1.core.utils.search.StartIndex;
 import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
 import draft1.TheArenaApp1.entities.model.Player;
 
 import draft1.TheArenaApp1.service.services.PlayerService;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -23,21 +28,39 @@ import java.util.Map;
 public class PlayerController {
 
     private final PlayerService playerService;
+    private final EntityManager entityManager;
 
 
     @Autowired
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(PlayerService playerService, EntityManager entityManager) {
 
         this.playerService = playerService;
-
+        this.entityManager = entityManager;
     }
 
-   /* @GetMapping("/search")
-    public List<Player> getPlayersBySearch(@RequestParam String name){
+    @GetMapping("/search")
+    public List<Player> getPlayersBySearch(@RequestParam String name) throws InterruptedException {
 
-        return this.playerSearchDao.findByPlayerNameUsingCustomQuery(name);
+        FullTextEntityManager fullTextEntityManager = Search
+                .getFullTextEntityManager(entityManager);
 
-    }*/
+        QueryBuilder queryBuilder = fullTextEntityManager
+                .getSearchFactory()
+                .buildQueryBuilder()
+                .forEntity(Player.class)
+                .get();
+
+        org.apache.lucene.search.Query query = queryBuilder
+                .keyword()
+                .onField("playerName")
+                .matching(name)
+                .createQuery();
+
+        org.hibernate.search.jpa.FullTextQuery jpaQuery
+                = fullTextEntityManager.createFullTextQuery(query, Player.class);
+
+        return jpaQuery.getResultList();
+    }
 
     @GetMapping("/getAllPlayers")
     public List<Player> getAllPlayers(){
