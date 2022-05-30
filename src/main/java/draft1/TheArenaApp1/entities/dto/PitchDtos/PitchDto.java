@@ -27,9 +27,9 @@ public class PitchDto {
 
     private String pitchAddressLink;
 
-    private int pitchRating;
+    private double pitchRatingAvg;
 
-    private BigDecimal pitchPrice;
+    private int pitchPrice;
 
     private String pitchImageLink; //!!!
 

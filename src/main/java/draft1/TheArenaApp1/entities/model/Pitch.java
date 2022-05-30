@@ -32,7 +32,6 @@ import java.util.List;
         @Column(name = "pitch_id")
         private int pitchId;
 
-
         @Column(name = "pitch_name")
         private String pitchName;
 
