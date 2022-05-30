@@ -22,9 +22,7 @@ public class PitchDto {
     private int pitchId;
 
     private String pitchName;
-
     private String pitchAddress;
-
     private String pitchAddressLink;
 
     private double pitchRatingAvg;
