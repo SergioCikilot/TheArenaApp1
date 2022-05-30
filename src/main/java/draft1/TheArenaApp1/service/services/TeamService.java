@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TeamService {
 
+    Team getByTeamId(int id);
+
     void addTeam(Team team);
 
     void deleteTeam(int id);

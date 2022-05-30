@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -41,19 +42,16 @@ public class PitchesController {
     }
 
     @GetMapping("/getAllPitches")
-    public List<Pitch> getAllPitches(){
+    public List<PitchDto> getAllPitches(){
 
-        return this.pitchService
-                .getAllPitches();
-
-         /*ModelMapper modelMapper = new ModelMapper();
+         ModelMapper modelMapper = new ModelMapper();
         return this.pitchService
                 .getAllPitches()
                 .stream()
                 .map(pitch -> modelMapper
                         .map(pitch, PitchDto.class))
                 .collect(Collectors
-                        .toList());*/
+                        .toList());
     }
 
     @PostMapping("addComment")

@@ -20,6 +20,11 @@ public class TeamManager implements TeamService {
 
 
     @Override
+    public Team getByTeamId(int id) {
+        return this.teamDao.getByTeamId(id);
+    }
+
+    @Override
     public void addTeam(Team team) {
 
         this.teamDao
@@ -49,6 +54,5 @@ public class TeamManager implements TeamService {
                 .save(team);
 
     }
-
 
 }

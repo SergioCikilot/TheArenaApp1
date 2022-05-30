@@ -19,7 +19,11 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","reservations","receivedComments","receivedRatings"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler",
+        "reservations",
+        "receivedComments",
+        "receivedRatings",
+        "pitchPics"})
 
     public class Pitch {
 
@@ -75,6 +79,8 @@ import java.util.List;
         @OneToMany(mappedBy = "pitch")
         private List<Comment> receivedComments;
 
+        @OneToMany(mappedBy = "pitch")
+        private List<PitchPic> pitchPics;
         @OneToMany(mappedBy = "pitch")
         private List<PitchRating> receivedRatings;
 

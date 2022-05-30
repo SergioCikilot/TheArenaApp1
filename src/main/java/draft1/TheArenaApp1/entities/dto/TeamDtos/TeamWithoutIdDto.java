@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class TeamWithoutIdDto {
 
+    private int teamId;
     private String teamName;
 
 }

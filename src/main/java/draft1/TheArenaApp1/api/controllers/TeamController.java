@@ -36,13 +36,16 @@ public class TeamController {
     }
 
     @PostMapping("/addTeam")
-    public void addTeam(@RequestBody TeamWithoutIdDto teamWithoutIdDto){
+    public int addTeam(@RequestBody TeamWithoutIdDto teamWithoutIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
         Team team = modelMapper
                 .map(teamWithoutIdDto,Team.class);
         this.teamService
                 .addTeam(team);
+
+        return team.getTeamId();
+
     }
 
     @PutMapping("updateTeam")

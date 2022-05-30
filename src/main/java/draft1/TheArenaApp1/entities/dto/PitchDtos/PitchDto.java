@@ -1,6 +1,7 @@
 package draft1.TheArenaApp1.entities.dto.PitchDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import draft1.TheArenaApp1.entities.model.PitchPic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,5 +48,7 @@ public class PitchDto {
     private boolean pitchIsIllumination;
 
     private boolean pitchIsCamera;
+
+    private List<PitchPic> pitchPics;
 
 }
