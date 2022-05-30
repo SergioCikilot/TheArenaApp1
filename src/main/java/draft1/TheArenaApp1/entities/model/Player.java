@@ -36,7 +36,7 @@ public class Player {
     @Column(name = "player_id")
     private int playerId;
 
-    @Field(termVector = TermVector.YES)
+    @Field
     @Column(name = "player_name")
     private String playerName;
 

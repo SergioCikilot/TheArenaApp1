@@ -17,6 +17,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 @EnableJpaRepositories(basePackages = "draft1.TheArenaApp1.repository.jparepository")*/
 public class TheArenaApp1Application {
 
+
+	public TheArenaApp1Application(){
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(TheArenaApp1Application.class, args);
 	}
