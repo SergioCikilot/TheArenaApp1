@@ -100,8 +100,6 @@ public class ReservationController {
 
         }
 
-        else
-
             this.reservationService.addReservation(reservation);
 
     }

@@ -146,13 +146,14 @@ public class PlayerController {
     }
 
     @PostMapping("/addPlayer")
-    public void addPlayer(@Valid @RequestBody PlayerWithUserIdDto playerWithUserIdDto){
+    public int addPlayer(@Valid @RequestBody PlayerWithUserIdDto playerWithUserIdDto){
 
         ModelMapper modelMapper = new ModelMapper();
         Player player = modelMapper
-                .map(playerWithUserIdDto,Player.class);
+                .map(playerWithUserIdDto, Player.class);
         this.playerService
                 .add(player);
+        return player.getPlayerId();
     }
 
     @DeleteMapping("delete")
