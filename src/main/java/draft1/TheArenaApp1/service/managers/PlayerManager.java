@@ -86,5 +86,14 @@ public class PlayerManager implements PlayerService {
                 .getPlayerByUserUserId(id);
     }
 
+    @Override
+    public Player getPlayerByPlayerName(String name) {
+        return this.playerDao.getPlayerByPlayerName(name);
+    }
+    @Override
+    public List<Player> getPlayersByPlayerName(String name) {
+        return this.playerDao.getPlayersByPlayerName(name);
+    }
+
 
 }

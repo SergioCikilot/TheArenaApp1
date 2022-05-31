@@ -21,5 +21,8 @@ public interface PlayerDao extends JpaRepository<Player,Integer> {
 
     Player getByPlayerId(int playerId);
 
+    Player getPlayerByPlayerName(String name);
+    List<Player> getPlayersByPlayerName(String name);
+
 
 }

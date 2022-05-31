@@ -16,5 +16,7 @@ public interface PlayerService {
      String getPlayerAge(Player player);
      void addTeam(int teamId, int playerId);
      Player getPlayerByUserId(int id);
+     Player getPlayerByPlayerName(String name);
+     List<Player> getPlayersByPlayerName(String name);
 
 }

@@ -1,6 +1,7 @@
 package draft1.TheArenaApp1.api.controllers;
 
 import draft1.TheArenaApp1.core.exceptions.ApiRequestException;
+import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 
 import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
@@ -13,7 +14,9 @@ import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +34,6 @@ public class PlayerController {
     private final PlayerService playerService;
     private final EntityManager entityManager;
 
-
     @Autowired
     public PlayerController(PlayerService playerService, EntityManager entityManager) {
 
@@ -43,11 +45,12 @@ public class PlayerController {
     public List<Player> getPlayersBySearch(@RequestParam String name) throws InterruptedException {
 
         //Get the FullTextEntityManager
-        FullTextEntityManager fullTextEntityManager
-                = Search.getFullTextEntityManager(entityManager);
+        FullTextEntityManager fullTextEntityManager = Search
+                .getFullTextEntityManager(entityManager);
 
         //Create a Hibernate Search DSL query builder for the required entity
-        org.hibernate.search.query.dsl.QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory()
+        org.hibernate.search.query.dsl.QueryBuilder queryBuilder = fullTextEntityManager
+                .getSearchFactory()
                 .buildQueryBuilder()
                 .forEntity(Player.class)
                 .get();
@@ -113,6 +116,20 @@ public class PlayerController {
         return this.playerService
                 .getPlayerAge(player);
     }
+    @GetMapping("/getPlayerByPlayerName")
+    public ResponseEntity<Player> getPlayerByPlayerName(String name)  {
+
+            return ResponseEntity.ok(this.playerService
+                    .getPlayerByPlayerName(name));
+
+    }
+
+    @GetMapping("/getPlayersByPlayerName")
+    public List<Player> getPlayersByPlayerName(String name)  {
+
+        return this.playerService.getPlayersByPlayerName(name);
+
+    }
 
     @GetMapping("/getPlayerByUserId")
     public PlayerWithUserIdDto getPlayerByUserId(@RequestParam int userId){
@@ -175,6 +192,27 @@ public class PlayerController {
         }
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
+        return  errors;
+    }
+    @ExceptionHandler(ExistingEntryException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationExistException(ExistingEntryException exceptions){
+
+        Map<String,String> validationErrors = new HashMap<String,String>();
+
+        for (int i = 0; i < exceptions.getFieldList().size() ; i++) {
+
+            validationErrors
+                    .put(
+                            exceptions.getFieldList()
+                                    .get(i),
+                            exceptions
+                                    .getMessage());
+
+        }
+
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
         return  errors;
     }
 

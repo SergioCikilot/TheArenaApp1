@@ -74,7 +74,6 @@ public class Player {
     private boolean playerIsGoalkeeper ;
     @ManyToOne()
     @JoinColumn(name="team_id")
-    @JsonIgnore
     private Team team;
 
     @OneToMany(mappedBy = "player")
