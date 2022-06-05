@@ -37,5 +37,7 @@ public class ReservationWithIdPlayerPitch {
 
     private int playerId;
 
+    private Boolean reservationIsRated;
+
 
 }

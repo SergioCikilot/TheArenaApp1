@@ -35,7 +35,7 @@ public class TeamController {
                 .getAllTeams();
     }
 
-    @GetMapping("getByTeamId")
+    @GetMapping("/getByTeamId")
     public Team getByTeamId(@RequestParam int id){
 
         return this.teamService.getByTeamId(id);
