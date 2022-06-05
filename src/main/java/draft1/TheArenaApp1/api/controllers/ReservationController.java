@@ -106,20 +106,20 @@ public class ReservationController {
     }
 
     @PutMapping("/updateReservation")
-    public void updateReservation(@Valid @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch) throws ExistingEntryException {
+    public void updateReservation( @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch) throws ExistingEntryException {
 
         ModelMapper modelMapper = new ModelMapper();
         Reservation reservation = modelMapper
                 .map(reservationWithIdPlayerPitch,Reservation.class);
 
-        if (!reservationValidator.IsValid(reservation)){
+        /*if (!reservationValidator.IsValid(reservation)){
 
             ArrayList<String> arrayList = new ArrayList<>();
             arrayList.add("Reservation");
 
             throw new ExistingEntryException("Reservation is already exists",arrayList);
 
-        }
+        }*/
         this.reservationService
                 .updateReservation(reservation);
 

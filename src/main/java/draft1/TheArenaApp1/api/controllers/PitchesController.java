@@ -157,6 +157,4 @@ public class PitchesController {
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
-
 }
