@@ -51,6 +51,5 @@ public class PlayerWithUserIdDto {
     @Past
     private LocalDate playerBirthDate;
 
-    private int teamId;
 
 }

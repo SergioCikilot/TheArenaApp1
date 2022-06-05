@@ -35,6 +35,13 @@ public class TeamController {
                 .getAllTeams();
     }
 
+    @GetMapping("getByTeamId")
+    public Team getByTeamId(@RequestParam int id){
+
+        return this.teamService.getByTeamId(id);
+
+    }
+
     @PostMapping("/addTeam")
     public int addTeam(@RequestBody TeamWithoutIdDto teamWithoutIdDto){
 
@@ -61,6 +68,7 @@ public class TeamController {
         this.teamService
                 .deleteTeam(id);
     }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
