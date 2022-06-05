@@ -29,15 +29,16 @@ public class ReservationWithIdPlayerPitch {
 
     @Future
     @Temporal(TemporalType.DATE)
-    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")//
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservationDate;
 
     private int pitchId;
 
     private int playerId;
-
     private Boolean reservationIsRated;
+
+
 
 
 }
