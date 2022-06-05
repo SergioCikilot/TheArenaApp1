@@ -35,11 +35,16 @@ public class ReservationWithPlayerAndPitchIdDto {
 
     private int pitchId;
 
+    private Boolean reservationIsRated;
+
     private int playerId;
 
     public void setReservationTime(LocalTime reservationTime) {
         this.reservationTime = reservationTime;
     }
 
+
     public void setReservationDate(LocalDate reservationDate) { this.reservationDate = reservationDate;}
+
+
 }

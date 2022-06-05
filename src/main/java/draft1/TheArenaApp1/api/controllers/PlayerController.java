@@ -29,6 +29,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/player")
+@CrossOrigin
 public class PlayerController {
 
     private final PlayerService playerService;

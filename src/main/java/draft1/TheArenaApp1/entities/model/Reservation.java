@@ -39,6 +39,9 @@ public class Reservation {
     @Transient
     private Status status;
 
+    @Column(name = "reservation_isRated")
+    private Boolean reservationIsRated;
+
     @ManyToOne()
     @JoinColumn(name="pitch_id")
     private Pitch pitch;
@@ -57,7 +60,10 @@ public class Reservation {
 
         } else if (reservationDate.isBefore(dateNow)) {
 
-            return this.status = new DoneStatus();
+            if (reservationIsRated){
+                return this.status = new DoneStatus(true);
+            }
+            return this.status = new DoneStatus(false);
 
         } else if (reservationDate.isEqual(dateNow)) {
 
@@ -67,11 +73,14 @@ public class Reservation {
 
             } else if (reservationTime.isBefore(timeNow)) {
 
-                return this.status = new DoneStatus();
+                if (reservationIsRated){
+                    return this.status = new DoneStatus(true);
+                }
+                return this.status = new DoneStatus(false);
             }
             return this.status = new Status();
         }
         return this.status = new Status();
-
     }
+
 }

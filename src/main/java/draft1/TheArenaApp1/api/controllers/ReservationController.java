@@ -87,6 +87,7 @@ public class ReservationController {
     public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto) throws ExistingEntryException {
 
         //map
+        reservationWithPlayerAndPitchIdDto.setReservationIsRated(false);
         ModelMapper modelMapper = new ModelMapper();
         Reservation reservation = modelMapper
                 .map(reservationWithPlayerAndPitchIdDto,Reservation.class);
