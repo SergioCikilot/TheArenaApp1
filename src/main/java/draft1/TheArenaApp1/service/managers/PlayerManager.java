@@ -53,7 +53,7 @@ public class PlayerManager implements PlayerService {
     }
 
     @Override
-    public List<Player> getPlayersByTeam(int teamId) {
+    public List<Player> getPlayersByTeamId(int teamId) {
         return this.playerDao
                 .getByTeamTeamId(teamId);
     }

@@ -5,6 +5,7 @@ import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 
 import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithUserIdDto;
+import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithoutTeamDto;
 import draft1.TheArenaApp1.entities.model.Player;
 
 import draft1.TheArenaApp1.service.services.PlayerService;
@@ -103,10 +104,9 @@ public class PlayerController {
     }
 
     @GetMapping("/getPlayersByTeam")
-    public List<Player> getPlayersByTeam(@RequestParam int teamId){
+    public List<Player> getPlayersByTeamId(@RequestParam int teamId){
 
-        return this.playerService
-                .getPlayersByTeam(teamId);
+        return this.playerService.getPlayersByTeamId(teamId);
     }
 
     @GetMapping("/getPlayerAge")
@@ -147,11 +147,11 @@ public class PlayerController {
     }
 
     @PostMapping("/addPlayer")
-    public int addPlayer(@Valid @RequestBody PlayerWithUserIdDto playerWithUserIdDto){
+    public int addPlayer(@Valid @RequestBody PlayerWithoutTeamDto playerWithoutTeamDto){
 
         ModelMapper modelMapper = new ModelMapper();
         Player player = modelMapper
-                .map(playerWithUserIdDto, Player.class);
+                .map(playerWithoutTeamDto, Player.class);
         this.playerService
                 .add(player);
         return player.getPlayerId();

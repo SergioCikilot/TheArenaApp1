@@ -11,7 +11,7 @@ public interface PlayerService {
      void delete(int id);
      void updatePlayer(Player player);
      List<Player> getAll();
-     List<Player> getPlayersByTeam(int teamId);
+     List<Player> getPlayersByTeamId(int teamId);
      Player getByPlayerPlayerId(int playerId);
      String getPlayerAge(Player player);
      void addTeam(int teamId, int playerId);
