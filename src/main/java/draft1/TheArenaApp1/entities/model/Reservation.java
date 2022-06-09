@@ -1,6 +1,7 @@
 package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import draft1.TheArenaApp1.core.utils.status.DoneStatus;
 import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.core.utils.status.WaitingStatus;
@@ -36,6 +37,7 @@ public class Reservation {
     @Column(name = "reservation_date")
     private LocalDate reservationDate;
 
+    @JsonIgnore
     @Transient
     private Status status;
 

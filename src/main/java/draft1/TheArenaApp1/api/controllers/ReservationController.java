@@ -144,6 +144,13 @@ public class ReservationController {
 
     }
 
+    @PutMapping("/updateReservationIsRated")
+    public void updateReservationIsRated(@RequestParam int reservationId,@RequestParam boolean reservationIsRated) throws ExistingEntryException {
+
+        this.reservationService.updateReservationIsRated(reservationIsRated,reservationId);
+
+    }
+
     @PutMapping("/updateReservationDate")
     public void updateReservationDate(@Valid @RequestParam  LocalDate reservationDate, @RequestParam int reservationId) throws ExistingEntryException {
 

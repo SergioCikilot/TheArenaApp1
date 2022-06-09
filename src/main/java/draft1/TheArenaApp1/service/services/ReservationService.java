@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.service.services;
 
 import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.entities.model.Reservation;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,6 +14,7 @@ public interface ReservationService {
     void deleteReservation(int id);
 
     void updateReservation(Reservation reservation);
+    void updateReservationIsRated(boolean reservationIsRated ,int reservationId);
     List<Reservation> getAllReservations();
     List<Reservation> getReservationsByPlayerId(int id);
     void updateReservationTime(LocalTime reservationTime, int reservationId);

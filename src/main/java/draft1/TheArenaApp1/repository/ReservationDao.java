@@ -23,6 +23,10 @@ public interface ReservationDao extends JpaRepository<Reservation,Integer> {
     @Query("update Reservation p set p.reservationTime=:reservationTime where p.reservationId =:reservationId")
     void updateReservationTime(@Param("reservationTime") LocalTime reservationTime, @Param("reservationId") int reservationId);
 
+    @Transactional
+    @Modifying
+    @Query("update Reservation p set p.reservationIsRated=:reservationIsRated where p.reservationId =:reservationId")
+    void updateReservationIsRated(@Param("reservationIsRated") boolean reservationIsRated , @Param("reservationId") int reservationId);
     List<Reservation> getReservationsByReservationDate(LocalDate reservationDate);
     List<Reservation> getReservationsByReservationTime(LocalTime reservationTime);
     List<Reservation> findReservationsByPitchPitchId(int pitchId);

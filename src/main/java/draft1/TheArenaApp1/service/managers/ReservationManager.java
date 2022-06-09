@@ -7,6 +7,7 @@ import draft1.TheArenaApp1.entities.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -43,6 +44,13 @@ public class ReservationManager implements ReservationService {
 
         this.reservationDao
                 .save(reservation);
+    }
+
+    @Override
+    public void updateReservationIsRated(boolean reservationIsRated, int reservationId) {
+
+        this.reservationDao.updateReservationIsRated(reservationIsRated,reservationId);
+
     }
 
     @Override
