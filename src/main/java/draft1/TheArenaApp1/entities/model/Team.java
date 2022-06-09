@@ -31,7 +31,7 @@ public class Team {
     @Column(name = "team_name")
     private String teamName;
 
-    @OneToMany(mappedBy = "team")//player
+    @OneToMany(mappedBy = "team")//zplayer
     private List<Player> players;
 
 }
