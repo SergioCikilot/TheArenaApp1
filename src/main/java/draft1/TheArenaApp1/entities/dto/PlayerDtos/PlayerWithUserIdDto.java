@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import draft1.TheArenaApp1.core.entities.foots.FootEnum;
 import draft1.TheArenaApp1.core.entities.positions.PositionEnum;
+import draft1.TheArenaApp1.entities.model.Team;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,6 +51,9 @@ public class PlayerWithUserIdDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past
     private LocalDate playerBirthDate;
+
+    private Team team;
+
 
 
 }
