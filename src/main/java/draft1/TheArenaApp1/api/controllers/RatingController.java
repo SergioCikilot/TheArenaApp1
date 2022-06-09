@@ -1,25 +1,20 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
+import draft1.TheArenaApp1.entities.model.PitchRating;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
-import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.entities.dto.PitchRatingDtos.PitchRatingDto;
 import draft1.TheArenaApp1.service.services.PitchRatingService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController

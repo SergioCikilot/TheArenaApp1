@@ -1,8 +1,8 @@
 package draft1.TheArenaApp1.api.controllers;
 
 
-import draft1.TheArenaApp1.core.entities.comments.Comment;
-import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
+import draft1.TheArenaApp1.entities.model.Comment;
+import draft1.TheArenaApp1.entities.model.PitchRating;
 import draft1.TheArenaApp1.entities.dto.CommentAndPitchRatingDto;
 import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.entities.dto.PitchDtos.PitchDto;
@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pitch")
+@CrossOrigin
 public class PitchesController {
 
     private final PitchService pitchService;

@@ -1,8 +1,6 @@
 package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import draft1.TheArenaApp1.core.entities.comments.Comment;
-import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import lombok.*;
 
 

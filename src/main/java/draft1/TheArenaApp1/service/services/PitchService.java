@@ -1,9 +1,6 @@
 package draft1.TheArenaApp1.service.services;
 
-import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
 import draft1.TheArenaApp1.entities.model.Pitch;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

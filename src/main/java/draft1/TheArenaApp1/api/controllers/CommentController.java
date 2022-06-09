@@ -1,6 +1,6 @@
 package draft1.TheArenaApp1.api.controllers;
 
-import draft1.TheArenaApp1.core.entities.comments.Comment;
+import draft1.TheArenaApp1.entities.model.Comment;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.service.services.CommentService;

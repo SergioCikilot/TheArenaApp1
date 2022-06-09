@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.core.entities.ratings;
+package draft1.TheArenaApp1.entities.model;
 
 import draft1.TheArenaApp1.entities.model.Pitch;
 import draft1.TheArenaApp1.entities.model.Player;

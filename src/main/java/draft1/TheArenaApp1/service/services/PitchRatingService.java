@@ -1,7 +1,6 @@
 package draft1.TheArenaApp1.service.services;
 
-import draft1.TheArenaApp1.core.entities.comments.Comment;
-import draft1.TheArenaApp1.core.entities.ratings.PitchRating;
+import draft1.TheArenaApp1.entities.model.PitchRating;
 
 import java.util.List;
 

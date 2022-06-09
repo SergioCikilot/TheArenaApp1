@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.core.entities.comments;
+package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import draft1.TheArenaApp1.entities.model.Pitch;
