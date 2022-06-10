@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                     .allowedHeaders("header1", "header2", "header3")
                     .exposedHeaders("header1", "header2")
                     .allowCredentials(false).maxAge(3600);
+
         }
     }
 
