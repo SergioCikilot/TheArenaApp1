@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         @Override
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/api/**")
+
                     .allowedOrigins("https://arenahalisaha.azurewebsites.net/login")
                     .allowedMethods("ADD","GET","PUT", "DELETE")
                     .allowedHeaders("header1", "header2", "header3")
