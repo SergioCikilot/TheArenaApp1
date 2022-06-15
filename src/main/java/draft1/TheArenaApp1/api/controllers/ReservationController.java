@@ -34,6 +34,7 @@ public class ReservationController {
 
     private final ReservationService reservationService;
     private final ReservationValidator reservationValidator;
+    private ModelMapper modelMapper;
 
     @Autowired
     public ReservationController(ReservationManager reservationManager, ReservationValidator reservationValidator) {
@@ -41,10 +42,88 @@ public class ReservationController {
         this.reservationValidator = reservationValidator;
     }
 
+    //add---------------------------------------------------------------------------------------------------------------
+    @PostMapping("/addReservation")
+    public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto) throws ExistingEntryException {
+
+        //map
+        reservationWithPlayerAndPitchIdDto.setReservationIsRated(false);
+        Reservation reservation = modelMapper
+                .map(reservationWithPlayerAndPitchIdDto, Reservation.class);
+        ArrayList<String> arrayList = new ArrayList<>();
+        if (!reservationValidator.IsValid(reservation)){
+
+            arrayList.add("Reservation");
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+        }
+        this.reservationService.addReservation(reservation);
+    }
+    //update------------------------------------------------------------------------------------------------------------
+    @PutMapping("/updateReservation")
+    public void updateReservation( @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch) throws ExistingEntryException {
+
+        Reservation reservation = modelMapper
+                .map(reservationWithIdPlayerPitch,Reservation.class);
+        this.reservationService
+                .updateReservation(reservation);
+    }
+    @PutMapping("/updateReservationTime")
+    public void updateReservationTime(@Valid @RequestParam LocalTime reservationTime, @RequestParam int reservationId) throws ExistingEntryException {
+
+        Reservation reservation = this.reservationService
+                .getByReservationId(reservationId);
+        if (!reservationValidator.IsValid(reservation)){
+
+            ArrayList<String> arrayList = new ArrayList<>();
+            arrayList.add("Reservation");
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+        }
+        this.reservationService
+                .updateReservationTime(reservationTime,reservationId);
+    }
+
+    @PutMapping("/updateReservationIsRated")
+    public void updateReservationIsRated(@RequestParam int reservationId,@RequestParam boolean reservationIsRated) throws ExistingEntryException {
+
+        this.reservationService
+                .updateReservationIsRated(reservationIsRated,reservationId);
+
+    }
+
+    @PutMapping("/updateReservationDate")
+    public void updateReservationDate(@Valid @RequestParam  LocalDate reservationDate, @RequestParam int reservationId) throws ExistingEntryException {
+
+
+        Reservation reservation = this.reservationService
+                .getByReservationId(reservationId);
+        reservation.setReservationDate(reservationDate);
+        if (!reservationValidator.IsValid(reservation)){
+
+            ArrayList<String> arrayList = new ArrayList<>();
+            arrayList.add("Reservation");
+
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+        }
+        this.reservationService
+                .updateReservationDate(reservationDate,reservationId);
+    }
+    //delete------------------------------------------------------------------------------------------------------------
+    @DeleteMapping("/deleteReservation")
+    public void deleteReservation(@RequestParam int id){
+
+        this.reservationService
+                .deleteReservation(id);
+    }
+    //get---------------------------------------------------------------------------------------------------------------
+    @GetMapping("/getReservationStatus")
+    public Status getReservationStatus(@RequestParam int id){
+
+        return this.reservationService
+                .getReservationStatus(id);
+    }
     @GetMapping("/getAllReservations")
     public List<ReservationWithoutLocalDateTime> getAllReservations(){
 
-        ModelMapper modelMapper = new ModelMapper();
         return this.reservationService
                 .getAllReservations()
                 .stream()
@@ -52,12 +131,10 @@ public class ReservationController {
                         .map(reservation, ReservationWithoutLocalDateTime.class))
                 .collect(Collectors
                         .toList());
-
     }
     @GetMapping("/getAllReservationsByPitchId")
     public List<ReservationWithoutLocalDateTime> getAllReservationsByPitchId(@RequestParam int id){
 
-        ModelMapper modelMapper = new ModelMapper();
         List <Reservation> list =this.reservationService
                 .findReservationsByPitchPitchId(id);
         Type listType =
@@ -66,12 +143,10 @@ public class ReservationController {
         List<ReservationWithoutLocalDateTime> ReservationWithoutLocalDateTime = modelMapper
                 .map(list,listType);
         return ReservationWithoutLocalDateTime;
-
     }
     @GetMapping("/getReservationsByPlayerId")
     public List<ReservationWithoutLocalDateTime> getReservationsByPlayerId(@RequestParam int id){
 
-        ModelMapper modelMapper = new ModelMapper();
         List <Reservation> list =this.reservationService
                 .getReservationsByPlayerId(id);
         Type listType =
@@ -80,110 +155,8 @@ public class ReservationController {
         List<ReservationWithoutLocalDateTime> ReservationWithoutLocalDateTime = modelMapper
                 .map(list,listType);
         return ReservationWithoutLocalDateTime;
-
     }
-
-    @PostMapping("/addReservation")
-    public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto) throws ExistingEntryException {
-
-        //map
-        reservationWithPlayerAndPitchIdDto.setReservationIsRated(false);
-        ModelMapper modelMapper = new ModelMapper();
-        Reservation reservation = modelMapper
-                .map(reservationWithPlayerAndPitchIdDto,Reservation.class);
-
-        ArrayList<String> arrayList = new ArrayList<>();
-        if (!reservationValidator.IsValid(reservation)){
-
-            arrayList.add("Reservation");
-
-            throw new ExistingEntryException("Reservation is already exists",arrayList);
-
-        }
-
-            this.reservationService.addReservation(reservation);
-
-    }
-
-    @PutMapping("/updateReservation")
-    public void updateReservation( @RequestBody ReservationWithIdPlayerPitch reservationWithIdPlayerPitch) throws ExistingEntryException {
-
-        ModelMapper modelMapper = new ModelMapper();
-        Reservation reservation = modelMapper
-                .map(reservationWithIdPlayerPitch,Reservation.class);
-
-        /*if (!reservationValidator.IsValid(reservation)){
-
-            ArrayList<String> arrayList = new ArrayList<>();
-            arrayList.add("Reservation");
-
-            throw new ExistingEntryException("Reservation is already exists",arrayList);
-
-        }*/
-        this.reservationService
-                .updateReservation(reservation);
-
-    }
-
-    @PutMapping("/updateReservationTime")
-    public void updateReservationTime(@Valid @RequestParam LocalTime reservationTime, @RequestParam int reservationId) throws ExistingEntryException {
-
-        Reservation reservation = this.reservationService.getByReservationId(reservationId);
-
-        if (!reservationValidator.IsValid(reservation)){
-
-            ArrayList<String> arrayList = new ArrayList<>();
-            arrayList.add("Reservation");
-
-            throw new ExistingEntryException("Reservation is already exists",arrayList);
-
-        }
-
-        this.reservationService
-                .updateReservationTime(reservationTime,reservationId);
-
-    }
-
-    @PutMapping("/updateReservationIsRated")
-    public void updateReservationIsRated(@RequestParam int reservationId,@RequestParam boolean reservationIsRated) throws ExistingEntryException {
-
-        this.reservationService.updateReservationIsRated(reservationIsRated,reservationId);
-
-    }
-
-    @PutMapping("/updateReservationDate")
-    public void updateReservationDate(@Valid @RequestParam  LocalDate reservationDate, @RequestParam int reservationId) throws ExistingEntryException {
-
-
-        Reservation reservation = this.reservationService.getByReservationId(reservationId);
-        reservation.setReservationDate(reservationDate);
-        if (!reservationValidator.IsValid(reservation)){
-
-            ArrayList<String> arrayList = new ArrayList<>();
-            arrayList.add("Reservation");
-
-            throw new ExistingEntryException("Reservation is already exists",arrayList);
-
-        }
-        this.reservationService
-                .updateReservationDate(reservationDate,reservationId);
-
-    }
-@GetMapping("/getReservationStatus")
-    public Status getReservationStatus(@RequestParam int id){
-
-        return this.reservationService.getReservationStatus(id);
-
-}
-
-    @DeleteMapping("/deleteReservation")
-    public void deleteReservation(@RequestParam int id){
-
-        this.reservationService
-                .deleteReservation(id);
-
-    }
-
+    //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
@@ -200,7 +173,6 @@ public class ReservationController {
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
     @ExceptionHandler(ExistingEntryException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationExistException(ExistingEntryException exceptions){
@@ -222,7 +194,4 @@ public class ReservationController {
                 new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
         return  errors;
     }
-
-
-
 }

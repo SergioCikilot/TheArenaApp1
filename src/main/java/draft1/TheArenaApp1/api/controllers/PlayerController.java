@@ -35,6 +35,7 @@ public class PlayerController {
 
     private final PlayerService playerService;
     private final EntityManager entityManager;
+    private ModelMapper modelMapper;
 
     @Autowired
     public PlayerController(PlayerService playerService, EntityManager entityManager) {
@@ -42,7 +43,83 @@ public class PlayerController {
         this.playerService = playerService;
         this.entityManager = entityManager;
     }
+    //add---------------------------------------------------------------------------------------------------------------
+    @PostMapping("/addPlayer")
+    public int addPlayer(@Valid @RequestBody PlayerWithoutTeamDto playerWithoutTeamDto){
 
+        Player player = modelMapper
+                .map(playerWithoutTeamDto, Player.class);
+        this.playerService
+                .add(player);
+        return player.getPlayerId();
+    }
+    //update------------------------------------------------------------------------------------------------------------
+    @PutMapping("/updatePlayer")
+    public void updatePlayer(@RequestBody PlayerWithUserIdDto playerWithIdUser) {
+
+        Player player = modelMapper
+                .map(playerWithIdUser,Player.class);
+        this.playerService
+                .updatePlayer(player);
+    }
+    @PutMapping("/updateTeamOfPlayer")
+    public void updateTeamOfPlayer(@RequestParam int teamId,@RequestParam int playerId){
+
+        this.playerService
+                .addTeam(teamId, playerId);
+    }
+    //delete------------------------------------------------------------------------------------------------------------
+    @DeleteMapping("delete")//rename
+    public void deletePlayer(@RequestParam int id){
+
+        this.playerService
+                .delete(id);
+    }
+    //get---------------------------------------------------------------------------------------------------------------
+    @GetMapping("/getAllPlayers")
+    public List<Player> getAllPlayers(){
+
+        return this.playerService
+                .getAll();
+    }
+    @GetMapping("/getPlayersByTeam")
+    public List<Player> getPlayersByTeamId(@RequestParam int teamId){
+
+        return this.playerService.getPlayersByTeamId(teamId);
+    }
+    @GetMapping("/getPlayerAge")
+    public String getPlayerAge(@RequestParam int playerId){
+
+        Player player = this.playerService
+                .getByPlayerPlayerId(playerId);
+        return this.playerService
+                .getPlayerAge(player);
+    }
+    @GetMapping("/getPlayerByPlayerName")
+    public ResponseEntity<Player> getPlayerByPlayerName(String name)  {
+
+            return ResponseEntity.ok(this.playerService
+                    .getPlayerByPlayerName(name));
+    }
+    @GetMapping("/getPlayersByPlayerName")
+    public List<Player> getPlayersByPlayerName(String name)  {
+
+        return this.playerService.getPlayersByPlayerName(name);
+    }
+    @GetMapping("/getPlayerByUserId")
+    public PlayerWithUserIdDto getPlayerByUserId(@RequestParam int userId){
+
+        Player player = this.playerService
+                .getPlayerByUserId(userId);
+        if (player == null){
+
+            throw new ApiRequestException("Player does not exist");
+        }
+        PlayerWithUserIdDto playerWithUserIdDto = modelMapper
+                .map(player,PlayerWithUserIdDto.class);
+        return playerWithUserIdDto;
+    }
+    //search------------------------------------------------------------------------------------------------------------
     @GetMapping("/search")
     public List<Player> getPlayersBySearch(@RequestParam String name) throws InterruptedException {
 
@@ -95,92 +172,7 @@ public class PlayerController {
 
         return results;
     }
-
-    @GetMapping("/getAllPlayers")
-    public List<Player> getAllPlayers(){
-
-        return this.playerService
-                .getAll();
-    }
-
-    @GetMapping("/getPlayersByTeam")
-    public List<Player> getPlayersByTeamId(@RequestParam int teamId){
-
-        return this.playerService.getPlayersByTeamId(teamId);
-    }
-
-    @GetMapping("/getPlayerAge")
-    public String getPlayerAge(@RequestParam int playerId){
-
-        Player player = this.playerService
-                .getByPlayerPlayerId(playerId);
-        return this.playerService
-                .getPlayerAge(player);
-    }
-    @GetMapping("/getPlayerByPlayerName")
-    public ResponseEntity<Player> getPlayerByPlayerName(String name)  {
-
-            return ResponseEntity.ok(this.playerService
-                    .getPlayerByPlayerName(name));
-
-    }
-
-    @GetMapping("/getPlayersByPlayerName")
-    public List<Player> getPlayersByPlayerName(String name)  {
-
-        return this.playerService.getPlayersByPlayerName(name);
-
-    }
-
-    @GetMapping("/getPlayerByUserId")
-    public PlayerWithUserIdDto getPlayerByUserId(@RequestParam int userId){
-        ModelMapper modelMapper = new ModelMapper();
-        Player player = this.playerService
-                .getPlayerByUserId(userId);
-        if (player == null){
-
-            throw new ApiRequestException("Player does not exist");
-        }
-        PlayerWithUserIdDto playerWithUserIdDto = modelMapper
-                .map(player,PlayerWithUserIdDto.class);
-        return playerWithUserIdDto;
-    }
-
-    @PostMapping("/addPlayer")
-    public int addPlayer(@Valid @RequestBody PlayerWithoutTeamDto playerWithoutTeamDto){
-
-        ModelMapper modelMapper = new ModelMapper();
-        Player player = modelMapper
-                .map(playerWithoutTeamDto, Player.class);
-        this.playerService
-                .add(player);
-        return player.getPlayerId();
-    }
-
-    @DeleteMapping("delete")
-    public void deletePlayer(@RequestParam int id){
-
-        this.playerService
-                .delete(id);
-    }
-
-    @PutMapping("/updatePlayer")
-    public void updatePlayer(@RequestBody PlayerWithUserIdDto playerWithIdUser) {
-
-        ModelMapper modelMapper = new ModelMapper();
-        Player player = modelMapper
-                .map(playerWithIdUser,Player.class);
-        this.playerService
-                .updatePlayer(player);
-    }
-
-    @PutMapping("/updateTeamOfPlayer")
-    public void updateTeamOfPlayer(@RequestParam int teamId,@RequestParam int playerId){
-
-        this.playerService
-                .addTeam(teamId, playerId);
-    }
-
+    //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){

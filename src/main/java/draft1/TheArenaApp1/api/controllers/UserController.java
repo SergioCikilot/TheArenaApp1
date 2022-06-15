@@ -25,6 +25,7 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private ModelMapper modelMapper;
 
     @Autowired
     public UserController(UserService userService) {
@@ -32,26 +33,32 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login")//düzenle
     public String login() throws Exception {
 
             return "login screen";
     }
-
+    //add---------------------------------------------------------------------------------------------------------------
     @PostMapping("/signup")
     public void addUser(@Valid @RequestBody User user) throws Exception {
 
         this.userService
                 .add(user);
     }
+    //delete------------------------------------------------------------------------------------------------------------
+    @DeleteMapping("/deleteUser")
+    public void deleteUser(@RequestBody User user){
 
+        this.userService
+                .delete(user);
+    }
+    //get---------------------------------------------------------------------------------------------------------------
     @GetMapping("/getUserDetailsByUsername")
     public UserDetails getUserDetailsByUsername(@RequestParam String username) throws Exception {
 
         return this.userService
                 .loadUserByUsername(username);
     }
-
     @GetMapping("/getUserIdByUsername")
     public int getUserIdByUsername(@RequestParam String username) throws Exception {
 
@@ -64,7 +71,6 @@ public class UserController {
                 .getUserId();
         return id;
     }
-
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
 
@@ -77,14 +83,7 @@ public class UserController {
         return this.userService
                 .findUserByUsername(username);
     }
-
-    @DeleteMapping("/deleteUser")
-    public void deleteUser(@RequestBody User user){
-
-        this.userService
-                .delete(user);
-    }
-
+    //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(
@@ -105,7 +104,6 @@ public class UserController {
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
     @ExceptionHandler(ExistingEntryException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationExistException(ExistingEntryException exceptions){
@@ -121,26 +119,9 @@ public class UserController {
                     exceptions
                             .getMessage());
         }
-
         ErrorDataResult<Object> errors =
                 new ErrorDataResult<Object>(validationErrors,"Custom Validation Error");
         return  errors;
     }
-
-
-    /*@ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDataResult<Object> handleValidationAllException(Exception exceptions){
-
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(exceptions.getMessage(),"Validation Error3");
-        return  errors;
-    }*/
-    /*@ExceptionHandler(DataIntegrityViolationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDataResult<Object> handleValidationTheException(DataIntegrityViolationException exceptions){
-
-        ErrorDataResult<Object> errors = new ErrorDataResult<Object>(exceptions.getMessage(),"Validation Error2");
-        return  errors;
-    }*/
 }
 

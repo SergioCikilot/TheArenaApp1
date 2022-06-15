@@ -21,43 +21,42 @@ import java.util.stream.Collectors;
 public class CommentController {
 
     private final CommentService commentService;
+    private ModelMapper modelMapper;
 
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
+    //add---------------------------------------------------------------------------------------------------------------
     @PostMapping("addComment")
     public void addComment(@RequestBody CommentDto commentDto){
 
-        ModelMapper modelMapper = new ModelMapper();
         Comment comment = modelMapper
                 .map(commentDto,Comment.class);
         this.commentService
                 .addComment(comment);
     }
+    //update------------------------------------------------------------------------------------------------------------
+    @PutMapping("updateComment")
+    public void updateComment(@RequestBody CommentDto commentDto){
 
+        Comment comment = modelMapper
+                .map(commentDto,Comment.class);
+        this.commentService
+                .addComment(comment);
+    }
+    //delete------------------------------------------------------------------------------------------------------------
     @DeleteMapping ("deleteComment")
     public void deleteComment(@RequestParam int id){
 
         this.commentService
                 .deleteComment(id);
     }
-
-    @PutMapping("updateComment")
-    public void updateComment(@RequestBody CommentDto commentDto){
-
-        ModelMapper modelMapper = new ModelMapper();
-        Comment comment = modelMapper
-                .map(commentDto,Comment.class);
-        this.commentService
-                .addComment(comment);
-    }
-
+    //get---------------------------------------------------------------------------------------------------------------
     @GetMapping("getCommentsByCommentTarget")
     public List<CommentDto> getCommentsByCommentTarget(@RequestParam int id){
 
-        ModelMapper modelMapper = new ModelMapper();
         return this.commentService
                 .findCommentsByCommentTarget(id)
                 .stream()
@@ -66,7 +65,7 @@ public class CommentController {
                 .collect(Collectors
                         .toList());
     }
-
+    //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){

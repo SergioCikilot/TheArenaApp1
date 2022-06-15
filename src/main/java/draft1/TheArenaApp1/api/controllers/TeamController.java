@@ -21,55 +21,50 @@ import java.util.Map;
 public class TeamController {
 
     private final TeamService teamService;
+    private ModelMapper modelMapper;
 
     @Autowired
-
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
 
-    @GetMapping("/getAllTeams")
-    public List<Team> getAllTeams(){
-
-        return this.teamService
-                .getAllTeams();
-    }
-
-    @GetMapping("/getByTeamId")
-    public Team getByTeamId(@RequestParam int id){
-
-        return this.teamService.getByTeamId(id);
-
-    }
-
+    //add---------------------------------------------------------------------------------------------------------------
     @PostMapping("/addTeam")
     public int addTeam(@RequestBody TeamWithoutIdDto teamWithoutIdDto){
 
-        ModelMapper modelMapper = new ModelMapper();
         Team team = modelMapper
                 .map(teamWithoutIdDto,Team.class);
         this.teamService
                 .addTeam(team);
-
         return team.getTeamId();
-
     }
-
+    //update------------------------------------------------------------------------------------------------------------
     @PutMapping("updateTeam")
     public void updateTeam(@RequestBody Team team){
 
         this.teamService
                 .updateTeam(team);
     }
-
+    //delete------------------------------------------------------------------------------------------------------------
     @DeleteMapping("/deleteTeam")
     public void deleteTeam(@RequestParam int id){
 
         this.teamService
                 .deleteTeam(id);
     }
+    //get---------------------------------------------------------------------------------------------------------------
+    @GetMapping("/getAllTeams")
+    public List<Team> getAllTeams(){
 
+        return this.teamService
+                .getAllTeams();
+    }
+    @GetMapping("/getByTeamId")
+    public Team getByTeamId(@RequestParam int id){
 
+        return this.teamService.getByTeamId(id);
+    }
+    //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
@@ -85,5 +80,4 @@ public class TeamController {
                 new ErrorDataResult<Object>(validationErrors,"Validation Errors");
         return  errors;
     }
-
 }

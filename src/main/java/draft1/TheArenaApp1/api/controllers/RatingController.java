@@ -22,43 +22,42 @@ import java.util.stream.Collectors;
 public class RatingController {
 
     private final PitchRatingService pitchRatingService;
+    private ModelMapper modelMapper;
 
     @Autowired
     public RatingController(PitchRatingService pitchRatingService) {
         this.pitchRatingService = pitchRatingService;
     }
 
+    //add---------------------------------------------------------------------------------------------------------------
     @PostMapping("addPitchRating")
     public void addPitchRating(@Valid @RequestBody PitchRatingDto pitchRatingDto){
 
-        ModelMapper modelMapper = new ModelMapper();
         PitchRating pitchRating = modelMapper
                 .map(pitchRatingDto,PitchRating.class);
         this.pitchRatingService
                 .addPitchRating(pitchRating);
     }
+    //update------------------------------------------------------------------------------------------------------------
+    @PutMapping("updatePitchRating")
+    public void updatePitchRating(@RequestBody PitchRatingDto pitchRatingDto){
 
+        PitchRating pitchRating = modelMapper
+                .map(pitchRatingDto,PitchRating.class);
+        this.pitchRatingService
+                .addPitchRating(pitchRating);
+    }
+    //delete------------------------------------------------------------------------------------------------------------
     @DeleteMapping("deletePitchRating")
     public void deletePitchRating(@RequestParam int id){
 
         this.pitchRatingService
                 .deletePitchRating(id);
     }
-
-    @PutMapping("updatePitchRating")
-    public void updatePitchRating(@RequestBody PitchRatingDto pitchRatingDto){
-
-        ModelMapper modelMapper = new ModelMapper();
-        PitchRating pitchRating = modelMapper
-                .map(pitchRatingDto,PitchRating.class);
-        this.pitchRatingService
-                .addPitchRating(pitchRating);
-    }
-
+    //get---------------------------------------------------------------------------------------------------------------
     @GetMapping("getPitchRatingsByPitchId")
     public List<PitchRatingDto> getPitchRatingsByPitchId(@RequestParam int id){
 
-        ModelMapper modelMapper = new ModelMapper();
         return this.pitchRatingService
                 .getPitchRatingsByPitchId(id)
                 .stream()
@@ -67,7 +66,7 @@ public class RatingController {
                 .collect(Collectors
                         .toList());
     }
-
+    //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){

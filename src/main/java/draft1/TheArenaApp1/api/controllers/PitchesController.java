@@ -34,6 +34,7 @@ public class PitchesController {
     private final PitchService pitchService;
     private final CommentService commentService;
     private final PitchRatingService pitchRatingService;
+    private ModelMapper modelMapper;
     @Autowired
     public PitchesController(PitchService pitchService, CommentService commentService, PitchRatingService pitchRatingService) {
 
@@ -41,24 +42,17 @@ public class PitchesController {
         this.commentService = commentService;
         this.pitchRatingService = pitchRatingService;
     }
+    //add---------------------------------------------------------------------------------------------------------------
+    @PostMapping("/addPitch")
+    public void addPitch(@RequestBody PitchWithoutIdDto pitchWithoutIdDto){
 
-    @GetMapping("/getAllPitches")
-    public List<PitchDto> getAllPitches(){
-
-         ModelMapper modelMapper = new ModelMapper();
-        return this.pitchService
-                .getAllPitches()
-                .stream()
-                .map(pitch -> modelMapper
-                        .map(pitch, PitchDto.class))
-                .collect(Collectors
-                        .toList());
+        Pitch pitch = modelMapper
+                .map(pitchWithoutIdDto,Pitch.class);
+        this.pitchService
+                .addPitch(pitch);
     }
-
-    @PostMapping("addComment")
+    @PostMapping("addComment")//ismi değiştir
     public void addCommentAndRating(@RequestBody CommentAndPitchRatingDto commentAndPitchRatingDto){
-
-        ModelMapper modelMapper = new ModelMapper();
 
         CommentDto commentDto = commentAndPitchRatingDto
                 .getCommentDto();
@@ -75,41 +69,15 @@ public class PitchesController {
         this.pitchRatingService
                 .addPitchRating(pitchRating);
     }
-
-    @GetMapping("/getAllPitchesByPage")
-    public List<Pitch> getAllPitchesByPage(@RequestParam int pageNo,@RequestParam int pageSize){
-
-        return this.pitchService
-                .getAllPitchesWithPage(pageNo,pageSize);
-    }
-
-    @PostMapping("/addPitch")
-    public void addPitch(@RequestBody PitchWithoutIdDto pitchWithoutIdDto){
-
-        ModelMapper modelMapper = new ModelMapper();
-        Pitch pitch = modelMapper
-                .map(pitchWithoutIdDto,Pitch.class);
-        this.pitchService
-                .addPitch(pitch);
-    }
-
-    @DeleteMapping("/deletePitch")
-    public void deletePitch(@RequestParam int id){
-
-        this.pitchService
-                .deletePitch(id);
-    }
-
+    //update------------------------------------------------------------------------------------------------------------
     @PutMapping("/updatePitch")
     public void updatePitch(@RequestBody PitchDto pitchDto){
 
-        ModelMapper modelMapper = new ModelMapper();
         Pitch pitch = modelMapper
                 .map(pitchDto,Pitch.class);
         this.pitchService
                 .updatePitch(pitch);
     }
-
     @PutMapping("/updatePitchOpeningTime")
     public void updateTOpeningTimeToPitch(@RequestParam LocalTime openingTime, @RequestParam int pitchId){
 
@@ -120,7 +88,6 @@ public class PitchesController {
         this.pitchService
                 .updatePitchOpeningTime(value,pitchId);
     }
-
     @PutMapping("/updatePitchClosingTime")
     public void updateClosingTimeToPitch(@RequestParam LocalTime closingTime, @RequestParam int pitchId){
 
@@ -131,7 +98,6 @@ public class PitchesController {
         this.pitchService
                 .updatePitchClosingTime(value,pitchId);
     }
-
     @PutMapping("/updatePitchMatchDuration")
     public void updatePitchMatchDuration(@RequestParam LocalTime duration, @RequestParam int pitchId){
 
@@ -142,7 +108,32 @@ public class PitchesController {
         this.pitchService
                 .updatePitchMatchDuration(value,pitchId);
     }
+    //delete------------------------------------------------------------------------------------------------------------
+    @DeleteMapping("/deletePitch")
+    public void deletePitch(@RequestParam int id){
 
+        this.pitchService
+                .deletePitch(id);
+    }
+    //get---------------------------------------------------------------------------------------------------------------
+    @GetMapping("/getAllPitches")
+    public List<PitchDto> getAllPitches(){
+
+        return this.pitchService
+                .getAllPitches()
+                .stream()
+                .map(pitch -> modelMapper
+                        .map(pitch, PitchDto.class))
+                .collect(Collectors
+                        .toList());
+    }
+    @GetMapping("/getAllPitchesByPage")
+    public List<Pitch> getAllPitchesByPage(@RequestParam int pageNo,@RequestParam int pageSize){
+
+        return this.pitchService
+                .getAllPitchesWithPage(pageNo,pageSize);
+    }
+    //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
