@@ -9,13 +9,11 @@ import draft1.TheArenaApp1.entities.dto.PlayerDtos.PlayerWithoutTeamDto;
 import draft1.TheArenaApp1.entities.model.Player;
 
 import draft1.TheArenaApp1.service.services.PlayerService;
-import org.hibernate.search.MassIndexer;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.QueryBuilder;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -33,19 +31,25 @@ import java.util.Map;
 @CrossOrigin
 public class PlayerController {
 
+
     private final PlayerService playerService;
     private final EntityManager entityManager;
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper = new ModelMapper();
+
 
     @Autowired
     public PlayerController(PlayerService playerService, EntityManager entityManager) {
 
         this.playerService = playerService;
         this.entityManager = entityManager;
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
+
     //add---------------------------------------------------------------------------------------------------------------
     @PostMapping("/addPlayer")
     public int addPlayer(@Valid @RequestBody PlayerWithoutTeamDto playerWithoutTeamDto){
+
+
 
         Player player = modelMapper
                 .map(playerWithoutTeamDto, Player.class);
