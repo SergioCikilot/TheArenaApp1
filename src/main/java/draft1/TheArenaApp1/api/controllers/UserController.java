@@ -6,6 +6,7 @@ import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.core.user.User;
 import draft1.TheArenaApp1.core.user.UserService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,13 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     public UserController(UserService userService) {
 
         this.userService = userService;
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     @PostMapping("/login")//düzenle

@@ -14,6 +14,7 @@ import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Pitch;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -34,13 +35,14 @@ public class PitchesController {
     private final PitchService pitchService;
     private final CommentService commentService;
     private final PitchRatingService pitchRatingService;
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper = new ModelMapper();
     @Autowired
     public PitchesController(PitchService pitchService, CommentService commentService, PitchRatingService pitchRatingService) {
 
         this.pitchService = pitchService;
         this.commentService = commentService;
         this.pitchRatingService = pitchRatingService;
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
     //add---------------------------------------------------------------------------------------------------------------
     @PostMapping("/addPitch")

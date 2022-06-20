@@ -5,6 +5,7 @@ import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.dto.PitchRatingDtos.PitchRatingDto;
 import draft1.TheArenaApp1.service.services.PitchRatingService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -22,11 +23,13 @@ import java.util.stream.Collectors;
 public class RatingController {
 
     private final PitchRatingService pitchRatingService;
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     public RatingController(PitchRatingService pitchRatingService) {
+
         this.pitchRatingService = pitchRatingService;
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     //add---------------------------------------------------------------------------------------------------------------

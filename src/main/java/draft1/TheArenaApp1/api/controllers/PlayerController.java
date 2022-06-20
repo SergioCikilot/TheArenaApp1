@@ -49,8 +49,6 @@ public class PlayerController {
     @PostMapping("/addPlayer")
     public int addPlayer(@Valid @RequestBody PlayerWithoutTeamDto playerWithoutTeamDto){
 
-
-
         Player player = modelMapper
                 .map(playerWithoutTeamDto, Player.class);
         this.playerService

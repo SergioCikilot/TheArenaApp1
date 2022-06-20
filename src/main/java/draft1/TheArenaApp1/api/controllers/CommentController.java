@@ -5,6 +5,7 @@ import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.dto.CommentDtos.CommentDto;
 import draft1.TheArenaApp1.service.services.CommentService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -21,12 +22,13 @@ import java.util.stream.Collectors;
 public class CommentController {
 
     private final CommentService commentService;
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper = new ModelMapper();
 
     //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     //add---------------------------------------------------------------------------------------------------------------

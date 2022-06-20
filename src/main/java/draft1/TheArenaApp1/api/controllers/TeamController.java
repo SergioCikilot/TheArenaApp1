@@ -6,6 +6,7 @@ import draft1.TheArenaApp1.service.services.TeamService;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
 import draft1.TheArenaApp1.entities.model.Team;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -21,11 +22,12 @@ import java.util.Map;
 public class TeamController {
 
     private final TeamService teamService;
-    private ModelMapper modelMapper;
+    private ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     //add---------------------------------------------------------------------------------------------------------------
