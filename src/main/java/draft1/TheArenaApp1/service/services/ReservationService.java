@@ -12,7 +12,6 @@ public interface ReservationService {
 
     void addReservation(Reservation reservation);
     void deleteReservation(int id);
-
     void updateReservation(Reservation reservation);
     void updateReservationIsRated(boolean reservationIsRated ,int reservationId);
     List<Reservation> getAllReservations();
