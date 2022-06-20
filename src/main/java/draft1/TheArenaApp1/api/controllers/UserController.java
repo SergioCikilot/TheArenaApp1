@@ -28,7 +28,6 @@ public class UserController {
     private final UserService userService;
     private ModelMapper modelMapper = new ModelMapper();
 
-
     @Autowired
     public UserController(UserService userService) {
 
