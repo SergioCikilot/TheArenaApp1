@@ -28,7 +28,7 @@ public class CommentController {
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        //modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     //add---------------------------------------------------------------------------------------------------------------
