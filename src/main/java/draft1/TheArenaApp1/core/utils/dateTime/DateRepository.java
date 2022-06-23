@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.core.utils.dateAndTime;
+package draft1.TheArenaApp1.core.utils.dateTime;
 
 import org.springframework.stereotype.Repository;
 
