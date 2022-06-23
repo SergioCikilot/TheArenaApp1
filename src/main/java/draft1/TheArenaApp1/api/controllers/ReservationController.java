@@ -41,7 +41,7 @@ public class ReservationController {
     public ReservationController(ReservationManager reservationManager, ReservationValidator reservationValidator) {
         this.reservationService = reservationManager;
         this.reservationValidator = reservationValidator;
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        //modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     //add---------------------------------------------------------------------------------------------------------------
