@@ -11,7 +11,6 @@ public class VersionController {
 
     @GetMapping("/showCurrentVersion")
     public String showCurrentVersion(){
-
         return "Running Version: _v.0.7.5p azure dalga ";
     }
 
