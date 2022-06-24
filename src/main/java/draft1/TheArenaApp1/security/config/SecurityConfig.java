@@ -67,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/showCurrentVersion").permitAll()
                 .anyRequest()
                 .authenticated();
+
     }
 
     @Override
