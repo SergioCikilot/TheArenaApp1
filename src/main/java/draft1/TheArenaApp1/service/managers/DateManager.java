@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.service.managers;
 
 import draft1.TheArenaApp1.service.services.DateService;
-import draft1.TheArenaApp1.core.utils.dateAndTime.DateAdapter;
+import draft1.TheArenaApp1.core.utils.dateTime.DateAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
