@@ -101,6 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH",
                 "DELETE", "OPTIONS"));
+        configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type",
                 "x-auth-token"));
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
