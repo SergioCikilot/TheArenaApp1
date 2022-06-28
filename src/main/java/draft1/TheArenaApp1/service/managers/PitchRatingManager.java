@@ -12,18 +12,27 @@ public class PitchRatingManager implements PitchRatingService {
 
     private final PitchRatingDao pitchRatingDao;
 
+    //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
     public PitchRatingManager(PitchRatingDao pitchRatingDao) {
         this.pitchRatingDao = pitchRatingDao;
     }
 
+    //add---------------------------------------------------------------------------------------------------------------
     @Override
     public void addPitchRating(PitchRating pitchRating) {
 
         this.pitchRatingDao
                 .save(pitchRating);
     }
+    //update------------------------------------------------------------------------------------------------------------
+    @Override
+    public void updatePitchRating(PitchRating pitchRating) {
 
+        this.pitchRatingDao
+                .save(pitchRating);
+    }
+    //delete------------------------------------------------------------------------------------------------------------
     @Override
     public void deletePitchRating(int id) {
 
@@ -32,14 +41,7 @@ public class PitchRatingManager implements PitchRatingService {
         this.pitchRatingDao
                 .delete(pitchRating);
     }
-
-    @Override
-    public void updatePitchRating(PitchRating pitchRating) {
-
-        this.pitchRatingDao
-                .save(pitchRating);
-    }
-
+    //get---------------------------------------------------------------------------------------------------------------
     @Override
     public List<PitchRating> getPitchRatingsByPitchId(int id) {
 

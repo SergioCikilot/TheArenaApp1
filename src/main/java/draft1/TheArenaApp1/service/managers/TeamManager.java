@@ -13,24 +13,27 @@ public class TeamManager implements TeamService {
 
     private final TeamDao teamDao;
 
+    //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
     public TeamManager(TeamDao teamDao) {
         this.teamDao = teamDao;
     }
 
-
-    @Override
-    public Team getByTeamId(int id) {
-        return this.teamDao.getByTeamId(id);
-    }
-
+    //add---------------------------------------------------------------------------------------------------------------
     @Override
     public void addTeam(Team team) {
 
         this.teamDao
                 .save(team);
     }
+    //update------------------------------------------------------------------------------------------------------------
+    @Override
+    public void updateTeam(Team team) {
 
+        this.teamDao
+                .save(team);
+    }
+    //delete------------------------------------------------------------------------------------------------------------
     @Override
     public void deleteTeam(int id) {
 
@@ -39,20 +42,17 @@ public class TeamManager implements TeamService {
         this.teamDao
                 .delete(team);
     }
+    //get---------------------------------------------------------------------------------------------------------------
+    @Override
+    public Team getByTeamId(int id) {
 
+        return this.teamDao
+                .getByTeamId(id);
+    }
     @Override
     public List<Team> getAllTeams() {
 
         return this.teamDao
                 .findAll();
     }
-
-    @Override
-    public void updateTeam(Team team) {
-
-        this.teamDao
-                .save(team);
-
-    }
-
 }

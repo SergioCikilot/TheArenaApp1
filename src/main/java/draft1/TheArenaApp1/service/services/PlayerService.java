@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface PlayerService {
 
-     void add(Player player);
-     void delete(int id);
+     void addPlayer(Player player);
      void updatePlayer(Player player);
+     void deletePlayer(int id);
      List<Player> getAll();
      List<Player> getPlayersByTeamId(int teamId);
      Player getByPlayerPlayerId(int playerId);

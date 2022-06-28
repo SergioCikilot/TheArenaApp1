@@ -9,12 +9,15 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    @Override
-    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-    User findUserByUsername(String username);
     void add(User user) throws Exception;
     void delete(User user);
     List<User> getAll();
+    User findUserByUsername(String username);
+    @Override
+    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+
+
+
 
 
 

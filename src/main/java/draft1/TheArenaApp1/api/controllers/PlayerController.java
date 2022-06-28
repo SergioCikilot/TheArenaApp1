@@ -52,7 +52,7 @@ public class PlayerController {
         Player player = modelMapper
                 .map(playerWithoutTeamDto, Player.class);
         this.playerService
-                .add(player);
+                .addPlayer(player);
         return player.getPlayerId();
     }
     //update------------------------------------------------------------------------------------------------------------

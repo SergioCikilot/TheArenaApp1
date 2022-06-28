@@ -15,44 +15,21 @@ public class PitchManager implements PitchService {
 
     private final PitchDao pitchDao;
 
+    //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
     public PitchManager(PitchDao pitchDao) {
         this.pitchDao = pitchDao;
 
     }
 
-    @Override
-    public List<Pitch> getAllPitches() {
-
-        return pitchDao
-                .findAll();
-    }
-
-    @Override
-    public List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize)
-    {
-        Pageable pageable = PageRequest
-                .of(pageNo,pageSize);
-        return this.pitchDao
-                .findAll(pageable).getContent();
-    }
-
+    //add---------------------------------------------------------------------------------------------------------------
     @Override
     public void addPitch(Pitch pitch) {
 
         this.pitchDao
                 .save(pitch);
     }
-
-    @Override
-    public void deletePitch(int id) {
-
-        Pitch pitch = this.pitchDao
-                .getByPitchId(id);
-        this.pitchDao
-                .delete(pitch);
-    }
-
+    //update------------------------------------------------------------------------------------------------------------
     @Override
     public void updatePitch(Pitch pitch) {
 
@@ -80,17 +57,29 @@ public class PitchManager implements PitchService {
         this.pitchDao
                 .updatePitchMatchDuration(matchDuration,pitchId);
     }
+    //delete------------------------------------------------------------------------------------------------------------
+    @Override
+    public void deletePitch(int id) {
 
-    /*@Override
-    public List<Pitch> findByPitchName(String name) {
-        Page<Pitch> pitchPage = pitchSearchDao
-                .findByPitchName(
-                        name,
-                        PageRequest
-                                .of(0,20));
-        return pitchPage.getContent();
+        Pitch pitch = this.pitchDao
+                .getByPitchId(id);
+        this.pitchDao
+                .delete(pitch);
+    }
+    //get---------------------------------------------------------------------------------------------------------------
+    @Override
+    public List<Pitch> getAllPitches() {
 
-    }*/
+        return pitchDao
+                .findAll();
+    }
 
-
+    @Override
+    public List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize)
+    {
+        Pageable pageable = PageRequest
+                .of(pageNo,pageSize);
+        return this.pitchDao
+                .findAll(pageable).getContent();
+    }
 }

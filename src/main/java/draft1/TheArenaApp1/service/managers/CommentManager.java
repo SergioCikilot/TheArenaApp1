@@ -12,18 +12,27 @@ public class CommentManager implements CommentService {
 
     private final CommentDao commentDao;
 
+    //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
     public CommentManager(CommentDao commentDao) {
         this.commentDao = commentDao;
     }
 
+    //add---------------------------------------------------------------------------------------------------------------
     @Override
     public void addComment(Comment comment) {
 
         this.commentDao
                 .save(comment);
     }
+    //update------------------------------------------------------------------------------------------------------------
+    @Override
+    public void updateComment(Comment comment) {
 
+        this.commentDao
+                .save(comment);
+    }
+    //delete------------------------------------------------------------------------------------------------------------
     @Override
     public void deleteComment(int id) {
 
@@ -32,14 +41,7 @@ public class CommentManager implements CommentService {
         this.commentDao
                 .delete(comment);
     }
-
-    @Override
-    public void updateComment(Comment comment) {
-
-        this.commentDao
-                .save(comment);
-    }
-
+    //get---------------------------------------------------------------------------------------------------------------
     @Override
     public List<Comment> findCommentsByCommentTarget(int id) {
 
