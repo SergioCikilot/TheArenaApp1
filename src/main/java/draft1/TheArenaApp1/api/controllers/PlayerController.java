@@ -75,7 +75,7 @@ public class PlayerController {
     public void deletePlayer(@RequestParam int id){
 
         this.playerService
-                .delete(id);
+                .deletePlayer(id);
     }
     //get---------------------------------------------------------------------------------------------------------------
     @GetMapping("/getAllPlayers")
