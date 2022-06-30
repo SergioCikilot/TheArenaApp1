@@ -2,12 +2,14 @@ package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import draft1.TheArenaApp1.core.utils.status.DoneStatus;
 import draft1.TheArenaApp1.core.utils.status.Status;
 import draft1.TheArenaApp1.core.utils.status.WaitingStatus;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDate;
@@ -15,9 +17,8 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name="reservations")
-@Getter
-@Setter
-
+@Data
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reservation {
@@ -48,8 +49,9 @@ public class Reservation {
     @JoinColumn(name="pitch_id")
     private Pitch pitch;
 
-    @ManyToOne()
-    @JoinColumn(name="player_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="player_id", nullable = true)
+    @Nullable
     private Player player;
 
     public Status getStatus() {

@@ -7,6 +7,7 @@ import draft1.TheArenaApp1.core.validators.ReservationValidator;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithIdPlayerPitch;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithPlayerAndPitchIdDto;
 import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutLocalDateTime;
+import draft1.TheArenaApp1.entities.dto.ReservationDtos.ReservationWithoutPlayerDto;
 import draft1.TheArenaApp1.entities.model.Reservation;
 import draft1.TheArenaApp1.service.managers.ReservationManager;
 import draft1.TheArenaApp1.service.services.ReservationService;
@@ -41,17 +42,34 @@ public class ReservationController {
     public ReservationController(ReservationManager reservationManager, ReservationValidator reservationValidator) {
         this.reservationService = reservationManager;
         this.reservationValidator = reservationValidator;
-        //modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
     //add---------------------------------------------------------------------------------------------------------------
     @PostMapping("/addReservation")
     public void addReservation(@Valid @RequestBody ReservationWithPlayerAndPitchIdDto reservationWithPlayerAndPitchIdDto) throws ExistingEntryException {
 
+        ModelMapper modelMapper1 = new ModelMapper();
         //map
         reservationWithPlayerAndPitchIdDto.setReservationIsRated(false);
         Reservation reservation = modelMapper
                 .map(reservationWithPlayerAndPitchIdDto, Reservation.class);
+        ArrayList<String> arrayList = new ArrayList<>();
+        if (!reservationValidator.IsValid(reservation)){
+
+            arrayList.add("Reservation");
+            throw new ExistingEntryException("Reservation is already exists",arrayList);
+        }
+        this.reservationService.addReservation(reservation);
+    }
+    @PostMapping("/addReservationWithoutPlayer")
+    public void addReservationWithoutPlayer(@RequestBody ReservationWithoutPlayerDto reservationWithoutPlayerDto) throws ExistingEntryException {
+
+        //map
+
+        reservationWithoutPlayerDto.setReservationIsRated(false);
+
+        Reservation reservation = modelMapper
+                .map(reservationWithoutPlayerDto, Reservation.class);
         ArrayList<String> arrayList = new ArrayList<>();
         if (!reservationValidator.IsValid(reservation)){
 
