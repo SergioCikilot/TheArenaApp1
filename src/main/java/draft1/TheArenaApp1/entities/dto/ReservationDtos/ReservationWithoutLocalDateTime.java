@@ -28,6 +28,10 @@ public class ReservationWithoutLocalDateTime {
 
     private int pitchId;
 
+    private String playerName;
+
+    private String playerSirName;
+
     private int playerId;
 
     private Status status;

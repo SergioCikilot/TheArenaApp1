@@ -19,7 +19,6 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class ReservationWithoutPlayerDto {
 
-
     private int reservationId;
 
     @JsonIgnore
