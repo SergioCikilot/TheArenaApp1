@@ -1,4 +1,4 @@
-package draft1.TheArenaApp1.core.entities.positions;
+package draft1.TheArenaApp1.entities.model;
 
 public enum PositionEnum {
 

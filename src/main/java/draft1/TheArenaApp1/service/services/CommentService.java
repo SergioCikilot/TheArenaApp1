@@ -7,8 +7,8 @@ import java.util.List;
 public interface CommentService {
 
     void addComment(Comment comment);
-    void deleteComment(int id);
     void updateComment(Comment comment);
+    void deleteComment(int id);
     List<Comment> findCommentsByCommentTarget(int id);
 
 }

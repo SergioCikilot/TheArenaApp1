@@ -10,11 +10,13 @@ public class DateManager implements DateService {
 
     private final DateAdapter dateAdapter;
 
+    //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
     public DateManager(DateAdapter dateAdapter) {
         this.dateAdapter = dateAdapter;
     }
 
+    //get---------------------------------------------------------------------------------------------------------------
     @Override
     public String getFormattedCurrentTime12Hour() {
         return this.dateAdapter.getFormattedCurrentTime12Hour();

@@ -1,7 +1,7 @@
 package draft1.TheArenaApp1.entities.dto.PlayerDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import draft1.TheArenaApp1.core.entities.foots.FootEnum;
+import draft1.TheArenaApp1.entities.model.FootEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

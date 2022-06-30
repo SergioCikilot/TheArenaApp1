@@ -11,13 +11,13 @@ import java.util.List;
 public interface ReservationService {
 
     void addReservation(Reservation reservation);
-    void deleteReservation(int id);
     void updateReservation(Reservation reservation);
     void updateReservationIsRated(boolean reservationIsRated ,int reservationId);
-    List<Reservation> getAllReservations();
-    List<Reservation> getReservationsByPlayerId(int id);
     void updateReservationTime(LocalTime reservationTime, int reservationId);
     void updateReservationDate(LocalDate reservationDate, int reservationId);
+    void deleteReservation(int id);
+    List<Reservation> getAllReservations();
+    List<Reservation> getReservationsByPlayerId(int id);
     List<Reservation> getReservationsByReservationDate(LocalDate reservationDate);
     List<Reservation> getReservationsByReservationTime(LocalTime reservationTime);
     List<Reservation> findReservationsByPitchPitchId(int pitchId);

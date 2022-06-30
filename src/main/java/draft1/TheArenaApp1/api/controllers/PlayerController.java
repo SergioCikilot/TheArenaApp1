@@ -52,7 +52,7 @@ public class PlayerController {
         Player player = modelMapper
                 .map(playerWithoutTeamDto, Player.class);
         this.playerService
-                .add(player);
+                .addPlayer(player);
         return player.getPlayerId();
     }
     //update------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ public class PlayerController {
     public void deletePlayer(@RequestParam int id){
 
         this.playerService
-                .delete(id);
+                .deletePlayer(id);
     }
     //get---------------------------------------------------------------------------------------------------------------
     @GetMapping("/getAllPlayers")

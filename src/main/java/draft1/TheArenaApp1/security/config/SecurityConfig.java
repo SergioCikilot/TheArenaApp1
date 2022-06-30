@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**").permitAll()
 
-                //.antMatchers("/**").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/showCurrentVersion").permitAll()
                 .anyRequest()
                 .authenticated();
@@ -89,6 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         final CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(ImmutableList.of("http://localhost:3000"));
         configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " + "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
 

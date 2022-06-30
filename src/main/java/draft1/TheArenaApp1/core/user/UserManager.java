@@ -17,40 +17,21 @@ public class UserManager implements UserService {
     private final UserDao userDao;
     private final PasswordConfig passwordConfig;
 
+    //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
     public UserManager(UserDao userDao, PasswordConfig passwordConfig) {
 
         this.userDao = userDao;
         this.passwordConfig = passwordConfig;
-
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDao
-                .findUserByUsername(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException(
-                                String.format("Username %s not found", username)));
-    }
-
-    @Override
-    public User findUserByUsername(String username) {
-        return this.userDao.findUserByUsername(username)
-                .orElseThrow(() ->
-                new UsernameNotFoundException(
-                        String.format("Username %s not found", username)));
-    }
-
-
+    //add---------------------------------------------------------------------------------------------------------------
     public void add(User user) throws Exception {
         //Re-write
         user.setPassword(
-                        passwordConfig
-                                .passwordEncoder()
-                                .encode(
-                                        user.getPassword()));
-
+                passwordConfig
+                        .passwordEncoder()
+                        .encode(
+                                user.getPassword()));
         List<User> listForEmail = this.userDao
                 .findUsersByEmail(
                         user.getEmail());
@@ -81,22 +62,36 @@ public class UserManager implements UserService {
             list.add(
                     user.getField("email"));
             throw new ExistingEntryException("Email is already exists", list);
-
-        } else
+        }
+        else
             this.userDao
                     .save(user);
-
     }
-
+    //delete------------------------------------------------------------------------------------------------------------
     public void delete(User user) {
         this.userDao
                 .delete(user);
 
     }
-
+    //get---------------------------------------------------------------------------------------------------------------
     public List<User> getAll() {
         return this.userDao
                 .findAll();
+    }
+    @Override
+    public User findUserByUsername(String username) {
+        return this.userDao.findUserByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(
+                                String.format("Username %s not found", username)));
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDao
+                .findUserByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(
+                                String.format("Username %s not found", username)));
     }
 }
 
