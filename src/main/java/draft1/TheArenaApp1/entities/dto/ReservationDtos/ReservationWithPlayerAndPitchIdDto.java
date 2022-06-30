@@ -39,6 +39,10 @@ public class ReservationWithPlayerAndPitchIdDto {
 
     private int playerId;
 
+    private String PlayerName;
+
+    private String PlayerSirName;
+
     public void setReservationTime(LocalTime reservationTime) {
         this.reservationTime = reservationTime;
     }
