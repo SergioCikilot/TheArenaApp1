@@ -4,12 +4,12 @@ import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
 import draft1.TheArenaApp1.repository.UserDao;
 import draft1.TheArenaApp1.security.config.PasswordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserManager implements UserService {
@@ -63,7 +63,7 @@ public class UserManager implements UserService {
                     user.getField("email"));
             throw new ExistingEntryException("Email is already exists", list);
         }
-        else
+
             this.userDao
                     .save(user);
     }

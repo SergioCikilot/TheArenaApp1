@@ -1,30 +1,21 @@
-package draft1.TheArenaApp1.core.user;
-
+package draft1.TheArenaApp1.core.admin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import draft1.TheArenaApp1.core.utils.CustomDeserializer;
 import draft1.TheArenaApp1.entities.model.Player;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.util.*;
-
+import java.util.Collection;
 
 @Entity
-@Table(name = "user",uniqueConstraints={
+@Table(name = "admin",uniqueConstraints={
         @UniqueConstraint(columnNames = "user_email")})
-@Getter
-@Setter
 @Data
-
-public class User implements UserDetails {
+public class Admin implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +34,8 @@ public class User implements UserDetails {
     @Column(name = "user_email",unique = true)
     private String email;
 
-    //@OneToMany(mappedBy = "grantedAuthorities")
-    @Transient
-    @JsonIgnore
-    @JsonDeserialize(using = CustomDeserializer.class)
-    private List<? extends GrantedAuthority> grantedAuthorities;
-
-    @Column(name = "role")
-    private UserRole userRole;
+    /*@Transient
+    private Set<? extends GrantedAuthority> grantedAuthorities;*/
 
     @Column(name = "isAccountNonExpired")
     private boolean isAccountNonExpired;
@@ -70,19 +55,18 @@ public class User implements UserDetails {
             fetch = FetchType.LAZY,
             cascade =  CascadeType.MERGE,
             orphanRemoval = true
-            )
+    )
     @JsonIgnore
     private Player playerLink;
 
-    public User() {
+    public Admin() {
     }
 
-    public User(int userId, String username, String password, String email, UserRole userRole, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, Player playerLink) {
+    public Admin(int userId, String username, String password, String email, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, Player playerLink) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.userRole = userRole;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -90,14 +74,19 @@ public class User implements UserDetails {
         this.playerLink = playerLink;
     }
 
-    @JsonDeserialize(using = CustomDeserializer.class)
     @Override
-    //@JsonDeserialize(using = CustomDeserializer.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        Set <? extends GrantedAuthority> authorities = userRole.getGrantedAuthorities();
+        return null;
+    }
 
-        return authorities;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int id) {
+        this.userId = id;
     }
 
     @Override
@@ -169,6 +158,3 @@ public class User implements UserDetails {
 
     }
 }
-
-
-
