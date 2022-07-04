@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
@@ -15,14 +16,6 @@ public interface UserService extends UserDetailsService {
     User findUserByUsername(String username);
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-
-
-
-
-
-
-
-
-
-
+    @Transactional
+    void updateUserPitch(String userName,int id);
 }

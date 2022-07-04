@@ -67,6 +67,16 @@ public class UserManager implements UserService {
             this.userDao
                     .save(user);
     }
+    @Override
+    public void updateUserPitch(String userName, int id) {
+
+        User user = userDao
+                .findUserByUsername(userName)
+                .orElseThrow();
+
+        //user.setUserPitches(); burdan devam et
+
+    }
     //delete------------------------------------------------------------------------------------------------------------
     public void delete(User user) {
         this.userDao
@@ -93,5 +103,7 @@ public class UserManager implements UserService {
                         new UsernameNotFoundException(
                                 String.format("Username %s not found", username)));
     }
+
+
 }
 

@@ -1,6 +1,7 @@
 package draft1.TheArenaApp1.entities.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import draft1.TheArenaApp1.core.user.User;
 import lombok.*;
 
 
@@ -83,6 +84,10 @@ import java.util.List;
 
         @OneToMany(mappedBy = "pitch")
         private List<Reservation> reservations;
+
+        @ManyToOne()
+        @JoinColumn
+        private User userPitch;
 
         public double getPitchRatingAvg() {
 

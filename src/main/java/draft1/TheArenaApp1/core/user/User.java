@@ -4,6 +4,7 @@ package draft1.TheArenaApp1.core.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import draft1.TheArenaApp1.core.utils.CustomDeserializer;
+import draft1.TheArenaApp1.entities.model.Pitch;
 import draft1.TheArenaApp1.entities.model.Player;
 import lombok.Data;
 import lombok.Getter;
@@ -51,6 +52,9 @@ public class User implements UserDetails {
 
     @Column(name = "role")
     private UserRole userRole;
+
+    @OneToMany(mappedBy = "userPitch")
+    private List<Pitch> userPitches;
 
     @Column(name = "isAccountNonExpired")
     private boolean isAccountNonExpired;
