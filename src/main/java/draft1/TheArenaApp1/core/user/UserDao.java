@@ -1,6 +1,7 @@
-package draft1.TheArenaApp1.repository;
+package draft1.TheArenaApp1.core.user;
 
 import draft1.TheArenaApp1.core.user.User;
+import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +19,6 @@ public interface UserDao extends JpaRepository <User,Integer> {
     @Transactional
     @Modifying
     @Query("update User p set p.userPitches=:userPitches where p.userId =:userId")
-    void updatePitchOpeningTime(@Param("userPitches")String userPitches, @Param("userId") int userId);
+    void updateUserPitches(@Param("userPitches") List<Pitch> userPitches, @Param("userId") int userId);
+
 }

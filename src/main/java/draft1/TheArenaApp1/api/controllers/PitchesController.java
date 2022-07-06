@@ -71,6 +71,12 @@ public class PitchesController {
         this.pitchRatingService
                 .addPitchRating(pitchRating);
     }
+    @PostMapping("addPitchUserId")//ismi değiştir
+    public void addPitchUserId(@RequestParam String userName, @RequestParam int pitchId){
+
+        this.pitchService
+                .addPitchUserId(userName,pitchId);
+    }
     //update------------------------------------------------------------------------------------------------------------
     @PutMapping("/updatePitch")
     public void updatePitch(@RequestBody PitchDto pitchDto){

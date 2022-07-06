@@ -11,10 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
-@Entity
-@Table(name = "admin",uniqueConstraints={
-        @UniqueConstraint(columnNames = "user_email")})
-@Data
+
 public class Admin implements UserDetails {
 
     @Id

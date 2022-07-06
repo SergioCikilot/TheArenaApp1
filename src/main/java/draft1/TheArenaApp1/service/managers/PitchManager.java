@@ -1,11 +1,14 @@
 package draft1.TheArenaApp1.service.managers;
 
+import draft1.TheArenaApp1.core.user.User;
+import draft1.TheArenaApp1.core.user.UserDao;
 import draft1.TheArenaApp1.service.services.PitchService;
 import draft1.TheArenaApp1.repository.PitchDao;
 import draft1.TheArenaApp1.entities.model.Pitch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -14,12 +17,14 @@ import java.util.List;
 public class PitchManager implements PitchService {
 
     private final PitchDao pitchDao;
+    private final UserDao userDao;
 
     //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
-    public PitchManager(PitchDao pitchDao) {
-        this.pitchDao = pitchDao;
+    public PitchManager(PitchDao pitchDao, UserDao userDao) {
 
+        this.pitchDao = pitchDao;
+        this.userDao = userDao;
     }
 
     //add---------------------------------------------------------------------------------------------------------------
@@ -28,6 +33,23 @@ public class PitchManager implements PitchService {
 
         this.pitchDao
                 .save(pitch);
+    }
+    @Override
+    public void addPitchUserId(String userName, int pitchId) {
+
+        Pitch pitch = this.pitchDao
+                .getByPitchId(pitchId);
+
+        User user = this.userDao
+                .findUserByUsername(userName)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(
+                                String.format("Username %s not found", userName)));
+
+        pitch.setUserPitch(user);
+
+        this.pitchDao.save(pitch);
+
     }
     //update------------------------------------------------------------------------------------------------------------
     @Override
@@ -57,6 +79,9 @@ public class PitchManager implements PitchService {
         this.pitchDao
                 .updatePitchMatchDuration(matchDuration,pitchId);
     }
+
+
+
     //delete------------------------------------------------------------------------------------------------------------
     @Override
     public void deletePitch(int id) {

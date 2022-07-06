@@ -86,7 +86,7 @@ import java.util.List;
         private List<Reservation> reservations;
 
         @ManyToOne()
-        @JoinColumn
+        @JoinColumn(name = "user_Id")
         private User userPitch;
 
         public double getPitchRatingAvg() {

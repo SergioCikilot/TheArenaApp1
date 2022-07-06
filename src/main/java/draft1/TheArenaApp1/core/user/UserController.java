@@ -1,10 +1,7 @@
-package draft1.TheArenaApp1.api.controllers;
+package draft1.TheArenaApp1.core.user;
 
-import draft1.TheArenaApp1.core.exceptions.CustomHandler;
 import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
 import draft1.TheArenaApp1.core.utils.results.ErrorDataResult;
-import draft1.TheArenaApp1.core.user.User;
-import draft1.TheArenaApp1.core.user.UserService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +43,13 @@ public class UserController {
         this.userService
                 .add(user);
     }
+//    @PostMapping("/addPitchesToUser")
+//    public void addPitchesToUser(@RequestBody List<Integer> pitchesId, @RequestParam String userName) throws Exception {
+//
+//        this.userService
+//                .addPitchesToUser(pitchesId,userName);
+//
+//    }
     //delete------------------------------------------------------------------------------------------------------------
     @DeleteMapping("/deleteUser")
     public void deleteUser(@RequestBody User user){

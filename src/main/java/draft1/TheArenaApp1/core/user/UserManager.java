@@ -1,15 +1,17 @@
 package draft1.TheArenaApp1.core.user;
 
 import draft1.TheArenaApp1.core.exceptions.ExistingEntryException;
-import draft1.TheArenaApp1.repository.UserDao;
+import draft1.TheArenaApp1.entities.model.Pitch;
+import draft1.TheArenaApp1.repository.PitchDao;
 import draft1.TheArenaApp1.security.config.PasswordConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 @Service
 public class UserManager implements UserService {
@@ -17,12 +19,15 @@ public class UserManager implements UserService {
     private final UserDao userDao;
     private final PasswordConfig passwordConfig;
 
+    private final PitchDao pitchDao;
+
     //cons--------------------------------------------------------------------------------------------------------------
     @Autowired
-    public UserManager(UserDao userDao, PasswordConfig passwordConfig) {
+    public UserManager(UserDao userDao, PasswordConfig passwordConfig, PitchDao pitchDao) {
 
         this.userDao = userDao;
         this.passwordConfig = passwordConfig;
+        this.pitchDao = pitchDao;
     }
     //add---------------------------------------------------------------------------------------------------------------
     public void add(User user) throws Exception {
@@ -63,19 +68,37 @@ public class UserManager implements UserService {
                     user.getField("email"));
             throw new ExistingEntryException("Email is already exists", list);
         }
-
             this.userDao
                     .save(user);
     }
     @Override
-    public void updateUserPitch(String userName, int id) {
+    public void addPitchesToUser(List<Integer> pitchesId, String userName) {
 
         User user = userDao
                 .findUserByUsername(userName)
-                .orElseThrow();
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(
+                                String.format("Username %s not found", userName)));
 
-        //user.setUserPitches(); burdan devam et
+        List<Pitch> pitches = new ArrayList<>();
 
+
+        for (Integer pitchId: pitchesId) {
+
+            pitches.add(pitchDao.getByPitchId(pitchId));
+        }
+
+        List<Pitch> userPitches = user
+                .getUserPitches();
+
+        userPitches
+                .addAll(pitches);
+
+        user
+                .setUserPitches(userPitches);
+
+        this.userDao
+                .save(user);
     }
     //delete------------------------------------------------------------------------------------------------------------
     public void delete(User user) {

@@ -11,6 +11,7 @@ public interface PitchService {
     void updatePitchOpeningTime(String openingTime, int pitchId);
     void updatePitchClosingTime(String closingTime, int pitchId);
     void updatePitchMatchDuration(String matchDuration, int pitchId);
+    void addPitchUserId(String userName, int pitchId);
     void deletePitch(int id);
     List<Pitch> getAllPitches();
     List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize);
