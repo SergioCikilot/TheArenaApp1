@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 public interface PitchDao extends JpaRepository<Pitch,Integer> {
@@ -27,6 +28,7 @@ public interface PitchDao extends JpaRepository<Pitch,Integer> {
     void updatePitchMatchDuration(@Param("pitchMatchDuration")String pitchMatchDuration, @Param("pitchId") int pitchId);
 
     Pitch getByPitchId(int id);
+    List<Pitch> getPitchesByUserPitchUserId(int id);
 
 
 

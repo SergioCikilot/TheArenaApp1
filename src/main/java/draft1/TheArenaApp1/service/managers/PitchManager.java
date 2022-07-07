@@ -112,4 +112,9 @@ public class PitchManager implements PitchService {
     public Pitch getByPitchId(int id) {
         return this.pitchDao.getByPitchId(id);
     }
+
+    @Override
+    public List<Pitch> getPitchesByUserPitchUserId(int id) {
+        return this.pitchDao.getPitchesByUserPitchUserId(id);
+    }
 }

@@ -143,8 +143,15 @@ public class PitchesController {
     }
     @GetMapping("/getByPitchId")
     public Pitch getByPitchId(int id) {
-        return this.pitchService.getByPitchId(id);
+
+        return this.pitchService
+                .getByPitchId(id);
     }
+    @GetMapping("/getPitchesByUserPitchUserId")
+    public List<Pitch> getPitchesByUserPitchUserId(int id) {
+        return this.pitchService.getPitchesByUserPitchUserId(id);
+    }
+
     //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -16,6 +16,7 @@ public interface PitchService {
     List<Pitch> getAllPitches();
     List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize);
     Pitch getByPitchId(int id);
+    List<Pitch> getPitchesByUserPitchUserId(int id);
 
     //List<Pitch> findByPitchName(String name);
 
