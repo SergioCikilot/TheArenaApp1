@@ -118,6 +118,14 @@ public class UserManager implements UserService {
                         new UsernameNotFoundException(
                                 String.format("Username %s not found", username)));
     }
+
+    @Override
+    public User findUserByUserId(int id) {
+
+        return this.userDao
+                .findUserByUserId(id);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userDao

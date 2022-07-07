@@ -2,6 +2,7 @@ package draft1.TheArenaApp1.core.user;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import draft1.TheArenaApp1.core.utils.CustomDeserializer;
 import draft1.TheArenaApp1.entities.model.Pitch;
@@ -24,6 +25,7 @@ import java.util.*;
 @Getter
 @Setter
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","userPitches"})
 
 public class User implements UserDetails {
 

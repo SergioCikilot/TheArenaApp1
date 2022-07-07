@@ -88,6 +88,12 @@ public class UserController {
         return this.userService
                 .findUserByUsername(username);
     }
+    @GetMapping("/findUserByUserId")
+    public User findUserByUserId(int id) {
+
+        return this.userService
+                .findUserByUserId(id);
+    }
     //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

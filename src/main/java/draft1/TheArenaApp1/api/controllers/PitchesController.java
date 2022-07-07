@@ -141,6 +141,10 @@ public class PitchesController {
         return this.pitchService
                 .getAllPitchesWithPage(pageNo,pageSize);
     }
+    @GetMapping("/getByPitchId")
+    public Pitch getByPitchId(int id) {
+        return this.pitchService.getByPitchId(id);
+    }
     //handler-----------------------------------------------------------------------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

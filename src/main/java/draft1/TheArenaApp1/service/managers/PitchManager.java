@@ -107,4 +107,9 @@ public class PitchManager implements PitchService {
         return this.pitchDao
                 .findAll(pageable).getContent();
     }
+
+    @Override
+    public Pitch getByPitchId(int id) {
+        return this.pitchDao.getByPitchId(id);
+    }
 }

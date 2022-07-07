@@ -15,6 +15,7 @@ public interface PitchService {
     void deletePitch(int id);
     List<Pitch> getAllPitches();
     List<Pitch> getAllPitchesWithPage(int pageNo, int pageSize);
+    Pitch getByPitchId(int id);
 
     //List<Pitch> findByPitchName(String name);
 
