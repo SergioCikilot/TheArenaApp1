@@ -5,7 +5,7 @@ public enum UserPermission {
     A_READ("a:read"),
     A_WRITE("a:write"),
     U_WRITE("u:write"),
-    U_READ("u:write");
+    U_READ("u:read");
 
     private final String permission;
 
